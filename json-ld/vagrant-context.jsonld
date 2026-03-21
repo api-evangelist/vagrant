@@ -1,0 +1,104 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "vagrant": "https://app.vagrantup.com/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Box": {
+      "@id": "vagrant:Box",
+      "@context": {
+        "tag": "vagrant:tag",
+        "username": "schema:author",
+        "name": "schema:name",
+        "private": "vagrant:isPrivate",
+        "downloads": "schema:interactionCount",
+        "shortDescription": "schema:abstract",
+        "description": "schema:description",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "versions": {
+          "@id": "schema:hasPart",
+          "@container": "@set"
+        },
+        "currentVersion": {
+          "@id": "vagrant:currentVersion",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Version": {
+      "@id": "vagrant:Version",
+      "@context": {
+        "version": "schema:version",
+        "status": "vagrant:releaseStatus",
+        "description": "schema:description",
+        "downloads": "schema:interactionCount",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "providers": {
+          "@id": "schema:hasPart",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Provider": {
+      "@id": "vagrant:Provider",
+      "@context": {
+        "name": "schema:name",
+        "hosted": "vagrant:isHosted",
+        "url": {
+          "@id": "schema:contentUrl",
+          "@type": "@id"
+        },
+        "downloadUrl": {
+          "@id": "schema:downloadUrl",
+          "@type": "@id"
+        },
+        "checksumType": "vagrant:checksumType",
+        "checksum": "vagrant:checksum",
+        "architecture": "vagrant:architecture",
+        "defaultArchitecture": "vagrant:isDefaultArchitecture",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Registry": {
+      "@id": "vagrant:Registry",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}

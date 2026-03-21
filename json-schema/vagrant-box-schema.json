@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/vagrant/box.json",
+  "title": "Vagrant Box",
+  "description": "A Vagrant box is a package format for Vagrant environments that includes the base image and metadata for one or more virtualization providers. Boxes are the fundamental unit of distribution in the Vagrant ecosystem.",
+  "type": "object",
+  "required": ["name", "username"],
+  "properties": {
+    "tag": {
+      "type": "string",
+      "description": "The full tag of the box in username/name format.",
+      "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+    },
+    "username": {
+      "type": "string",
+      "description": "The username or organization that owns the box.",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the box, unique within the owner namespace.",
+      "minLength": 1
+    },
+    "private": {
+      "type": "boolean",
+      "description": "Whether the box is private and requires authentication to access.",
+      "default": false
+    },
+    "downloads": {
+      "type": "integer",
+      "description": "The total number of downloads for this box across all versions.",
+      "minimum": 0
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief description of the box for display in search results and listings.",
+      "maxLength": 100
+    },
+    "description": {
+      "type": "string",
+      "description": "The full description of the box in Markdown format."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the box was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the box was last updated."
+    },
+    "versions": {
+      "type": "array",
+      "description": "List of versions available for this box.",
+      "items": {
+        "$ref": "#/$defs/Version"
+      }
+    },
+    "current_version": {
+      "description": "The current released version of this box.",
+      "$ref": "#/$defs/Version"
+    }
+  },
+  "$defs": {
+    "Version": {
+      "type": "object",
+      "description": "A version of a Vagrant box following semantic versioning. Versions must be released before they are available for download by users.",
+      "required": ["version"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The version number following semantic versioning.",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+.*$"
+        },
+        "status": {
+          "type": "string",
+          "description": "The release status of the version.",
+          "enum": ["unreleased", "active", "revoked"]
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of this version in Markdown format."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the version was created."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the version was last updated."
+        },
+        "downloads": {
+          "type": "integer",
+          "description": "The total number of downloads for this version.",
+          "minimum": 0
+        },
+        "providers": {
+          "type": "array",
+          "description": "List of providers available for this version.",
+          "items": {
+            "$ref": "#/$defs/Provider"
+          }
+        }
+      }
+    },
+    "Provider": {
+      "type": "object",
+      "description": "A provider represents a specific virtualization platform for which a box file is available, such as VirtualBox, VMware, or Docker.",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the provider such as virtualbox, vmware_desktop, docker, or hyperv.",
+          "enum": [
+            "virtualbox",
+            "vmware_desktop",
+            "vmware_workstation",
+            "vmware_fusion",
+            "docker",
+            "hyperv",
+            "libvirt",
+            "parallels"
+          ]
+        },
+        "hosted": {
+          "type": "boolean",
+          "description": "Whether the box file is hosted on Vagrant Cloud."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the box file if externally hosted."
+        },
+        "download_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to download the box file."
+        },
+        "checksum_type": {
+          "type": "string",
+          "description": "The type of checksum used for the box file.",
+          "enum": ["md5", "sha1", "sha256", "sha384", "sha512"]
+        },
+        "checksum": {
+          "type": "string",
+          "description": "The checksum value for verifying the integrity of the box file."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "The CPU architecture the box supports.",
+          "enum": ["amd64", "arm64", "i386", "unknown"]
+        },
+        "default_architecture": {
+          "type": "boolean",
+          "description": "Whether this is the default architecture for the provider."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the provider was created."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the provider was last updated."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,845 @@
+openapi: 3.1.0
+info:
+  title: HCP Vagrant Box Registry API
+  description: >-
+    The HCP Vagrant Box Registry API provides REST endpoints for managing
+    Vagrant box registries and boxes on the HashiCorp Cloud Platform. It
+    supports creating and managing registries, listing and deleting boxes,
+    and handling box versions and providers. The API uses HCP service principal
+    credentials for authentication and is the successor to the legacy Vagrant
+    Cloud service, offering tighter integration with the broader HashiCorp
+    Cloud Platform ecosystem.
+  version: '2023-01-01'
+  contact:
+    name: HashiCorp Support
+    url: https://support.hashicorp.com
+  termsOfService: https://www.hashicorp.com/terms-of-service
+externalDocs:
+  description: HCP Vagrant Box Registry API Documentation
+  url: https://developer.hashicorp.com/hcp/api-docs/vagrant-box-registry
+servers:
+  - url: https://api.cloud.hashicorp.com
+    description: HCP Production Server
+tags:
+  - name: Registries
+    description: >-
+      Endpoints for managing Vagrant box registries. A registry is a
+      namespace that holds boxes and forms the first segment of a box
+      tag such as hashicorp in hashicorp/vagrant.
+  - name: Boxes
+    description: >-
+      Endpoints for managing Vagrant boxes within a registry, including
+      creating, reading, listing, and deleting boxes.
+  - name: Versions
+    description: >-
+      Endpoints for managing versions of boxes, including creating,
+      reading, listing, and deleting versions.
+  - name: Providers
+    description: >-
+      Endpoints for managing providers within box versions, representing
+      specific virtualization platform builds of a box.
+security:
+  - bearerAuth: []
+paths:
+  /vagrant/2023-01-01/registry:
+    post:
+      operationId: createRegistry
+      summary: Create a registry
+      description: >-
+        Creates a new Vagrant box registry on the HashiCorp Cloud Platform.
+        The registry name must be globally unique and will form the first
+        segment of all box tags within the registry.
+      tags:
+        - Registries
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRegistryRequest'
+      responses:
+        '200':
+          description: Registry created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistryResponse'
+        '401':
+          description: Authentication required
+        '409':
+          description: Registry name already exists
+        '422':
+          description: Validation error
+  /vagrant/2023-01-01/registry/{registry}:
+    get:
+      operationId: readRegistry
+      summary: Read a registry
+      description: >-
+        Retrieves detailed information about a specific Vagrant box
+        registry on the HashiCorp Cloud Platform.
+      tags:
+        - Registries
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+      responses:
+        '200':
+          description: Registry details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistryResponse'
+        '404':
+          description: Registry not found
+    delete:
+      operationId: deleteRegistry
+      summary: Delete a registry
+      description: >-
+        Permanently deletes a Vagrant box registry and all of its boxes,
+        versions, and providers. This action cannot be undone.
+      tags:
+        - Registries
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+      responses:
+        '200':
+          description: Registry deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '401':
+          description: Authentication required
+        '404':
+          description: Registry not found
+  /vagrant/2023-01-01/registry/{registry}/boxes:
+    get:
+      operationId: listBoxes
+      summary: List boxes
+      description: >-
+        Lists all Vagrant boxes within a specific registry. Supports
+        pagination for registries with many boxes.
+      tags:
+        - Boxes
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
+      responses:
+        '200':
+          description: List of boxes returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBoxesResponse'
+        '404':
+          description: Registry not found
+    post:
+      operationId: createBox
+      summary: Create a box
+      description: >-
+        Creates a new Vagrant box within a registry. The box name must
+        be unique within the registry and should only be set at creation
+        time.
+      tags:
+        - Boxes
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBoxRequest'
+      responses:
+        '200':
+          description: Box created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoxResponse'
+        '401':
+          description: Authentication required
+        '404':
+          description: Registry not found
+        '409':
+          description: Box name already exists in the registry
+  /vagrant/2023-01-01/registry/{registry}/box/{box}:
+    get:
+      operationId: readBox
+      summary: Read a box
+      description: >-
+        Retrieves detailed information about a specific Vagrant box
+        within a registry.
+      tags:
+        - Boxes
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+      responses:
+        '200':
+          description: Box details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoxResponse'
+        '404':
+          description: Box not found
+    put:
+      operationId: updateBox
+      summary: Update a box
+      description: >-
+        Updates the metadata of an existing Vagrant box within a registry,
+        such as its descriptions.
+      tags:
+        - Boxes
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBoxRequest'
+      responses:
+        '200':
+          description: Box updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoxResponse'
+        '401':
+          description: Authentication required
+        '404':
+          description: Box not found
+    delete:
+      operationId: deleteBox
+      summary: Delete a box
+      description: >-
+        Permanently deletes a box and all of its versions and providers
+        from the registry. This action cannot be undone.
+      tags:
+        - Boxes
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+      responses:
+        '200':
+          description: Box deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '401':
+          description: Authentication required
+        '404':
+          description: Box not found
+  /vagrant/2023-01-01/registry/{registry}/box/{box}/versions:
+    get:
+      operationId: listVersions
+      summary: List versions
+      description: >-
+        Lists all versions of a specific box within a registry. Supports
+        pagination for boxes with many versions.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
+      responses:
+        '200':
+          description: List of versions returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVersionsResponse'
+        '404':
+          description: Box not found
+    post:
+      operationId: createVersion
+      summary: Create a version
+      description: >-
+        Creates a new version for a box. The version string must be unique
+        within the box and should follow semantic versioning.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVersionRequest'
+      responses:
+        '200':
+          description: Version created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResponse'
+        '401':
+          description: Authentication required
+        '404':
+          description: Box not found
+        '409':
+          description: Version already exists
+  /vagrant/2023-01-01/registry/{registry}/box/{box}/version/{version}:
+    get:
+      operationId: readVersion
+      summary: Read a version
+      description: >-
+        Retrieves detailed information about a specific version of a
+        box within a registry.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionName'
+      responses:
+        '200':
+          description: Version details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResponse'
+        '404':
+          description: Version not found
+    delete:
+      operationId: deleteVersion
+      summary: Delete a version
+      description: >-
+        Permanently deletes a version and all of its providers from the
+        box. This action cannot be undone.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionName'
+      responses:
+        '200':
+          description: Version deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '401':
+          description: Authentication required
+        '404':
+          description: Version not found
+  /vagrant/2023-01-01/registry/{registry}/box/{box}/version/{version}/providers:
+    get:
+      operationId: listProviders
+      summary: List providers
+      description: >-
+        Lists all providers for a specific version of a box within a
+        registry.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionName'
+      responses:
+        '200':
+          description: List of providers returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProvidersResponse'
+        '404':
+          description: Version not found
+    post:
+      operationId: createProvider
+      summary: Create a provider
+      description: >-
+        Creates a new provider for a specific version of a box. A provider
+        represents a virtualization platform build of the box.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProviderRequest'
+      responses:
+        '200':
+          description: Provider created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '401':
+          description: Authentication required
+        '404':
+          description: Version not found
+        '409':
+          description: Provider already exists for this version
+  /vagrant/2023-01-01/registry/{registry}/box/{box}/version/{version}/provider/{provider}:
+    get:
+      operationId: readProvider
+      summary: Read a provider
+      description: >-
+        Retrieves detailed information about a specific provider within
+        a version of a box.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionName'
+        - $ref: '#/components/parameters/providerName'
+      responses:
+        '200':
+          description: Provider details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '404':
+          description: Provider not found
+    delete:
+      operationId: deleteProvider
+      summary: Delete a provider
+      description: >-
+        Permanently deletes a provider from a version. This action
+        cannot be undone.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/registryName'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionName'
+        - $ref: '#/components/parameters/providerName'
+      responses:
+        '200':
+          description: Provider deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '401':
+          description: Authentication required
+        '404':
+          description: Provider not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        HCP service principal access token passed as a Bearer token
+        in the Authorization header.
+  parameters:
+    registryName:
+      name: registry
+      in: path
+      required: true
+      description: >-
+        The globally unique name of the Vagrant box registry such as
+        hashicorp in hashicorp/vagrant.
+      schema:
+        type: string
+    boxName:
+      name: box
+      in: path
+      required: true
+      description: >-
+        The name segment of the box which is unique within the registry.
+      schema:
+        type: string
+    versionName:
+      name: version
+      in: path
+      required: true
+      description: >-
+        The version string which must be unique within the box.
+      schema:
+        type: string
+    providerName:
+      name: provider
+      in: path
+      required: true
+      description: >-
+        The name of the provider such as virtualbox or vmware_desktop.
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      description: >-
+        The maximum number of results to return per page.
+      schema:
+        type: integer
+        minimum: 1
+    pageToken:
+      name: page_token
+      in: query
+      description: >-
+        The token for fetching the next page of results.
+      schema:
+        type: string
+  schemas:
+    Registry:
+      type: object
+      description: >-
+        A Vagrant box registry is a namespace on the HashiCorp Cloud
+        Platform that holds boxes. The registry name forms the first
+        segment of a box tag.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the registry.
+        name:
+          type: string
+          description: >-
+            The globally unique name of the registry.
+        description:
+          type: string
+          description: >-
+            The description of the registry.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the registry was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the registry was last updated.
+    Box:
+      type: object
+      description: >-
+        A Vagrant box within an HCP registry. The box name combined
+        with the registry name forms the full box tag.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name segment of the box, unique within the registry.
+        registry:
+          type: string
+          description: >-
+            The name of the registry this box belongs to.
+        short_description:
+          type: string
+          description: >-
+            A brief description of the box limited to 100 characters.
+          maxLength: 100
+        description:
+          type: string
+          description: >-
+            The full description of the box.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the box was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the box was last updated.
+        downloads:
+          type: integer
+          description: >-
+            The total number of downloads for this box.
+    Version:
+      type: object
+      description: >-
+        A version of a Vagrant box. Versions support long-form
+        descriptions and must have unique version strings within
+        the box.
+      properties:
+        version:
+          type: string
+          description: >-
+            The version string which must be unique within the box.
+        description:
+          type: string
+          description: >-
+            The description of this version.
+        state:
+          type: string
+          description: >-
+            The state of the version.
+          enum:
+            - UNRELEASED
+            - ACTIVE
+            - REVOKED
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the version was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the version was last updated.
+    Provider:
+      type: object
+      description: >-
+        A provider describes a specific virtualization platform build
+        of a box version, with its list of architectures and box data.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the provider such as virtualbox or vmware_desktop.
+        url:
+          type: string
+          format: uri
+          description: >-
+            The URL of the externally hosted box file.
+        checksum:
+          type: string
+          description: >-
+            The checksum value for the box file.
+        checksum_type:
+          type: string
+          description: >-
+            The type of checksum used.
+          enum:
+            - MD5
+            - SHA1
+            - SHA256
+            - SHA384
+            - SHA512
+        architecture:
+          type: string
+          description: >-
+            The CPU architecture the box supports such as amd64 or arm64.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the provider was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the provider was last updated.
+    Operation:
+      type: object
+      description: >-
+        An operation returned by asynchronous API calls. The operation
+        ID is unique within the region the operation is running in.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the operation within the region.
+        state:
+          type: string
+          description: >-
+            The current state of the operation.
+          enum:
+            - PENDING
+            - RUNNING
+            - DONE
+        error:
+          type: object
+          description: >-
+            Error details if the operation failed.
+          properties:
+            code:
+              type: integer
+              description: >-
+                The error code.
+            message:
+              type: string
+              description: >-
+                The error message.
+    CreateRegistryRequest:
+      type: object
+      description: >-
+        Request body for creating a new Vagrant box registry.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: >-
+            The globally unique name for the registry.
+        description:
+          type: string
+          description: >-
+            A description of the registry.
+    RegistryResponse:
+      type: object
+      description: >-
+        Response containing a registry object.
+      properties:
+        registry:
+          $ref: '#/components/schemas/Registry'
+    CreateBoxRequest:
+      type: object
+      description: >-
+        Request body for creating a new box in a registry.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: >-
+            The name segment of the box, unique within the registry.
+        short_description:
+          type: string
+          description: >-
+            A brief description limited to 100 characters.
+          maxLength: 100
+        description:
+          type: string
+          description: >-
+            The full description of the box.
+    UpdateBoxRequest:
+      type: object
+      description: >-
+        Request body for updating a box in a registry.
+      properties:
+        short_description:
+          type: string
+          description: >-
+            An updated brief description limited to 100 characters.
+          maxLength: 100
+        description:
+          type: string
+          description: >-
+            An updated full description.
+    BoxResponse:
+      type: object
+      description: >-
+        Response containing a box object.
+      properties:
+        box:
+          $ref: '#/components/schemas/Box'
+    ListBoxesResponse:
+      type: object
+      description: >-
+        Response containing a list of boxes and pagination information.
+      properties:
+        boxes:
+          type: array
+          description: >-
+            List of boxes in the registry.
+          items:
+            $ref: '#/components/schemas/Box'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    CreateVersionRequest:
+      type: object
+      description: >-
+        Request body for creating a new version of a box.
+      required:
+        - version
+      properties:
+        version:
+          type: string
+          description: >-
+            The version string following semantic versioning.
+        description:
+          type: string
+          description: >-
+            A description of this version.
+    VersionResponse:
+      type: object
+      description: >-
+        Response containing a version object.
+      properties:
+        version:
+          $ref: '#/components/schemas/Version'
+    ListVersionsResponse:
+      type: object
+      description: >-
+        Response containing a list of versions and pagination information.
+      properties:
+        versions:
+          type: array
+          description: >-
+            List of versions for the box.
+          items:
+            $ref: '#/components/schemas/Version'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    CreateProviderRequest:
+      type: object
+      description: >-
+        Request body for creating a new provider for a version.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the provider such as virtualbox or vmware_desktop.
+        url:
+          type: string
+          format: uri
+          description: >-
+            The URL of an externally hosted box file.
+        checksum:
+          type: string
+          description: >-
+            The checksum value for the box file.
+        checksum_type:
+          type: string
+          description: >-
+            The type of checksum.
+          enum:
+            - MD5
+            - SHA1
+            - SHA256
+            - SHA384
+            - SHA512
+        architecture:
+          type: string
+          description: >-
+            The CPU architecture such as amd64 or arm64.
+    ProviderResponse:
+      type: object
+      description: >-
+        Response containing a provider object.
+      properties:
+        provider:
+          $ref: '#/components/schemas/Provider'
+    ListProvidersResponse:
+      type: object
+      description: >-
+        Response containing a list of providers.
+      properties:
+        providers:
+          type: array
+          description: >-
+            List of providers for the version.
+          items:
+            $ref: '#/components/schemas/Provider'
+    OperationResponse:
+      type: object
+      description: >-
+        Response containing an operation object for asynchronous actions.
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    Pagination:
+      type: object
+      description: >-
+        Pagination information for list responses.
+      properties:
+        next_page_token:
+          type: string
+          description: >-
+            The token to use for fetching the next page of results.
+            Empty when there are no more results.

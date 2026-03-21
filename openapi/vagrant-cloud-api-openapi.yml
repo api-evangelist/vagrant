@@ -1,0 +1,960 @@
+openapi: 3.1.0
+info:
+  title: Vagrant Cloud API
+  description: >-
+    The Vagrant Cloud API v2 enables developers to programmatically interact
+    with the Vagrant Cloud platform for managing Vagrant boxes, versions, and
+    providers. It supports creating and updating boxes, publishing new versions,
+    uploading provider binaries, and searching the public box catalog. The API
+    uses token-based authentication and is designed for automating box lifecycle
+    management and integrating Vagrant Cloud into CI/CD pipelines.
+  version: '2'
+  contact:
+    name: HashiCorp Support
+    url: https://support.hashicorp.com
+  termsOfService: https://www.hashicorp.com/terms-of-service
+externalDocs:
+  description: Vagrant Cloud API v2 Documentation
+  url: https://developer.hashicorp.com/vagrant/vagrant-cloud/api/v2
+servers:
+  - url: https://app.vagrantup.com/api/v2
+    description: Vagrant Cloud Production Server
+tags:
+  - name: Search
+    description: >-
+      Endpoints for searching the public Vagrant box catalog by query,
+      provider, and other filters.
+  - name: Boxes
+    description: >-
+      Endpoints for creating, reading, updating, and deleting Vagrant boxes
+      in the Vagrant Cloud registry.
+  - name: Versions
+    description: >-
+      Endpoints for managing versions of a Vagrant box, including creating
+      new versions and releasing them for consumption.
+  - name: Providers
+    description: >-
+      Endpoints for managing providers within a box version, including
+      creating providers and uploading box files.
+security:
+  - bearerAuth: []
+paths:
+  /search:
+    get:
+      operationId: searchBoxes
+      summary: Search boxes
+      description: >-
+        Searches the public Vagrant box catalog. The search query matches
+        against the username, name, or short_description fields. If the
+        query is omitted, the top boxes based on sort and order are returned.
+      tags:
+        - Search
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/searchProvider'
+        - $ref: '#/components/parameters/searchSort'
+        - $ref: '#/components/parameters/searchOrder'
+        - $ref: '#/components/parameters/searchLimit'
+        - $ref: '#/components/parameters/searchPage'
+      responses:
+        '200':
+          description: Successful search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+  /boxes:
+    post:
+      operationId: createBox
+      summary: Create a box
+      description: >-
+        Creates a new Vagrant box under the authenticated user or specified
+        organization. Requires authentication with a valid access token.
+      tags:
+        - Boxes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBoxRequest'
+      responses:
+        '200':
+          description: Box created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Box'
+        '401':
+          description: Authentication required
+        '422':
+          description: Validation error
+  /box/{username}/{name}:
+    get:
+      operationId: readBox
+      summary: Read a box
+      description: >-
+        Retrieves detailed information about a specific Vagrant box,
+        including its versions, providers, and metadata. Public boxes
+        do not require authentication.
+      tags:
+        - Boxes
+      security:
+        - bearerAuth: []
+        - {}
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+      responses:
+        '200':
+          description: Box details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Box'
+        '404':
+          description: Box not found
+    put:
+      operationId: updateBox
+      summary: Update a box
+      description: >-
+        Updates the metadata of an existing Vagrant box, such as its
+        description, short description, or privacy settings.
+      tags:
+        - Boxes
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBoxRequest'
+      responses:
+        '200':
+          description: Box updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Box'
+        '401':
+          description: Authentication required
+        '404':
+          description: Box not found
+    delete:
+      operationId: deleteBox
+      summary: Delete a box
+      description: >-
+        Permanently deletes a Vagrant box and all of its versions and
+        providers. This action cannot be undone.
+      tags:
+        - Boxes
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+      responses:
+        '200':
+          description: Box deleted successfully
+        '401':
+          description: Authentication required
+        '404':
+          description: Box not found
+  /box/{username}/{name}/versions:
+    post:
+      operationId: createVersion
+      summary: Create a version
+      description: >-
+        Creates a new version for an existing Vagrant box. The version
+        string must follow semantic versioning. New versions are created
+        in an unreleased state and must be explicitly released after
+        uploading provider files.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVersionRequest'
+      responses:
+        '200':
+          description: Version created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+        '401':
+          description: Authentication required
+        '404':
+          description: Box not found
+        '422':
+          description: Validation error
+  /box/{username}/{name}/version/{version}:
+    get:
+      operationId: readVersion
+      summary: Read a version
+      description: >-
+        Retrieves detailed information about a specific version of a
+        Vagrant box, including its providers and release status.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+      responses:
+        '200':
+          description: Version details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+        '404':
+          description: Version not found
+    put:
+      operationId: updateVersion
+      summary: Update a version
+      description: >-
+        Updates the metadata of an existing version, such as its
+        description.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVersionRequest'
+      responses:
+        '200':
+          description: Version updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+        '401':
+          description: Authentication required
+        '404':
+          description: Version not found
+    delete:
+      operationId: deleteVersion
+      summary: Delete a version
+      description: >-
+        Permanently deletes a version and all of its providers. This
+        action cannot be undone.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+      responses:
+        '200':
+          description: Version deleted successfully
+        '401':
+          description: Authentication required
+        '404':
+          description: Version not found
+  /box/{username}/{name}/version/{version}/release:
+    put:
+      operationId: releaseVersion
+      summary: Release a version
+      description: >-
+        Releases a version, making it available for consumption by
+        Vagrant users. A version must have at least one provider with
+        an uploaded box file before it can be released.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+      responses:
+        '200':
+          description: Version released successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+        '401':
+          description: Authentication required
+        '404':
+          description: Version not found
+        '422':
+          description: Version cannot be released
+  /box/{username}/{name}/version/{version}/revoke:
+    put:
+      operationId: revokeVersion
+      summary: Revoke a version
+      description: >-
+        Revokes a previously released version, making it unavailable
+        for download by Vagrant users.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+      responses:
+        '200':
+          description: Version revoked successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+        '401':
+          description: Authentication required
+        '404':
+          description: Version not found
+  /box/{username}/{name}/version/{version}/providers:
+    post:
+      operationId: createProvider
+      summary: Create a provider
+      description: >-
+        Creates a new provider for a specific version of a Vagrant box.
+        A provider represents a specific virtualization platform (such as
+        virtualbox, vmware_desktop, or docker) for which a box file is
+        available.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProviderRequest'
+      responses:
+        '200':
+          description: Provider created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '401':
+          description: Authentication required
+        '404':
+          description: Version not found
+        '422':
+          description: Validation error
+  /box/{username}/{name}/version/{version}/provider/{provider}:
+    get:
+      operationId: readProvider
+      summary: Read a provider
+      description: >-
+        Retrieves detailed information about a specific provider within
+        a version of a Vagrant box.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+        - $ref: '#/components/parameters/providerName'
+      responses:
+        '200':
+          description: Provider details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '404':
+          description: Provider not found
+    put:
+      operationId: updateProvider
+      summary: Update a provider
+      description: >-
+        Updates the metadata of an existing provider, such as its URL
+        or checksum information.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+        - $ref: '#/components/parameters/providerName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProviderRequest'
+      responses:
+        '200':
+          description: Provider updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '401':
+          description: Authentication required
+        '404':
+          description: Provider not found
+    delete:
+      operationId: deleteProvider
+      summary: Delete a provider
+      description: >-
+        Permanently deletes a provider from a version. This action
+        cannot be undone.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+        - $ref: '#/components/parameters/providerName'
+      responses:
+        '200':
+          description: Provider deleted successfully
+        '401':
+          description: Authentication required
+        '404':
+          description: Provider not found
+  /box/{username}/{name}/version/{version}/provider/{provider}/upload:
+    get:
+      operationId: getUploadUrl
+      summary: Get upload URL
+      description: >-
+        Returns a pre-signed upload URL for uploading a box file to the
+        specified provider. The client should use the returned URL to
+        upload the box file via an HTTP PUT request.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+        - $ref: '#/components/parameters/providerName'
+      responses:
+        '200':
+          description: Upload URL returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadPath'
+        '401':
+          description: Authentication required
+        '404':
+          description: Provider not found
+  /box/{username}/{name}/version/{version}/provider/{provider}/upload/direct:
+    get:
+      operationId: getDirectUploadUrl
+      summary: Get direct upload URL
+      description: >-
+        Returns a pre-signed URL for directly uploading a box file to
+        cloud storage, bypassing the Vagrant Cloud server. This is
+        recommended for large box files to improve upload performance.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/boxName'
+        - $ref: '#/components/parameters/versionNumber'
+        - $ref: '#/components/parameters/providerName'
+      responses:
+        '200':
+          description: Direct upload URL returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectUploadPath'
+        '401':
+          description: Authentication required
+        '404':
+          description: Provider not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Vagrant Cloud API token passed as a Bearer token in the
+        Authorization header.
+  parameters:
+    searchQuery:
+      name: q
+      in: query
+      description: >-
+        Search query that matches against the username, name, or
+        short_description fields.
+      schema:
+        type: string
+    searchProvider:
+      name: provider
+      in: query
+      description: >-
+        Filter results to boxes supporting a specific provider such
+        as virtualbox or vmware_desktop.
+      schema:
+        type: string
+    searchSort:
+      name: sort
+      in: query
+      description: >-
+        The field to sort results on.
+      schema:
+        type: string
+        enum:
+          - downloads
+          - created
+          - updated
+        default: downloads
+    searchOrder:
+      name: order
+      in: query
+      description: >-
+        The order to return the sorted field in.
+      schema:
+        type: string
+        enum:
+          - desc
+          - asc
+        default: desc
+    searchLimit:
+      name: limit
+      in: query
+      description: >-
+        The number of results to return per page, with a maximum
+        of 100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    searchPage:
+      name: page
+      in: query
+      description: >-
+        The page number to return for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    username:
+      name: username
+      in: path
+      required: true
+      description: >-
+        The username or organization name that owns the box.
+      schema:
+        type: string
+    boxName:
+      name: name
+      in: path
+      required: true
+      description: >-
+        The name of the Vagrant box.
+      schema:
+        type: string
+    versionNumber:
+      name: version
+      in: path
+      required: true
+      description: >-
+        The version number of the box following semantic versioning.
+      schema:
+        type: string
+    providerName:
+      name: provider
+      in: path
+      required: true
+      description: >-
+        The name of the provider such as virtualbox, vmware_desktop,
+        or docker.
+      schema:
+        type: string
+  schemas:
+    SearchResults:
+      type: object
+      description: >-
+        Container for search results returned from the box catalog.
+      properties:
+        boxes:
+          type: array
+          description: >-
+            List of boxes matching the search criteria.
+          items:
+            $ref: '#/components/schemas/Box'
+    Box:
+      type: object
+      description: >-
+        A Vagrant box is a package format for Vagrant environments that
+        includes the base image and metadata for one or more providers.
+      properties:
+        tag:
+          type: string
+          description: >-
+            The full tag of the box in username/name format.
+        username:
+          type: string
+          description: >-
+            The username or organization that owns the box.
+        name:
+          type: string
+          description: >-
+            The name of the box.
+        private:
+          type: boolean
+          description: >-
+            Whether the box is private and requires authentication to access.
+        downloads:
+          type: integer
+          description: >-
+            The total number of downloads for this box across all versions.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the box was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the box was last updated.
+        short_description:
+          type: string
+          description: >-
+            A brief description of the box, limited to 100 characters.
+          maxLength: 100
+        description_html:
+          type: string
+          description: >-
+            The full description of the box rendered as HTML.
+        description_markdown:
+          type: string
+          description: >-
+            The full description of the box in Markdown format.
+        versions:
+          type: array
+          description: >-
+            List of versions available for this box.
+          items:
+            $ref: '#/components/schemas/Version'
+        current_version:
+          description: >-
+            The current released version of this box.
+          $ref: '#/components/schemas/Version'
+    Version:
+      type: object
+      description: >-
+        A version of a Vagrant box following semantic versioning. Versions
+        must be released before they are available for download.
+      properties:
+        version:
+          type: string
+          description: >-
+            The version number following semantic versioning.
+        status:
+          type: string
+          description: >-
+            The release status of the version.
+          enum:
+            - unreleased
+            - active
+            - revoked
+        description_html:
+          type: string
+          description: >-
+            The version description rendered as HTML.
+        description_markdown:
+          type: string
+          description: >-
+            The version description in Markdown format.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the version was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the version was last updated.
+        number:
+          type: string
+          description: >-
+            The version number string.
+        downloads:
+          type: integer
+          description: >-
+            The total number of downloads for this version.
+        providers:
+          type: array
+          description: >-
+            List of providers available for this version.
+          items:
+            $ref: '#/components/schemas/Provider'
+    Provider:
+      type: object
+      description: >-
+        A provider represents a specific virtualization platform for
+        which a box file is available within a version.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the provider such as virtualbox or vmware_desktop.
+        hosted:
+          type: boolean
+          description: >-
+            Whether the box file is hosted on Vagrant Cloud.
+        hosted_token:
+          type: string
+          description: >-
+            The token used for hosted box file downloads.
+        original_url:
+          type: string
+          format: uri
+          description: >-
+            The original URL of the box file if externally hosted.
+        download_url:
+          type: string
+          format: uri
+          description: >-
+            The URL to download the box file.
+        created_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the provider was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the provider was last updated.
+        checksum_type:
+          type: string
+          description: >-
+            The type of checksum used for the box file.
+          enum:
+            - md5
+            - sha1
+            - sha256
+            - sha384
+            - sha512
+        checksum:
+          type: string
+          description: >-
+            The checksum value for the box file.
+        architecture:
+          type: string
+          description: >-
+            The CPU architecture the box supports such as amd64 or arm64.
+        default_architecture:
+          type: boolean
+          description: >-
+            Whether this is the default architecture for the provider.
+    UploadPath:
+      type: object
+      description: >-
+        Contains the upload URL for uploading a box file to Vagrant Cloud.
+      properties:
+        upload_path:
+          type: string
+          format: uri
+          description: >-
+            The pre-signed URL to upload the box file via HTTP PUT.
+        token:
+          type: string
+          description: >-
+            The upload token for this upload session.
+    DirectUploadPath:
+      type: object
+      description: >-
+        Contains the direct upload URL for uploading a box file directly
+        to cloud storage.
+      properties:
+        upload_path:
+          type: string
+          format: uri
+          description: >-
+            The pre-signed URL to upload the box file directly to
+            cloud storage via HTTP PUT.
+        callback:
+          type: string
+          format: uri
+          description: >-
+            The callback URL to notify Vagrant Cloud after the upload
+            completes.
+        token:
+          type: string
+          description: >-
+            The upload token for this upload session.
+    CreateBoxRequest:
+      type: object
+      description: >-
+        Request body for creating a new Vagrant box.
+      required:
+        - box
+      properties:
+        box:
+          type: object
+          required:
+            - username
+            - name
+          properties:
+            username:
+              type: string
+              description: >-
+                The username or organization to create the box under.
+            name:
+              type: string
+              description: >-
+                The name of the box.
+            short_description:
+              type: string
+              description: >-
+                A brief description of the box, limited to 100 characters.
+              maxLength: 100
+            description:
+              type: string
+              description: >-
+                The full description of the box in Markdown format.
+            is_private:
+              type: boolean
+              description: >-
+                Whether the box should be private.
+              default: false
+    UpdateBoxRequest:
+      type: object
+      description: >-
+        Request body for updating an existing Vagrant box.
+      properties:
+        box:
+          type: object
+          properties:
+            short_description:
+              type: string
+              description: >-
+                A brief description of the box, limited to 100 characters.
+              maxLength: 100
+            description:
+              type: string
+              description: >-
+                The full description of the box in Markdown format.
+            is_private:
+              type: boolean
+              description: >-
+                Whether the box should be private.
+    CreateVersionRequest:
+      type: object
+      description: >-
+        Request body for creating a new version of a Vagrant box.
+      required:
+        - version
+      properties:
+        version:
+          type: object
+          required:
+            - version
+          properties:
+            version:
+              type: string
+              description: >-
+                The version number following semantic versioning.
+            description:
+              type: string
+              description: >-
+                The description of this version in Markdown format.
+    UpdateVersionRequest:
+      type: object
+      description: >-
+        Request body for updating an existing version.
+      properties:
+        version:
+          type: object
+          properties:
+            version:
+              type: string
+              description: >-
+                The updated version number.
+            description:
+              type: string
+              description: >-
+                The updated description in Markdown format.
+    CreateProviderRequest:
+      type: object
+      description: >-
+        Request body for creating a new provider for a version.
+      required:
+        - provider
+      properties:
+        provider:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: >-
+                The name of the provider such as virtualbox or
+                vmware_desktop.
+            url:
+              type: string
+              format: uri
+              description: >-
+                The URL of an externally hosted box file. If omitted,
+                the box file must be uploaded to Vagrant Cloud.
+            checksum_type:
+              type: string
+              description: >-
+                The type of checksum for the box file.
+              enum:
+                - md5
+                - sha1
+                - sha256
+                - sha384
+                - sha512
+            checksum:
+              type: string
+              description: >-
+                The checksum value for the box file.
+            architecture:
+              type: string
+              description: >-
+                The CPU architecture the box supports.
+            default_architecture:
+              type: boolean
+              description: >-
+                Whether this is the default architecture for the provider.
+    UpdateProviderRequest:
+      type: object
+      description: >-
+        Request body for updating an existing provider.
+      properties:
+        provider:
+          type: object
+          properties:
+            name:
+              type: string
+              description: >-
+                The updated name of the provider.
+            url:
+              type: string
+              format: uri
+              description: >-
+                The updated URL of an externally hosted box file.
+            checksum_type:
+              type: string
+              description: >-
+                The updated checksum type.
+            checksum:
+              type: string
+              description: >-
+                The updated checksum value.
+            architecture:
+              type: string
+              description: >-
+                The updated CPU architecture.
