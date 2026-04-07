@@ -21,23 +21,23 @@ servers:
   - url: https://api.cloud.hashicorp.com
     description: HCP Production Server
 tags:
+  - name: Boxes
+    description: >-
+      Endpoints for managing Vagrant boxes within a registry, including
+      creating, reading, listing, and deleting boxes.
+  - name: Providers
+    description: >-
+      Endpoints for managing providers within box versions, representing
+      specific virtualization platform builds of a box.
   - name: Registries
     description: >-
       Endpoints for managing Vagrant box registries. A registry is a
       namespace that holds boxes and forms the first segment of a box
       tag such as hashicorp in hashicorp/vagrant.
-  - name: Boxes
-    description: >-
-      Endpoints for managing Vagrant boxes within a registry, including
-      creating, reading, listing, and deleting boxes.
   - name: Versions
     description: >-
       Endpoints for managing versions of boxes, including creating,
       reading, listing, and deleting versions.
-  - name: Providers
-    description: >-
-      Endpoints for managing providers within box versions, representing
-      specific virtualization platform builds of a box.
 security:
   - bearerAuth: []
 paths:

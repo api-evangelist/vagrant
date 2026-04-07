@@ -20,22 +20,22 @@ servers:
   - url: https://app.vagrantup.com/api/v2
     description: Vagrant Cloud Production Server
 tags:
-  - name: Search
-    description: >-
-      Endpoints for searching the public Vagrant box catalog by query,
-      provider, and other filters.
   - name: Boxes
     description: >-
       Endpoints for creating, reading, updating, and deleting Vagrant boxes
       in the Vagrant Cloud registry.
-  - name: Versions
-    description: >-
-      Endpoints for managing versions of a Vagrant box, including creating
-      new versions and releasing them for consumption.
   - name: Providers
     description: >-
       Endpoints for managing providers within a box version, including
       creating providers and uploading box files.
+  - name: Search
+    description: >-
+      Endpoints for searching the public Vagrant box catalog by query,
+      provider, and other filters.
+  - name: Versions
+    description: >-
+      Endpoints for managing versions of a Vagrant box, including creating
+      new versions and releasing them for consumption.
 security:
   - bearerAuth: []
 paths:
