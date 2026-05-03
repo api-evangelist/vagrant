@@ -1,0 +1,85 @@
+vocabulary:
+  name: Vagrant Vocabulary
+  description: Domain vocabulary for Vagrant virtualization, box management, and development environments
+  version: '1.0'
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  terms:
+    - term: Box
+      definition: A package format for Vagrant environments that includes a base OS image and metadata for one or more providers
+      category: Core Concept
+      tags:
+        - Vagrant
+        - Virtualization
+    - term: Provider
+      definition: A virtualization platform supported by Vagrant such as VirtualBox, VMware, Docker, or Hyper-V
+      category: Core Concept
+      tags:
+        - Vagrant
+        - Virtualization
+    - term: Vagrantfile
+      definition: A Ruby-based configuration file that describes the type of machine and how to configure and provision it
+      category: Configuration
+      tags:
+        - Configuration
+        - Infrastructure
+    - term: Provisioner
+      definition: A tool that automatically installs software, alters configurations, and more during the Vagrant startup process
+      category: Feature
+      tags:
+        - Automation
+        - Configuration
+    - term: Version
+      definition: A specific release of a Vagrant box following semantic versioning
+      category: Resource
+      tags:
+        - Versioning
+        - Release
+    - term: Registry
+      definition: A collection of Vagrant boxes stored in the HCP Vagrant Box Registry
+      category: Resource
+      tags:
+        - Cloud
+        - Storage
+    - term: Vagrant Cloud
+      definition: HashiCorp's hosted service for discovering, sharing, and managing Vagrant boxes
+      category: Platform
+      tags:
+        - Cloud
+        - HashiCorp
+    - term: HCP
+      definition: HashiCorp Cloud Platform - the managed infrastructure platform that hosts the Vagrant Box Registry
+      category: Platform
+      tags:
+        - Cloud
+        - HashiCorp
+    - term: Plugin
+      definition: An extension to Vagrant that adds new commands, providers, provisioners, or other capabilities
+      category: Extension
+      tags:
+        - Extensibility
+        - Development
+    - term: SSH
+      definition: Secure Shell protocol used for accessing and managing Vagrant virtual machines
+      category: Protocol
+      tags:
+        - Networking
+        - Access
+    - term: Synced Folder
+      definition: A directory on the host machine that is automatically shared with the guest Vagrant machine
+      category: Feature
+      tags:
+        - Filesystem
+        - Development
+    - term: Forwarded Port
+      definition: A network port mapping from the guest machine to the host, enabling access to services
+      category: Networking
+      tags:
+        - Networking
+        - Configuration
+    - term: Base Box
+      definition: A minimal Vagrant box containing an operating system and the required configuration to allow Vagrant to function
+      category: Resource
+      tags:
+        - Vagrant
+        - Infrastructure

@@ -1,0 +1,63 @@
+extends:
+  - spectral:oas
+rules:
+  vagrant-bearer-auth:
+    description: Vagrant Cloud API operations should use bearerAuth security
+    message: Operations should use bearerAuth security scheme
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      function: truthy
+      field: security
+
+  vagrant-operations-have-summaries:
+    description: All operations must have a summary
+    message: Operations must have a summary field
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      function: truthy
+      field: summary
+
+  vagrant-operations-have-tags:
+    description: All operations should have at least one tag
+    message: Operations should be tagged
+    severity: warn
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      function: truthy
+      field: tags
+
+  vagrant-operation-ids-camel-case:
+    description: Operation IDs should use camelCase
+    message: OperationId should use camelCase
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  vagrant-username-name-paths:
+    description: Box paths should use :username/:name format
+    message: Box resource paths should include username and name parameters
+    severity: hint
+    given: "$.paths"
+    then:
+      function: truthy
+
+  vagrant-error-responses:
+    description: Operations should document error responses
+    message: Operations should have 401 or 404 error responses defined
+    severity: warn
+    given: "$.paths[*][get,post,put,delete].responses"
+    then:
+      function: truthy
+
+  vagrant-json-content-type:
+    description: API responses should use application/json content type
+    message: Responses should use application/json content type
+    severity: warn
+    given: "$.paths[*][*].responses[*].content"
+    then:
+      function: truthy

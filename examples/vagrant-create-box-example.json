@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://app.vagrantup.com/api/v2/boxes",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "box": {
+        "username": "myorg",
+        "name": "my-dev-box",
+        "short_description": "Custom development environment",
+        "description": "A custom Ubuntu-based development environment with common tools pre-installed.",
+        "is_private": false
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "tag": "myorg/my-dev-box",
+      "username": "myorg",
+      "name": "my-dev-box",
+      "private": false,
+      "short_description": "Custom development environment",
+      "description": "A custom Ubuntu-based development environment with common tools pre-installed.",
+      "downloads": 0,
+      "created_at": "2024-05-03T10:00:00Z",
+      "updated_at": "2024-05-03T10:00:00Z",
+      "current_version": null,
+      "versions": []
+    }
+  }
+}

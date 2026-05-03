@@ -1,0 +1,240 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Vagrant Box Lifecycle
+  description: >-
+    Unified workflow capability for managing the complete Vagrant box lifecycle -
+    from searching the public catalog and creating new boxes, to publishing versions
+    and managing providers. Designed for DevOps engineers and platform teams automating
+    development environment distribution via Vagrant Cloud.
+  tags:
+    - DevOps
+    - Virtualization
+    - Vagrant
+    - Boxes
+    - HashiCorp
+    - CI/CD
+    - Infrastructure
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      VAGRANT_CLOUD_TOKEN: VAGRANT_CLOUD_TOKEN
+
+capability:
+  consumes:
+    - import: vagrant-cloud
+      location: ./shared/vagrant-cloud.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: box-lifecycle-api
+      description: Unified REST API for Vagrant box lifecycle management.
+      resources:
+        - path: /v1/boxes
+          name: boxes
+          description: Search and create Vagrant boxes
+          operations:
+            - method: GET
+              name: search-boxes
+              description: Search the Vagrant box catalog
+              call: "vagrant-cloud.search-boxes"
+              with:
+                q: "rest.q"
+                provider: "rest.provider"
+                sort: "rest.sort"
+                limit: "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-box
+              description: Create a new Vagrant box
+              call: "vagrant-cloud.create-box"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/boxes/{username}/{name}
+          name: box
+          description: Individual box management
+          operations:
+            - method: GET
+              name: get-box
+              description: Get a specific Vagrant box
+              call: "vagrant-cloud.get-box"
+              with:
+                username: "rest.username"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-box
+              description: Update a Vagrant box
+              call: "vagrant-cloud.update-box"
+              with:
+                username: "rest.username"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-box
+              description: Delete a Vagrant box
+              call: "vagrant-cloud.delete-box"
+              with:
+                username: "rest.username"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/boxes/{username}/{name}/versions
+          name: versions
+          description: Box version management
+          operations:
+            - method: POST
+              name: create-version
+              description: Create a new version for a box
+              call: "vagrant-cloud.create-version"
+              with:
+                username: "rest.username"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/boxes/{username}/{name}/versions/{version}
+          name: version
+          description: Individual version management
+          operations:
+            - method: GET
+              name: get-version
+              description: Get a specific box version
+              call: "vagrant-cloud.get-version"
+              with:
+                username: "rest.username"
+                name: "rest.name"
+                version: "rest.version"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/boxes/{username}/{name}/versions/{version}/release
+          name: version-release
+          description: Release a box version
+          operations:
+            - method: PUT
+              name: release-version
+              description: Publish a box version
+              call: "vagrant-cloud.release-version"
+              with:
+                username: "rest.username"
+                name: "rest.name"
+                version: "rest.version"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: box-lifecycle-mcp
+      transport: http
+      description: MCP server for AI-assisted Vagrant box lifecycle management.
+      tools:
+        - name: search-boxes
+          description: Search the public Vagrant box catalog
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vagrant-cloud.search-boxes"
+          with:
+            q: "tools.q"
+            provider: "tools.provider"
+            sort: "tools.sort"
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-box
+          description: Get details for a specific Vagrant box
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vagrant-cloud.get-box"
+          with:
+            username: "tools.username"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-box
+          description: Create a new Vagrant box in the registry
+          hints:
+            readOnly: false
+          call: "vagrant-cloud.create-box"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-box
+          description: Update a Vagrant box metadata
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "vagrant-cloud.update-box"
+          with:
+            username: "tools.username"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-box
+          description: Delete a Vagrant box
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "vagrant-cloud.delete-box"
+          with:
+            username: "tools.username"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-version
+          description: Create a new version for a Vagrant box
+          hints:
+            readOnly: false
+          call: "vagrant-cloud.create-version"
+          with:
+            username: "tools.username"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-version
+          description: Get a specific box version details
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vagrant-cloud.get-version"
+          with:
+            username: "tools.username"
+            name: "tools.name"
+            version: "tools.version"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: release-version
+          description: Publish a box version to make it available for download
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "vagrant-cloud.release-version"
+          with:
+            username: "tools.username"
+            name: "tools.name"
+            version: "tools.version"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,44 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://app.vagrantup.com/api/v2/search",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_TOKEN"
+    },
+    "query": {
+      "q": "ubuntu",
+      "provider": "virtualbox",
+      "sort": "downloads",
+      "limit": 5
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "boxes": [
+        {
+          "tag": "ubuntu/focal64",
+          "username": "ubuntu",
+          "name": "focal64",
+          "short_description": "Official Ubuntu 20.04 LTS (Focal Fossa) daily builds",
+          "description_html": "<p>Official Ubuntu 20.04 LTS Vagrant box.</p>",
+          "downloads": 18500000,
+          "private": false,
+          "current_version": {
+            "version": "20240501.0.0",
+            "status": "active",
+            "description": "Daily build 20240501",
+            "providers": [
+              {
+                "name": "virtualbox",
+                "hosted": true,
+                "architecture": "amd64",
+                "default_architecture": true
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

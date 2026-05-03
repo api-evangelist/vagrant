@@ -1,0 +1,34 @@
+{
+  "name": "Vagrant Box",
+  "description": "Structure of a Vagrant box in the Vagrant Cloud registry",
+  "fields": [
+    { "name": "tag", "type": "string", "required": false, "description": "Full tag in username/name format" },
+    { "name": "username", "type": "string", "required": true, "description": "Box owner username" },
+    { "name": "name", "type": "string", "required": true, "description": "Box name" },
+    { "name": "private", "type": "boolean", "required": false, "description": "Whether box is private" },
+    { "name": "downloads", "type": "integer", "required": false, "description": "Total download count" },
+    { "name": "short_description", "type": "string", "required": false, "description": "Brief description" },
+    { "name": "description", "type": "string", "required": false, "description": "Full Markdown description" },
+    { "name": "current_version", "type": "Version", "required": false, "description": "Currently released version" },
+    { "name": "versions", "type": "array[Version]", "required": false, "description": "All versions" },
+    { "name": "created_at", "type": "datetime", "required": false, "description": "Creation timestamp" },
+    { "name": "updated_at", "type": "datetime", "required": false, "description": "Last update timestamp" }
+  ],
+  "nested": {
+    "Version": [
+      { "name": "version", "type": "string", "required": true, "description": "Semantic version number" },
+      { "name": "status", "type": "enum[unreleased,active,revoked]", "required": false, "description": "Release status" },
+      { "name": "description", "type": "string", "required": false, "description": "Version description" },
+      { "name": "downloads", "type": "integer", "required": false, "description": "Version download count" },
+      { "name": "providers", "type": "array[Provider]", "required": false, "description": "Available providers" }
+    ],
+    "Provider": [
+      { "name": "name", "type": "string", "required": true, "description": "Provider name (virtualbox, vmware_desktop, etc.)" },
+      { "name": "hosted", "type": "boolean", "required": false, "description": "Whether hosted on Vagrant Cloud" },
+      { "name": "url", "type": "uri", "required": false, "description": "External download URL" },
+      { "name": "architecture", "type": "string", "required": false, "description": "CPU architecture" },
+      { "name": "checksum_type", "type": "string", "required": false, "description": "Checksum algorithm" },
+      { "name": "checksum", "type": "string", "required": false, "description": "File checksum value" }
+    ]
+  }
+}
