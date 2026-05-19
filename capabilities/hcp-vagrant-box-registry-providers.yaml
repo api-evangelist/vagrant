@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: HCP Vagrant Box Registry API — Providers
+  description: 'HCP Vagrant Box Registry API — Providers. 4 operations. Lead operation: Read a provider. Self-contained Naftiko
+    capability covering one Vagrant business surface.'
+  tags:
+  - Vagrant
+  - Providers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VAGRANT_API_KEY: VAGRANT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hcp-vagrant-box-registry-providers
+    baseUri: https://api.cloud.hashicorp.com
+    description: HCP Vagrant Box Registry API — Providers business capability. Self-contained, no shared references.
+    resources:
+    - name: vagrant-2023-01-01-registry-registry-box-box-version-version-provider-provider
+      path: /vagrant/2023-01-01/registry/{registry}/box/{box}/version/{version}/provider/{provider}
+      operations:
+      - name: readprovider
+        method: GET
+        description: Read a provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteprovider
+        method: DELETE
+        description: Delete a provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vagrant-2023-01-01-registry-registry-box-box-version-version-providers
+      path: /vagrant/2023-01-01/registry/{registry}/box/{box}/version/{version}/providers
+      operations:
+      - name: listproviders
+        method: GET
+        description: List providers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createprovider
+        method: POST
+        description: Create a provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.VAGRANT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: hcp-vagrant-box-registry-providers-rest
+    port: 8080
+    description: REST adapter for HCP Vagrant Box Registry API — Providers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/vagrant/2023-01-01/registry/{registry}/box/{box}/version/{version}/provider/{provider}
+      name: vagrant-2023-01-01-registry-registry-box-box-version-version-provider-provider
+      description: REST surface for vagrant-2023-01-01-registry-registry-box-box-version-version-provider-provider.
+      operations:
+      - method: GET
+        name: readprovider
+        description: Read a provider
+        call: hcp-vagrant-box-registry-providers.readprovider
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprovider
+        description: Delete a provider
+        call: hcp-vagrant-box-registry-providers.deleteprovider
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/vagrant/2023-01-01/registry/{registry}/box/{box}/version/{version}/providers
+      name: vagrant-2023-01-01-registry-registry-box-box-version-version-providers
+      description: REST surface for vagrant-2023-01-01-registry-registry-box-box-version-version-providers.
+      operations:
+      - method: GET
+        name: listproviders
+        description: List providers
+        call: hcp-vagrant-box-registry-providers.listproviders
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprovider
+        description: Create a provider
+        call: hcp-vagrant-box-registry-providers.createprovider
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: hcp-vagrant-box-registry-providers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for HCP Vagrant Box Registry API — Providers. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: read-provider
+      description: Read a provider
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hcp-vagrant-box-registry-providers.readprovider
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-provider
+      description: Delete a provider
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: hcp-vagrant-box-registry-providers.deleteprovider
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-providers
+      description: List providers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hcp-vagrant-box-registry-providers.listproviders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-provider
+      description: Create a provider
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hcp-vagrant-box-registry-providers.createprovider
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

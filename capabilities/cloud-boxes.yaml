@@ -1,0 +1,172 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vagrant Cloud API — Boxes
+  description: 'Vagrant Cloud API — Boxes. 4 operations. Lead operation: Read a box. Self-contained Naftiko capability covering
+    one Vagrant business surface.'
+  tags:
+  - Vagrant
+  - Boxes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VAGRANT_API_KEY: VAGRANT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-boxes
+    baseUri: https://app.vagrantup.com/api/v2
+    description: Vagrant Cloud API — Boxes business capability. Self-contained, no shared references.
+    resources:
+    - name: box-username-name
+      path: /box/{username}/{name}
+      operations:
+      - name: readbox
+        method: GET
+        description: Read a box
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatebox
+        method: PUT
+        description: Update a box
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletebox
+        method: DELETE
+        description: Delete a box
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: boxes
+      path: /boxes
+      operations:
+      - name: createbox
+        method: POST
+        description: Create a box
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.VAGRANT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-boxes-rest
+    port: 8080
+    description: REST adapter for Vagrant Cloud API — Boxes. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/box/{username}/{name}
+      name: box-username-name
+      description: REST surface for box-username-name.
+      operations:
+      - method: GET
+        name: readbox
+        description: Read a box
+        call: cloud-boxes.readbox
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatebox
+        description: Update a box
+        call: cloud-boxes.updatebox
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletebox
+        description: Delete a box
+        call: cloud-boxes.deletebox
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/boxes
+      name: boxes
+      description: REST surface for boxes.
+      operations:
+      - method: POST
+        name: createbox
+        description: Create a box
+        call: cloud-boxes.createbox
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-boxes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vagrant Cloud API — Boxes. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: read-box
+      description: Read a box
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-boxes.readbox
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-box
+      description: Update a box
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-boxes.updatebox
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-box
+      description: Delete a box
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-boxes.deletebox
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-box
+      description: Create a box
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-boxes.createbox
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,236 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vagrant Cloud API — Providers
+  description: 'Vagrant Cloud API — Providers. 6 operations. Lead operation: Read a provider. Self-contained Naftiko capability
+    covering one Vagrant business surface.'
+  tags:
+  - Vagrant
+  - Providers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VAGRANT_API_KEY: VAGRANT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-providers
+    baseUri: https://app.vagrantup.com/api/v2
+    description: Vagrant Cloud API — Providers business capability. Self-contained, no shared references.
+    resources:
+    - name: box-username-name-version-version-provider-provider
+      path: /box/{username}/{name}/version/{version}/provider/{provider}
+      operations:
+      - name: readprovider
+        method: GET
+        description: Read a provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateprovider
+        method: PUT
+        description: Update a provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteprovider
+        method: DELETE
+        description: Delete a provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: box-username-name-version-version-provider-provider-upload
+      path: /box/{username}/{name}/version/{version}/provider/{provider}/upload
+      operations:
+      - name: getuploadurl
+        method: GET
+        description: Get upload URL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: box-username-name-version-version-provider-provider-upload-direct
+      path: /box/{username}/{name}/version/{version}/provider/{provider}/upload/direct
+      operations:
+      - name: getdirectuploadurl
+        method: GET
+        description: Get direct upload URL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: box-username-name-version-version-providers
+      path: /box/{username}/{name}/version/{version}/providers
+      operations:
+      - name: createprovider
+        method: POST
+        description: Create a provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.VAGRANT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-providers-rest
+    port: 8080
+    description: REST adapter for Vagrant Cloud API — Providers. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/box/{username}/{name}/version/{version}/provider/{provider}
+      name: box-username-name-version-version-provider-provider
+      description: REST surface for box-username-name-version-version-provider-provider.
+      operations:
+      - method: GET
+        name: readprovider
+        description: Read a provider
+        call: cloud-providers.readprovider
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateprovider
+        description: Update a provider
+        call: cloud-providers.updateprovider
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprovider
+        description: Delete a provider
+        call: cloud-providers.deleteprovider
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/box/{username}/{name}/version/{version}/provider/{provider}/upload
+      name: box-username-name-version-version-provider-provider-upload
+      description: REST surface for box-username-name-version-version-provider-provider-upload.
+      operations:
+      - method: GET
+        name: getuploadurl
+        description: Get upload URL
+        call: cloud-providers.getuploadurl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/box/{username}/{name}/version/{version}/provider/{provider}/upload/direct
+      name: box-username-name-version-version-provider-provider-upload-direct
+      description: REST surface for box-username-name-version-version-provider-provider-upload-direct.
+      operations:
+      - method: GET
+        name: getdirectuploadurl
+        description: Get direct upload URL
+        call: cloud-providers.getdirectuploadurl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/box/{username}/{name}/version/{version}/providers
+      name: box-username-name-version-version-providers
+      description: REST surface for box-username-name-version-version-providers.
+      operations:
+      - method: POST
+        name: createprovider
+        description: Create a provider
+        call: cloud-providers.createprovider
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-providers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vagrant Cloud API — Providers. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: read-provider
+      description: Read a provider
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-providers.readprovider
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-provider
+      description: Update a provider
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-providers.updateprovider
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-provider
+      description: Delete a provider
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-providers.deleteprovider
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-upload-url
+      description: Get upload URL
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-providers.getuploadurl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-direct-upload-url
+      description: Get direct upload URL
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-providers.getdirectuploadurl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-provider
+      description: Create a provider
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-providers.createprovider
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

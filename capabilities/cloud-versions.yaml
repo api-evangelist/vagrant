@@ -1,0 +1,236 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vagrant Cloud API — Versions
+  description: 'Vagrant Cloud API — Versions. 6 operations. Lead operation: Read a version. Self-contained Naftiko capability
+    covering one Vagrant business surface.'
+  tags:
+  - Vagrant
+  - Versions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VAGRANT_API_KEY: VAGRANT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-versions
+    baseUri: https://app.vagrantup.com/api/v2
+    description: Vagrant Cloud API — Versions business capability. Self-contained, no shared references.
+    resources:
+    - name: box-username-name-version-version
+      path: /box/{username}/{name}/version/{version}
+      operations:
+      - name: readversion
+        method: GET
+        description: Read a version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateversion
+        method: PUT
+        description: Update a version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteversion
+        method: DELETE
+        description: Delete a version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: box-username-name-version-version-release
+      path: /box/{username}/{name}/version/{version}/release
+      operations:
+      - name: releaseversion
+        method: PUT
+        description: Release a version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: box-username-name-version-version-revoke
+      path: /box/{username}/{name}/version/{version}/revoke
+      operations:
+      - name: revokeversion
+        method: PUT
+        description: Revoke a version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: box-username-name-versions
+      path: /box/{username}/{name}/versions
+      operations:
+      - name: createversion
+        method: POST
+        description: Create a version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.VAGRANT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-versions-rest
+    port: 8080
+    description: REST adapter for Vagrant Cloud API — Versions. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/box/{username}/{name}/version/{version}
+      name: box-username-name-version-version
+      description: REST surface for box-username-name-version-version.
+      operations:
+      - method: GET
+        name: readversion
+        description: Read a version
+        call: cloud-versions.readversion
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateversion
+        description: Update a version
+        call: cloud-versions.updateversion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteversion
+        description: Delete a version
+        call: cloud-versions.deleteversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/box/{username}/{name}/version/{version}/release
+      name: box-username-name-version-version-release
+      description: REST surface for box-username-name-version-version-release.
+      operations:
+      - method: PUT
+        name: releaseversion
+        description: Release a version
+        call: cloud-versions.releaseversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/box/{username}/{name}/version/{version}/revoke
+      name: box-username-name-version-version-revoke
+      description: REST surface for box-username-name-version-version-revoke.
+      operations:
+      - method: PUT
+        name: revokeversion
+        description: Revoke a version
+        call: cloud-versions.revokeversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/box/{username}/{name}/versions
+      name: box-username-name-versions
+      description: REST surface for box-username-name-versions.
+      operations:
+      - method: POST
+        name: createversion
+        description: Create a version
+        call: cloud-versions.createversion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-versions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vagrant Cloud API — Versions. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: read-version
+      description: Read a version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-versions.readversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-version
+      description: Update a version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-versions.updateversion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-version
+      description: Delete a version
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-versions.deleteversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: release-version
+      description: Release a version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-versions.releaseversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revoke-version
+      description: Revoke a version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-versions.revokeversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-version
+      description: Create a version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-versions.createversion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
