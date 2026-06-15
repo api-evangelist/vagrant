@@ -1,0 +1,502 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HCP Vagrant Box Registry API",
+    "version": "2023-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Registries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Vagrant box registry on the HashiCorp Cloud Platform. The registry name must be globally unique and will form the first segment of all box tags within the registry."
+        },
+        {
+          "info": {
+            "name": "Read a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific Vagrant box registry on the HashiCorp Cloud Platform."
+        },
+        {
+          "info": {
+            "name": "Delete a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a Vagrant box registry and all of its boxes, versions, and providers. This action cannot be undone."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Boxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List boxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/boxes",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token for fetching the next page of results."
+              }
+            ]
+          },
+          "docs": "Lists all Vagrant boxes within a specific registry. Supports pagination for registries with many boxes."
+        },
+        {
+          "info": {
+            "name": "Create a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/boxes",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Vagrant box within a registry. The box name must be unique within the registry and should only be set at creation time."
+        },
+        {
+          "info": {
+            "name": "Read a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific Vagrant box within a registry."
+        },
+        {
+          "info": {
+            "name": "Update a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata of an existing Vagrant box within a registry, such as its descriptions."
+        },
+        {
+          "info": {
+            "name": "Delete a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a box and all of its versions and providers from the registry. This action cannot be undone."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box/versions",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token for fetching the next page of results."
+              }
+            ]
+          },
+          "docs": "Lists all versions of a specific box within a registry. Supports pagination for boxes with many versions."
+        },
+        {
+          "info": {
+            "name": "Create a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box/versions",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new version for a box. The version string must be unique within the box and should follow semantic versioning."
+        },
+        {
+          "info": {
+            "name": "Read a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific version of a box within a registry."
+        },
+        {
+          "info": {
+            "name": "Delete a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a version and all of its providers from the box. This action cannot be undone."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              }
+            ]
+          },
+          "docs": "Lists all providers for a specific version of a box within a registry."
+        },
+        {
+          "info": {
+            "name": "Create a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new provider for a specific version of a box. A provider represents a virtualization platform build of the box."
+        },
+        {
+          "info": {
+            "name": "Read a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox or vmware_desktop."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific provider within a version of a box."
+        },
+        {
+          "info": {
+            "name": "Delete a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.hashicorp.com/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox or vmware_desktop."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a provider from a version. This action cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

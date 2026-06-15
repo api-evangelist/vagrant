@@ -1,0 +1,607 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vagrant Cloud API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search boxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query that matches against the username, name, or short_description fields."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to boxes supporting a specific provider such as virtualbox or vmware_desktop."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results on."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The order to return the sorted field in."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page, with a maximum of 100."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return for paginated results."
+              }
+            ]
+          },
+          "docs": "Searches the public Vagrant box catalog. The search query matches against the username, name, or short_description fields. If the query is omitted, the top boxes based on sort and order are returned."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Boxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.vagrantup.com/api/v2/boxes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Vagrant box under the authenticated user or specified organization. Requires authentication with a valid access token."
+        },
+        {
+          "info": {
+            "name": "Read a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves detailed information about a specific Vagrant box, including its versions, providers, and metadata. Public boxes do not require authentication."
+        },
+        {
+          "info": {
+            "name": "Update a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata of an existing Vagrant box, such as its description, short description, or privacy settings."
+        },
+        {
+          "info": {
+            "name": "Delete a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a Vagrant box and all of its versions and providers. This action cannot be undone."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/versions",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new version for an existing Vagrant box. The version string must follow semantic versioning. New versions are created in an unreleased state and must be explicitly released after uploading provider files."
+        },
+        {
+          "info": {
+            "name": "Read a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific version of a Vagrant box, including its providers and release status."
+        },
+        {
+          "info": {
+            "name": "Update a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata of an existing version, such as its description."
+        },
+        {
+          "info": {
+            "name": "Delete a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a version and all of its providers. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Release a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/release",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ]
+          },
+          "docs": "Releases a version, making it available for consumption by Vagrant users. A version must have at least one provider with an uploaded box file before it can be released."
+        },
+        {
+          "info": {
+            "name": "Revoke a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/revoke",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ]
+          },
+          "docs": "Revokes a previously released version, making it unavailable for download by Vagrant users."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/providers",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new provider for a specific version of a Vagrant box. A provider represents a specific virtualization platform (such as virtualbox, vmware_desktop, or docker) for which a box file is available."
+        },
+        {
+          "info": {
+            "name": "Read a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific provider within a version of a Vagrant box."
+        },
+        {
+          "info": {
+            "name": "Update a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata of an existing provider, such as its URL or checksum information."
+        },
+        {
+          "info": {
+            "name": "Delete a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a provider from a version. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get upload URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider/upload",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ]
+          },
+          "docs": "Returns a pre-signed upload URL for uploading a box file to the specified provider. The client should use the returned URL to upload the box file via an HTTP PUT request."
+        },
+        {
+          "info": {
+            "name": "Get direct upload URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider/upload/direct",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ]
+          },
+          "docs": "Returns a pre-signed URL for directly uploading a box file to cloud storage, bypassing the Vagrant Cloud server. This is recommended for large box files to improve upload performance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
