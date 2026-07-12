@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vagrant-cloud-api-openapi.yml, openapi/vagrant-hcp-vagrant-box-registry-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Vagrant Cloud API token passed as a Bearer token in the Authorization header.
+  sources:
+  - openapi/vagrant-cloud-api-openapi.yml
+  - openapi/vagrant-hcp-vagrant-box-registry-openapi.yml

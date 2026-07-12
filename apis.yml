@@ -92,6 +92,10 @@ apis:
       - type: Documentation
         url: https://developer.hashicorp.com/vagrant/docs/plugins/development-basics
 common:
+  - type: DomainSecurity
+    url: security/vagrant-domain-security.yml
+  - type: Authentication
+    url: authentication/vagrant-authentication.yml
   - type: Portal
     url: https://developer.hashicorp.com/vagrant
   - type: Documentation
