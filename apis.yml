@@ -92,6 +92,8 @@ apis:
       - type: Documentation
         url: https://developer.hashicorp.com/vagrant/docs/plugins/development-basics
 common:
+  - type: AgenticAccess
+    url: agentic-access/vagrant-agentic-access.yml
   - type: DomainSecurity
     url: security/vagrant-domain-security.yml
   - type: Authentication
