@@ -1,0 +1,625 @@
+{
+  "info": {
+    "_postman_id": "24051cc9-b630-422d-af4b-a29849db79f5",
+    "name": "Vagrant Cloud Boxes Registries API",
+    "description": "The Vagrant Cloud API v2 enables developers to programmatically interact with the Vagrant Cloud platform for managing Vagrant boxes, versions, and providers. It supports creating and updating boxes, publishing new versions, uploading provider binaries, and searching the public box catalog. The API uses token-based authentication and is designed for automating box lifecycle management and integrating Vagrant Cloud into CI/CD pipelines.\n\nContact Support:\n Name: HashiCorp Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:24.000Z",
+    "updatedAt": "2026-07-28T03:26:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-24051cc9-b630-422d-af4b-a29849db79f5"
+  },
+  "item": [
+    {
+      "name": "vagrant",
+      "item": [
+        {
+          "name": "2023-01-01",
+          "item": [
+            {
+              "name": "registry",
+              "item": [
+                {
+                  "name": "{registry}",
+                  "item": [
+                    {
+                      "name": "Read a registry",
+                      "id": "6cf31cf6-df9f-4e20-b574-a1851f57f429",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vagrant",
+                            "2023-01-01",
+                            "registry",
+                            ":registry"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f7cadfac-eab7-4f71-8984-cdd17af1c27d",
+                              "key": "registry",
+                              "value": "<string>",
+                              "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves detailed information about a specific Vagrant box registry on the HashiCorp Cloud Platform."
+                      },
+                      "response": [
+                        {
+                          "id": "f1f85651-0474-4bfa-ad50-640be7ad3b9c",
+                          "name": "Registry details returned successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "vagrant",
+                                "2023-01-01",
+                                "registry",
+                                ":registry"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "registry"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"registry\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:26:25.000Z",
+                          "updatedAt": "2026-07-28T03:26:25.000Z",
+                          "uid": "35240-f1f85651-0474-4bfa-ad50-640be7ad3b9c"
+                        },
+                        {
+                          "id": "e551c57c-b260-4078-b16b-c3c3d0690b46",
+                          "name": "Registry not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "vagrant",
+                                "2023-01-01",
+                                "registry",
+                                ":registry"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "registry"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:26:25.000Z",
+                          "updatedAt": "2026-07-28T03:26:25.000Z",
+                          "uid": "35240-e551c57c-b260-4078-b16b-c3c3d0690b46"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:26:25.000Z",
+                      "updatedAt": "2026-07-28T03:26:25.000Z",
+                      "uid": "35240-6cf31cf6-df9f-4e20-b574-a1851f57f429"
+                    },
+                    {
+                      "name": "Delete a registry",
+                      "id": "a5e445cf-ba51-4d0a-a0bc-8b20c6fe146f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vagrant",
+                            "2023-01-01",
+                            "registry",
+                            ":registry"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1e4cc124-9c2f-4345-95bd-6c1cc13dae18",
+                              "key": "registry",
+                              "value": "<string>",
+                              "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                            }
+                          ]
+                        },
+                        "description": "Permanently deletes a Vagrant box registry and all of its boxes, versions, and providers. This action cannot be undone."
+                      },
+                      "response": [
+                        {
+                          "id": "bbab3f7f-f997-44f4-bc79-67afbd24a812",
+                          "name": "Registry deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "vagrant",
+                                "2023-01-01",
+                                "registry",
+                                ":registry"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "registry"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"operation\": {\n    \"id\": \"<string>\",\n    \"state\": \"DONE\",\n    \"error\": {\n      \"code\": \"<integer>\",\n      \"message\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T03:26:25.000Z",
+                          "updatedAt": "2026-07-28T03:26:25.000Z",
+                          "uid": "35240-bbab3f7f-f997-44f4-bc79-67afbd24a812"
+                        },
+                        {
+                          "id": "fb3ead18-aaaf-4443-8c77-b49aede36ca4",
+                          "name": "Authentication required",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "vagrant",
+                                "2023-01-01",
+                                "registry",
+                                ":registry"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "registry"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:26:25.000Z",
+                          "updatedAt": "2026-07-28T03:26:25.000Z",
+                          "uid": "35240-fb3ead18-aaaf-4443-8c77-b49aede36ca4"
+                        },
+                        {
+                          "id": "aab7671a-ecb2-4ce7-ab5f-0b10b90c0f02",
+                          "name": "Registry not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "vagrant",
+                                "2023-01-01",
+                                "registry",
+                                ":registry"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "registry"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:26:25.000Z",
+                          "updatedAt": "2026-07-28T03:26:25.000Z",
+                          "uid": "35240-aab7671a-ecb2-4ce7-ab5f-0b10b90c0f02"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:26:25.000Z",
+                      "updatedAt": "2026-07-28T03:26:25.000Z",
+                      "uid": "35240-a5e445cf-ba51-4d0a-a0bc-8b20c6fe146f"
+                    }
+                  ],
+                  "id": "9c2e93f1-2bb0-4bae-8b4c-2647c548319c",
+                  "createdAt": "2026-07-28T03:26:25.000Z",
+                  "updatedAt": "2026-07-28T03:26:25.000Z",
+                  "uid": "35240-9c2e93f1-2bb0-4bae-8b4c-2647c548319c"
+                },
+                {
+                  "name": "Create a registry",
+                  "id": "8a170d64-c2ac-4923-b9db-509ffa0b4e61",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vagrant",
+                        "2023-01-01",
+                        "registry"
+                      ]
+                    },
+                    "description": "Creates a new Vagrant box registry on the HashiCorp Cloud Platform. The registry name must be globally unique and will form the first segment of all box tags within the registry."
+                  },
+                  "response": [
+                    {
+                      "id": "d2111684-65c8-4c7c-863b-5530455b3a9f",
+                      "name": "Registry created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vagrant",
+                            "2023-01-01",
+                            "registry"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"registry\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:26:25.000Z",
+                      "updatedAt": "2026-07-28T03:26:25.000Z",
+                      "uid": "35240-d2111684-65c8-4c7c-863b-5530455b3a9f"
+                    },
+                    {
+                      "id": "4db83973-e9e9-47c6-a148-4aa8ae7eaaa0",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vagrant",
+                            "2023-01-01",
+                            "registry"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:26:25.000Z",
+                      "updatedAt": "2026-07-28T03:26:25.000Z",
+                      "uid": "35240-4db83973-e9e9-47c6-a148-4aa8ae7eaaa0"
+                    },
+                    {
+                      "id": "1e6afeaf-3aaf-43a8-98de-b6c7cc8d3999",
+                      "name": "Registry name already exists",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vagrant",
+                            "2023-01-01",
+                            "registry"
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:26:25.000Z",
+                      "updatedAt": "2026-07-28T03:26:25.000Z",
+                      "uid": "35240-1e6afeaf-3aaf-43a8-98de-b6c7cc8d3999"
+                    },
+                    {
+                      "id": "bc6993e0-5eed-4737-b7eb-f1b3acd7cefe",
+                      "name": "Validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vagrant",
+                            "2023-01-01",
+                            "registry"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:26:25.000Z",
+                      "updatedAt": "2026-07-28T03:26:25.000Z",
+                      "uid": "35240-bc6993e0-5eed-4737-b7eb-f1b3acd7cefe"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:26:25.000Z",
+                  "updatedAt": "2026-07-28T03:26:25.000Z",
+                  "uid": "35240-8a170d64-c2ac-4923-b9db-509ffa0b4e61"
+                }
+              ],
+              "id": "f492a595-e1f2-49f8-bcaf-be8d2e701cde",
+              "createdAt": "2026-07-28T03:26:25.000Z",
+              "updatedAt": "2026-07-28T03:26:25.000Z",
+              "uid": "35240-f492a595-e1f2-49f8-bcaf-be8d2e701cde"
+            }
+          ],
+          "id": "fb9e31fe-c6ff-4027-8387-0a00dfec11f5",
+          "createdAt": "2026-07-28T03:26:25.000Z",
+          "updatedAt": "2026-07-28T03:26:25.000Z",
+          "uid": "35240-fb9e31fe-c6ff-4027-8387-0a00dfec11f5"
+        }
+      ],
+      "id": "27cc856a-a232-4c9b-8b33-b08d8a0a23ca",
+      "createdAt": "2026-07-28T03:26:25.000Z",
+      "updatedAt": "2026-07-28T03:26:25.000Z",
+      "uid": "35240-27cc856a-a232-4c9b-8b33-b08d8a0a23ca"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.vagrantup.com/api/v2"
+    }
+  ]
+}

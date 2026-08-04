@@ -1,0 +1,2654 @@
+{
+  "info": {
+    "_postman_id": "2c27e106-b7ff-4d8a-bd3b-1a94facc6d7e",
+    "name": "Vagrant Cloud Boxes Providers API",
+    "description": "The Vagrant Cloud API v2 enables developers to programmatically interact with the Vagrant Cloud platform for managing Vagrant boxes, versions, and providers. It supports creating and updating boxes, publishing new versions, uploading provider binaries, and searching the public box catalog. The API uses token-based authentication and is designed for automating box lifecycle management and integrating Vagrant Cloud into CI/CD pipelines.\n\nContact Support:\n Name: HashiCorp Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:23.000Z",
+    "updatedAt": "2026-07-28T03:26:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2c27e106-b7ff-4d8a-bd3b-1a94facc6d7e"
+  },
+  "item": [
+    {
+      "name": "box",
+      "item": [
+        {
+          "name": "{username}",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "version",
+                  "item": [
+                    {
+                      "name": "{version}",
+                      "item": [
+                        {
+                          "name": "providers",
+                          "item": [
+                            {
+                              "name": "Create a provider",
+                              "id": "66979841-f420-4aad-8ca8-4ae5d6842a54",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum_type\": \"sha512\",\n    \"checksum\": \"<string>\",\n    \"architecture\": \"<string>\",\n    \"default_architecture\": \"<boolean>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version/providers",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version",
+                                    "providers"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "e66b546b-e920-4187-b9f4-10f221224859",
+                                      "key": "username",
+                                      "value": "<string>",
+                                      "description": "(Required) The username or organization name that owns the box."
+                                    },
+                                    {
+                                      "id": "e1ecf01a-7d64-4a65-a91a-bb34ffb54cf3",
+                                      "key": "name",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the Vagrant box."
+                                    },
+                                    {
+                                      "id": "dd27c865-dd7c-4335-92d5-ea7172a4bfea",
+                                      "key": "version",
+                                      "value": "<string>",
+                                      "description": "(Required) The version number of the box following semantic versioning."
+                                    }
+                                  ]
+                                },
+                                "description": "Creates a new provider for a specific version of a Vagrant box. A provider represents a specific virtualization platform (such as virtualbox, vmware_desktop, or docker) for which a box file is available."
+                              },
+                              "response": [
+                                {
+                                  "id": "516979a6-7ad2-40df-bde8-927b6cdf9e1a",
+                                  "name": "Provider created successfully",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum_type\": \"sha512\",\n    \"checksum\": \"<string>\",\n    \"architecture\": \"<string>\",\n    \"default_architecture\": \"<boolean>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"name\": \"<string>\",\n  \"hosted\": \"<boolean>\",\n  \"hosted_token\": \"<string>\",\n  \"original_url\": \"<uri>\",\n  \"download_url\": \"<uri>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"checksum_type\": \"sha256\",\n  \"checksum\": \"<string>\",\n  \"architecture\": \"<string>\",\n  \"default_architecture\": \"<boolean>\"\n}",
+                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                  "uid": "35240-516979a6-7ad2-40df-bde8-927b6cdf9e1a"
+                                },
+                                {
+                                  "id": "1a1ee5be-9b0f-4df8-a48f-aa3442cd6425",
+                                  "name": "Authentication required",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum_type\": \"sha512\",\n    \"checksum\": \"<string>\",\n    \"architecture\": \"<string>\",\n    \"default_architecture\": \"<boolean>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                  "uid": "35240-1a1ee5be-9b0f-4df8-a48f-aa3442cd6425"
+                                },
+                                {
+                                  "id": "ecec88a0-f3cc-4616-8371-19b7aa93131f",
+                                  "name": "Version not found",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum_type\": \"sha512\",\n    \"checksum\": \"<string>\",\n    \"architecture\": \"<string>\",\n    \"default_architecture\": \"<boolean>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                  "uid": "35240-ecec88a0-f3cc-4616-8371-19b7aa93131f"
+                                },
+                                {
+                                  "id": "f5006ab9-83bb-42c8-b28d-1474feadeaa1",
+                                  "name": "Validation error",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum_type\": \"sha512\",\n    \"checksum\": \"<string>\",\n    \"architecture\": \"<string>\",\n    \"default_architecture\": \"<boolean>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                  "uid": "35240-f5006ab9-83bb-42c8-b28d-1474feadeaa1"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:26:24.000Z",
+                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                              "uid": "35240-66979841-f420-4aad-8ca8-4ae5d6842a54"
+                            }
+                          ],
+                          "id": "507eb102-1fac-4869-9d15-48457b072921",
+                          "createdAt": "2026-07-28T03:26:24.000Z",
+                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                          "uid": "35240-507eb102-1fac-4869-9d15-48457b072921"
+                        },
+                        {
+                          "name": "provider",
+                          "item": [
+                            {
+                              "name": "{provider}",
+                              "item": [
+                                {
+                                  "name": "upload",
+                                  "item": [
+                                    {
+                                      "name": "direct",
+                                      "item": [
+                                        {
+                                          "name": "Get direct upload URL",
+                                          "id": "98fac4d3-75bd-496a-86e0-407aaa0f3fef",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider/upload/direct",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "box",
+                                                ":username",
+                                                ":name",
+                                                "version",
+                                                ":version",
+                                                "provider",
+                                                ":provider",
+                                                "upload",
+                                                "direct"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "9aa54509-941a-4a32-a58a-f89f303d177e",
+                                                  "key": "username",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The username or organization name that owns the box."
+                                                },
+                                                {
+                                                  "id": "8c9597ad-e7d0-4d27-97bd-b815822a520c",
+                                                  "key": "name",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The name of the Vagrant box."
+                                                },
+                                                {
+                                                  "id": "b4595f8c-a826-4776-9177-1d7cdc257e9c",
+                                                  "key": "version",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The version number of the box following semantic versioning."
+                                                },
+                                                {
+                                                  "id": "086d3f84-d06d-4cce-926d-7a6d63482916",
+                                                  "key": "provider",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The name of the provider such as virtualbox, vmware_desktop, or docker."
+                                                }
+                                              ]
+                                            },
+                                            "description": "Returns a pre-signed URL for directly uploading a box file to cloud storage, bypassing the Vagrant Cloud server. This is recommended for large box files to improve upload performance."
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "65a6430a-f591-44c3-9c15-0764081a887f",
+                                              "name": "Direct upload URL returned successfully",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider/upload/direct",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "box",
+                                                    ":username",
+                                                    ":name",
+                                                    "version",
+                                                    ":version",
+                                                    "provider",
+                                                    ":provider",
+                                                    "upload",
+                                                    "direct"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "username"
+                                                    },
+                                                    {
+                                                      "key": "name"
+                                                    },
+                                                    {
+                                                      "key": "version"
+                                                    },
+                                                    {
+                                                      "key": "provider"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"upload_path\": \"<uri>\",\n  \"callback\": \"<uri>\",\n  \"token\": \"<string>\"\n}",
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-65a6430a-f591-44c3-9c15-0764081a887f"
+                                            },
+                                            {
+                                              "id": "6b3c28b4-34d9-4c75-9eac-c32ccf4b5d9b",
+                                              "name": "Authentication required",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider/upload/direct",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "box",
+                                                    ":username",
+                                                    ":name",
+                                                    "version",
+                                                    ":version",
+                                                    "provider",
+                                                    ":provider",
+                                                    "upload",
+                                                    "direct"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "username"
+                                                    },
+                                                    {
+                                                      "key": "name"
+                                                    },
+                                                    {
+                                                      "key": "version"
+                                                    },
+                                                    {
+                                                      "key": "provider"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Unauthorized",
+                                              "code": 401,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-6b3c28b4-34d9-4c75-9eac-c32ccf4b5d9b"
+                                            },
+                                            {
+                                              "id": "9862309d-7f17-42e6-8920-2b163f27f8b5",
+                                              "name": "Provider not found",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider/upload/direct",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "box",
+                                                    ":username",
+                                                    ":name",
+                                                    "version",
+                                                    ":version",
+                                                    "provider",
+                                                    ":provider",
+                                                    "upload",
+                                                    "direct"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "username"
+                                                    },
+                                                    {
+                                                      "key": "name"
+                                                    },
+                                                    {
+                                                      "key": "version"
+                                                    },
+                                                    {
+                                                      "key": "provider"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Not Found",
+                                              "code": 404,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-9862309d-7f17-42e6-8920-2b163f27f8b5"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T03:26:24.000Z",
+                                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                                          "uid": "35240-98fac4d3-75bd-496a-86e0-407aaa0f3fef"
+                                        }
+                                      ],
+                                      "id": "c704294e-25eb-4dc6-b70c-218c63802d9a",
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-c704294e-25eb-4dc6-b70c-218c63802d9a"
+                                    },
+                                    {
+                                      "name": "Get upload URL",
+                                      "id": "a1b2b923-a066-4356-9423-aca377e6226c",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider/upload",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "box",
+                                            ":username",
+                                            ":name",
+                                            "version",
+                                            ":version",
+                                            "provider",
+                                            ":provider",
+                                            "upload"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "32f1658d-655c-4b99-af5c-325e8d82f48a",
+                                              "key": "username",
+                                              "value": "<string>",
+                                              "description": "(Required) The username or organization name that owns the box."
+                                            },
+                                            {
+                                              "id": "6bfcd61b-0d5b-45d1-9266-05c4f702a795",
+                                              "key": "name",
+                                              "value": "<string>",
+                                              "description": "(Required) The name of the Vagrant box."
+                                            },
+                                            {
+                                              "id": "5d1dde91-6bfb-47b5-bbcc-748412170941",
+                                              "key": "version",
+                                              "value": "<string>",
+                                              "description": "(Required) The version number of the box following semantic versioning."
+                                            },
+                                            {
+                                              "id": "3a981234-8f9b-42eb-8e84-d39939d44410",
+                                              "key": "provider",
+                                              "value": "<string>",
+                                              "description": "(Required) The name of the provider such as virtualbox, vmware_desktop, or docker."
+                                            }
+                                          ]
+                                        },
+                                        "description": "Returns a pre-signed upload URL for uploading a box file to the specified provider. The client should use the returned URL to upload the box file via an HTTP PUT request."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "7982ac4a-d15a-4f5d-be6b-50dd7ab27915",
+                                          "name": "Upload URL returned successfully",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider/upload",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "box",
+                                                ":username",
+                                                ":name",
+                                                "version",
+                                                ":version",
+                                                "provider",
+                                                ":provider",
+                                                "upload"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "username"
+                                                },
+                                                {
+                                                  "key": "name"
+                                                },
+                                                {
+                                                  "key": "version"
+                                                },
+                                                {
+                                                  "key": "provider"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"upload_path\": \"<uri>\",\n  \"token\": \"<string>\"\n}",
+                                          "createdAt": "2026-07-28T03:26:24.000Z",
+                                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                                          "uid": "35240-7982ac4a-d15a-4f5d-be6b-50dd7ab27915"
+                                        },
+                                        {
+                                          "id": "7aa3b17a-994a-4eb5-bbce-cbfd4d40c563",
+                                          "name": "Authentication required",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider/upload",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "box",
+                                                ":username",
+                                                ":name",
+                                                "version",
+                                                ":version",
+                                                "provider",
+                                                ":provider",
+                                                "upload"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "username"
+                                                },
+                                                {
+                                                  "key": "name"
+                                                },
+                                                {
+                                                  "key": "version"
+                                                },
+                                                {
+                                                  "key": "provider"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Unauthorized",
+                                          "code": 401,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:26:24.000Z",
+                                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                                          "uid": "35240-7aa3b17a-994a-4eb5-bbce-cbfd4d40c563"
+                                        },
+                                        {
+                                          "id": "f6bc24a2-fa78-4578-a068-68c8ca4f7c74",
+                                          "name": "Provider not found",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider/upload",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "box",
+                                                ":username",
+                                                ":name",
+                                                "version",
+                                                ":version",
+                                                "provider",
+                                                ":provider",
+                                                "upload"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "username"
+                                                },
+                                                {
+                                                  "key": "name"
+                                                },
+                                                {
+                                                  "key": "version"
+                                                },
+                                                {
+                                                  "key": "provider"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:26:24.000Z",
+                                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                                          "uid": "35240-f6bc24a2-fa78-4578-a068-68c8ca4f7c74"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-a1b2b923-a066-4356-9423-aca377e6226c"
+                                    }
+                                  ],
+                                  "id": "b92650a6-deb2-4acb-bd73-5f1edc2aca29",
+                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                  "uid": "35240-b92650a6-deb2-4acb-bd73-5f1edc2aca29"
+                                },
+                                {
+                                  "name": "Read a provider",
+                                  "id": "17dc1084-3674-4326-9e31-4ccc8dbc9c38",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "provider",
+                                        ":provider"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "9225a309-96d2-4647-b1bf-a1c1be2b125d",
+                                          "key": "username",
+                                          "value": "<string>",
+                                          "description": "(Required) The username or organization name that owns the box."
+                                        },
+                                        {
+                                          "id": "beb2c8c8-033d-4ecd-baff-fbd465d75c61",
+                                          "key": "name",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the Vagrant box."
+                                        },
+                                        {
+                                          "id": "4f61ba04-b5cc-42c7-96c8-80315b66b2cc",
+                                          "key": "version",
+                                          "value": "<string>",
+                                          "description": "(Required) The version number of the box following semantic versioning."
+                                        },
+                                        {
+                                          "id": "19f0278f-34db-4b7a-bc1c-6b33bc6b279b",
+                                          "key": "provider",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the provider such as virtualbox, vmware_desktop, or docker."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Retrieves detailed information about a specific provider within a version of a Vagrant box."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "34793b0f-11f7-4019-800d-b81ffed955e3",
+                                      "name": "Provider details returned successfully",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "box",
+                                            ":username",
+                                            ":name",
+                                            "version",
+                                            ":version",
+                                            "provider",
+                                            ":provider"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "username"
+                                            },
+                                            {
+                                              "key": "name"
+                                            },
+                                            {
+                                              "key": "version"
+                                            },
+                                            {
+                                              "key": "provider"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"name\": \"<string>\",\n  \"hosted\": \"<boolean>\",\n  \"hosted_token\": \"<string>\",\n  \"original_url\": \"<uri>\",\n  \"download_url\": \"<uri>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"checksum_type\": \"sha256\",\n  \"checksum\": \"<string>\",\n  \"architecture\": \"<string>\",\n  \"default_architecture\": \"<boolean>\"\n}",
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-34793b0f-11f7-4019-800d-b81ffed955e3"
+                                    },
+                                    {
+                                      "id": "63cf6de4-f71f-4750-8eeb-4914c4a073e1",
+                                      "name": "Provider not found",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "box",
+                                            ":username",
+                                            ":name",
+                                            "version",
+                                            ":version",
+                                            "provider",
+                                            ":provider"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "username"
+                                            },
+                                            {
+                                              "key": "name"
+                                            },
+                                            {
+                                              "key": "version"
+                                            },
+                                            {
+                                              "key": "provider"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-63cf6de4-f71f-4750-8eeb-4914c4a073e1"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                  "uid": "35240-17dc1084-3674-4326-9e31-4ccc8dbc9c38"
+                                },
+                                {
+                                  "name": "Update a provider",
+                                  "id": "41b853d1-3e7f-4fef-872a-83b17960d89d",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum_type\": \"<string>\",\n    \"checksum\": \"<string>\",\n    \"architecture\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "provider",
+                                        ":provider"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "91949565-ca1b-458f-bc1e-ddfa9a29ba14",
+                                          "key": "username",
+                                          "value": "<string>",
+                                          "description": "(Required) The username or organization name that owns the box."
+                                        },
+                                        {
+                                          "id": "6e3f817c-c8cf-43da-b3c6-780802ed8923",
+                                          "key": "name",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the Vagrant box."
+                                        },
+                                        {
+                                          "id": "b5b1a44a-c461-4d37-a483-7118ea285dbb",
+                                          "key": "version",
+                                          "value": "<string>",
+                                          "description": "(Required) The version number of the box following semantic versioning."
+                                        },
+                                        {
+                                          "id": "462d9688-775c-43b3-927d-a297fc9500a2",
+                                          "key": "provider",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the provider such as virtualbox, vmware_desktop, or docker."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Updates the metadata of an existing provider, such as its URL or checksum information."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "a00ea8dc-2677-4c8a-8890-4c00efab7cb5",
+                                      "name": "Provider updated successfully",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum_type\": \"<string>\",\n    \"checksum\": \"<string>\",\n    \"architecture\": \"<string>\"\n  }\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "box",
+                                            ":username",
+                                            ":name",
+                                            "version",
+                                            ":version",
+                                            "provider",
+                                            ":provider"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "username"
+                                            },
+                                            {
+                                              "key": "name"
+                                            },
+                                            {
+                                              "key": "version"
+                                            },
+                                            {
+                                              "key": "provider"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"name\": \"<string>\",\n  \"hosted\": \"<boolean>\",\n  \"hosted_token\": \"<string>\",\n  \"original_url\": \"<uri>\",\n  \"download_url\": \"<uri>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"checksum_type\": \"sha256\",\n  \"checksum\": \"<string>\",\n  \"architecture\": \"<string>\",\n  \"default_architecture\": \"<boolean>\"\n}",
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-a00ea8dc-2677-4c8a-8890-4c00efab7cb5"
+                                    },
+                                    {
+                                      "id": "0dcbf00f-9b01-411e-9e6b-ec6e9fa264ae",
+                                      "name": "Authentication required",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum_type\": \"<string>\",\n    \"checksum\": \"<string>\",\n    \"architecture\": \"<string>\"\n  }\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "box",
+                                            ":username",
+                                            ":name",
+                                            "version",
+                                            ":version",
+                                            "provider",
+                                            ":provider"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "username"
+                                            },
+                                            {
+                                              "key": "name"
+                                            },
+                                            {
+                                              "key": "version"
+                                            },
+                                            {
+                                              "key": "provider"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-0dcbf00f-9b01-411e-9e6b-ec6e9fa264ae"
+                                    },
+                                    {
+                                      "id": "9ef7ee32-f8cd-416c-91e6-9822041e8cbd",
+                                      "name": "Provider not found",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum_type\": \"<string>\",\n    \"checksum\": \"<string>\",\n    \"architecture\": \"<string>\"\n  }\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "box",
+                                            ":username",
+                                            ":name",
+                                            "version",
+                                            ":version",
+                                            "provider",
+                                            ":provider"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "username"
+                                            },
+                                            {
+                                              "key": "name"
+                                            },
+                                            {
+                                              "key": "version"
+                                            },
+                                            {
+                                              "key": "provider"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-9ef7ee32-f8cd-416c-91e6-9822041e8cbd"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                  "uid": "35240-41b853d1-3e7f-4fef-872a-83b17960d89d"
+                                },
+                                {
+                                  "name": "Delete a provider",
+                                  "id": "1eb1e36e-05ef-4a36-819a-a0ebce4a24e9",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "provider",
+                                        ":provider"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "43ae484a-6815-44f5-89ad-21b7e9f7cef1",
+                                          "key": "username",
+                                          "value": "<string>",
+                                          "description": "(Required) The username or organization name that owns the box."
+                                        },
+                                        {
+                                          "id": "8b8f89d1-12f7-416f-afb2-e8692e3cffb6",
+                                          "key": "name",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the Vagrant box."
+                                        },
+                                        {
+                                          "id": "451cd5eb-3bcd-4efe-8774-fa0ba0f118fb",
+                                          "key": "version",
+                                          "value": "<string>",
+                                          "description": "(Required) The version number of the box following semantic versioning."
+                                        },
+                                        {
+                                          "id": "55a4e80f-bfbf-436f-9156-6a35a32e65d6",
+                                          "key": "provider",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the provider such as virtualbox, vmware_desktop, or docker."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Permanently deletes a provider from a version. This action cannot be undone."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "7f77de53-506d-4c71-ad09-2f8d98f6761a",
+                                      "name": "Provider deleted successfully",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "box",
+                                            ":username",
+                                            ":name",
+                                            "version",
+                                            ":version",
+                                            "provider",
+                                            ":provider"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "username"
+                                            },
+                                            {
+                                              "key": "name"
+                                            },
+                                            {
+                                              "key": "version"
+                                            },
+                                            {
+                                              "key": "provider"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-7f77de53-506d-4c71-ad09-2f8d98f6761a"
+                                    },
+                                    {
+                                      "id": "6d51570f-04a7-4ca2-a82a-f593c4483446",
+                                      "name": "Authentication required",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "box",
+                                            ":username",
+                                            ":name",
+                                            "version",
+                                            ":version",
+                                            "provider",
+                                            ":provider"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "username"
+                                            },
+                                            {
+                                              "key": "name"
+                                            },
+                                            {
+                                              "key": "version"
+                                            },
+                                            {
+                                              "key": "provider"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-6d51570f-04a7-4ca2-a82a-f593c4483446"
+                                    },
+                                    {
+                                      "id": "e3aa1823-33ea-4ca4-9861-3d0bc2f85d34",
+                                      "name": "Provider not found",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/box/:username/:name/version/:version/provider/:provider",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "box",
+                                            ":username",
+                                            ":name",
+                                            "version",
+                                            ":version",
+                                            "provider",
+                                            ":provider"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "username"
+                                            },
+                                            {
+                                              "key": "name"
+                                            },
+                                            {
+                                              "key": "version"
+                                            },
+                                            {
+                                              "key": "provider"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-e3aa1823-33ea-4ca4-9861-3d0bc2f85d34"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                  "uid": "35240-1eb1e36e-05ef-4a36-819a-a0ebce4a24e9"
+                                }
+                              ],
+                              "id": "84ebde38-e8b1-4483-a73d-d4d7187712cc",
+                              "createdAt": "2026-07-28T03:26:24.000Z",
+                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                              "uid": "35240-84ebde38-e8b1-4483-a73d-d4d7187712cc"
+                            }
+                          ],
+                          "id": "06581d62-fe04-4905-b012-045da9c055dc",
+                          "createdAt": "2026-07-28T03:26:24.000Z",
+                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                          "uid": "35240-06581d62-fe04-4905-b012-045da9c055dc"
+                        }
+                      ],
+                      "id": "c588d556-0b78-4e76-9991-d92b6e0a2046",
+                      "createdAt": "2026-07-28T03:26:24.000Z",
+                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                      "uid": "35240-c588d556-0b78-4e76-9991-d92b6e0a2046"
+                    }
+                  ],
+                  "id": "20d48257-40c2-4f33-8b83-4730ea0c58a9",
+                  "createdAt": "2026-07-28T03:26:24.000Z",
+                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                  "uid": "35240-20d48257-40c2-4f33-8b83-4730ea0c58a9"
+                }
+              ],
+              "id": "220df41c-1da2-4b04-b0f7-3f9ccb5a779e",
+              "createdAt": "2026-07-28T03:26:24.000Z",
+              "updatedAt": "2026-07-28T03:26:24.000Z",
+              "uid": "35240-220df41c-1da2-4b04-b0f7-3f9ccb5a779e"
+            }
+          ],
+          "id": "bb4eccab-c976-4c51-a435-8f219af58963",
+          "createdAt": "2026-07-28T03:26:24.000Z",
+          "updatedAt": "2026-07-28T03:26:24.000Z",
+          "uid": "35240-bb4eccab-c976-4c51-a435-8f219af58963"
+        }
+      ],
+      "id": "8c1592c8-619c-4366-a42d-e0219e20f806",
+      "createdAt": "2026-07-28T03:26:24.000Z",
+      "updatedAt": "2026-07-28T03:26:24.000Z",
+      "uid": "35240-8c1592c8-619c-4366-a42d-e0219e20f806"
+    },
+    {
+      "name": "vagrant",
+      "item": [
+        {
+          "name": "2023-01-01",
+          "item": [
+            {
+              "name": "registry",
+              "item": [
+                {
+                  "name": "{registry}",
+                  "item": [
+                    {
+                      "name": "box",
+                      "item": [
+                        {
+                          "name": "{box}",
+                          "item": [
+                            {
+                              "name": "version",
+                              "item": [
+                                {
+                                  "name": "{version}",
+                                  "item": [
+                                    {
+                                      "name": "providers",
+                                      "item": [
+                                        {
+                                          "name": "List providers",
+                                          "id": "6759002f-e92b-4efa-b9d9-8d990e0bd2fd",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "vagrant",
+                                                "2023-01-01",
+                                                "registry",
+                                                ":registry",
+                                                "box",
+                                                ":box",
+                                                "version",
+                                                ":version",
+                                                "providers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "420c1f23-2340-48a5-a3d3-64530496aabe",
+                                                  "key": "registry",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                                },
+                                                {
+                                                  "id": "ae4551ed-f410-4938-b667-6b1a1eec7cbf",
+                                                  "key": "box",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The name segment of the box which is unique within the registry."
+                                                },
+                                                {
+                                                  "id": "910ad6cc-cb1e-4192-b370-aa26a1f4a9c3",
+                                                  "key": "version",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The version string which must be unique within the box."
+                                                }
+                                              ]
+                                            },
+                                            "description": "Lists all providers for a specific version of a box within a registry."
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "4f330035-7d58-4acb-a3de-04c11cab4251",
+                                              "name": "List of providers returned successfully",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "vagrant",
+                                                    "2023-01-01",
+                                                    "registry",
+                                                    ":registry",
+                                                    "box",
+                                                    ":box",
+                                                    "version",
+                                                    ":version",
+                                                    "providers"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "registry"
+                                                    },
+                                                    {
+                                                      "key": "box"
+                                                    },
+                                                    {
+                                                      "key": "version"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"providers\": [\n    {\n      \"name\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"checksum\": \"<string>\",\n      \"checksum_type\": \"MD5\",\n      \"architecture\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"checksum\": \"<string>\",\n      \"checksum_type\": \"SHA1\",\n      \"architecture\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-4f330035-7d58-4acb-a3de-04c11cab4251"
+                                            },
+                                            {
+                                              "id": "f87be293-b4bd-4767-bfcb-0a6d368c9831",
+                                              "name": "Version not found",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "vagrant",
+                                                    "2023-01-01",
+                                                    "registry",
+                                                    ":registry",
+                                                    "box",
+                                                    ":box",
+                                                    "version",
+                                                    ":version",
+                                                    "providers"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "registry"
+                                                    },
+                                                    {
+                                                      "key": "box"
+                                                    },
+                                                    {
+                                                      "key": "version"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Not Found",
+                                              "code": 404,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-f87be293-b4bd-4767-bfcb-0a6d368c9831"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T03:26:24.000Z",
+                                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                                          "uid": "35240-6759002f-e92b-4efa-b9d9-8d990e0bd2fd"
+                                        },
+                                        {
+                                          "name": "Create a provider",
+                                          "id": "48442777-b42f-459a-ad21-e33645c543c9",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"checksum\": \"<string>\",\n  \"checksum_type\": \"SHA1\",\n  \"architecture\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "vagrant",
+                                                "2023-01-01",
+                                                "registry",
+                                                ":registry",
+                                                "box",
+                                                ":box",
+                                                "version",
+                                                ":version",
+                                                "providers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "2272ab0d-8dc6-413e-9faf-009ee7ada810",
+                                                  "key": "registry",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                                },
+                                                {
+                                                  "id": "2dc30fc2-63e5-4187-a6cd-d8a77e1b9809",
+                                                  "key": "box",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The name segment of the box which is unique within the registry."
+                                                },
+                                                {
+                                                  "id": "62ee7db7-2321-45d1-851e-3a8019d6354e",
+                                                  "key": "version",
+                                                  "value": "<string>",
+                                                  "description": "(Required) The version string which must be unique within the box."
+                                                }
+                                              ]
+                                            },
+                                            "description": "Creates a new provider for a specific version of a box. A provider represents a virtualization platform build of the box."
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "3cb2cb11-696e-4acd-9e2e-3e4e02402dcf",
+                                              "name": "Provider created successfully",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"checksum\": \"<string>\",\n  \"checksum_type\": \"SHA1\",\n  \"architecture\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "vagrant",
+                                                    "2023-01-01",
+                                                    "registry",
+                                                    ":registry",
+                                                    "box",
+                                                    ":box",
+                                                    "version",
+                                                    ":version",
+                                                    "providers"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "registry"
+                                                    },
+                                                    {
+                                                      "key": "box"
+                                                    },
+                                                    {
+                                                      "key": "version"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum\": \"<string>\",\n    \"checksum_type\": \"SHA384\",\n    \"architecture\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-3cb2cb11-696e-4acd-9e2e-3e4e02402dcf"
+                                            },
+                                            {
+                                              "id": "540cb014-8011-4905-b77b-42e39051929e",
+                                              "name": "Authentication required",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"checksum\": \"<string>\",\n  \"checksum_type\": \"SHA1\",\n  \"architecture\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "vagrant",
+                                                    "2023-01-01",
+                                                    "registry",
+                                                    ":registry",
+                                                    "box",
+                                                    ":box",
+                                                    "version",
+                                                    ":version",
+                                                    "providers"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "registry"
+                                                    },
+                                                    {
+                                                      "key": "box"
+                                                    },
+                                                    {
+                                                      "key": "version"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Unauthorized",
+                                              "code": 401,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-540cb014-8011-4905-b77b-42e39051929e"
+                                            },
+                                            {
+                                              "id": "639a3835-7618-4882-952c-2b4b5c29913c",
+                                              "name": "Version not found",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"checksum\": \"<string>\",\n  \"checksum_type\": \"SHA1\",\n  \"architecture\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "vagrant",
+                                                    "2023-01-01",
+                                                    "registry",
+                                                    ":registry",
+                                                    "box",
+                                                    ":box",
+                                                    "version",
+                                                    ":version",
+                                                    "providers"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "registry"
+                                                    },
+                                                    {
+                                                      "key": "box"
+                                                    },
+                                                    {
+                                                      "key": "version"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Not Found",
+                                              "code": 404,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-639a3835-7618-4882-952c-2b4b5c29913c"
+                                            },
+                                            {
+                                              "id": "d60dc4ce-c8f7-4437-b95a-16e3e50d149c",
+                                              "name": "Provider already exists for this version",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"checksum\": \"<string>\",\n  \"checksum_type\": \"SHA1\",\n  \"architecture\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "vagrant",
+                                                    "2023-01-01",
+                                                    "registry",
+                                                    ":registry",
+                                                    "box",
+                                                    ":box",
+                                                    "version",
+                                                    ":version",
+                                                    "providers"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "registry"
+                                                    },
+                                                    {
+                                                      "key": "box"
+                                                    },
+                                                    {
+                                                      "key": "version"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Conflict",
+                                              "code": 409,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-d60dc4ce-c8f7-4437-b95a-16e3e50d149c"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T03:26:24.000Z",
+                                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                                          "uid": "35240-48442777-b42f-459a-ad21-e33645c543c9"
+                                        }
+                                      ],
+                                      "id": "c562618b-496a-45df-a707-28829a0777cc",
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-c562618b-496a-45df-a707-28829a0777cc"
+                                    },
+                                    {
+                                      "name": "provider",
+                                      "item": [
+                                        {
+                                          "name": "{provider}",
+                                          "item": [
+                                            {
+                                              "name": "Read a provider",
+                                              "id": "c206fe36-30eb-424b-a17b-6d4e8badd81f",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "vagrant",
+                                                    "2023-01-01",
+                                                    "registry",
+                                                    ":registry",
+                                                    "box",
+                                                    ":box",
+                                                    "version",
+                                                    ":version",
+                                                    "provider",
+                                                    ":provider"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "c4faac74-33c4-4477-8015-be278c8452fd",
+                                                      "key": "registry",
+                                                      "value": "<string>",
+                                                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                                    },
+                                                    {
+                                                      "id": "290f22f5-c051-4b44-9c21-12fe942f87b1",
+                                                      "key": "box",
+                                                      "value": "<string>",
+                                                      "description": "(Required) The name segment of the box which is unique within the registry."
+                                                    },
+                                                    {
+                                                      "id": "e146cefa-0a71-4e31-8152-421f15601c96",
+                                                      "key": "version",
+                                                      "value": "<string>",
+                                                      "description": "(Required) The version string which must be unique within the box."
+                                                    },
+                                                    {
+                                                      "id": "060a5ccb-6e63-4a6d-a87d-8d4f65f2ce3a",
+                                                      "key": "provider",
+                                                      "value": "<string>",
+                                                      "description": "(Required) The name of the provider such as virtualbox or vmware_desktop."
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "Retrieves detailed information about a specific provider within a version of a box."
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "5325a997-9313-4558-8215-fa2cea4ae080",
+                                                  "name": "Provider details returned successfully",
+                                                  "originalRequest": {
+                                                    "method": "GET",
+                                                    "header": [
+                                                      {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "vagrant",
+                                                        "2023-01-01",
+                                                        "registry",
+                                                        ":registry",
+                                                        "box",
+                                                        ":box",
+                                                        "version",
+                                                        ":version",
+                                                        "provider",
+                                                        ":provider"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "registry"
+                                                        },
+                                                        {
+                                                          "key": "box"
+                                                        },
+                                                        {
+                                                          "key": "version"
+                                                        },
+                                                        {
+                                                          "key": "provider"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "OK",
+                                                  "code": 200,
+                                                  "_postman_previewlanguage": "json",
+                                                  "header": [
+                                                    {
+                                                      "key": "Content-Type",
+                                                      "value": "application/json"
+                                                    }
+                                                  ],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": "{\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"checksum\": \"<string>\",\n    \"checksum_type\": \"SHA384\",\n    \"architecture\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                                  "uid": "35240-5325a997-9313-4558-8215-fa2cea4ae080"
+                                                },
+                                                {
+                                                  "id": "80f26bb4-d3a1-4550-be6f-7d7ca19ab577",
+                                                  "name": "Provider not found",
+                                                  "originalRequest": {
+                                                    "method": "GET",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "vagrant",
+                                                        "2023-01-01",
+                                                        "registry",
+                                                        ":registry",
+                                                        "box",
+                                                        ":box",
+                                                        "version",
+                                                        ":version",
+                                                        "provider",
+                                                        ":provider"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "registry"
+                                                        },
+                                                        {
+                                                          "key": "box"
+                                                        },
+                                                        {
+                                                          "key": "version"
+                                                        },
+                                                        {
+                                                          "key": "provider"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Not Found",
+                                                  "code": 404,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                                  "uid": "35240-80f26bb4-d3a1-4550-be6f-7d7ca19ab577"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-c206fe36-30eb-424b-a17b-6d4e8badd81f"
+                                            },
+                                            {
+                                              "name": "Delete a provider",
+                                              "id": "5519335d-6a1e-41b4-ab9a-f92618e99ab9",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "DELETE",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "vagrant",
+                                                    "2023-01-01",
+                                                    "registry",
+                                                    ":registry",
+                                                    "box",
+                                                    ":box",
+                                                    "version",
+                                                    ":version",
+                                                    "provider",
+                                                    ":provider"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "ac0f0d23-443c-48c6-8a53-e88693d2c7fe",
+                                                      "key": "registry",
+                                                      "value": "<string>",
+                                                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                                    },
+                                                    {
+                                                      "id": "935c53d8-9d04-49db-bd3a-326d88e12e56",
+                                                      "key": "box",
+                                                      "value": "<string>",
+                                                      "description": "(Required) The name segment of the box which is unique within the registry."
+                                                    },
+                                                    {
+                                                      "id": "40f006b6-98ff-4ae8-8915-eae8025b52ef",
+                                                      "key": "version",
+                                                      "value": "<string>",
+                                                      "description": "(Required) The version string which must be unique within the box."
+                                                    },
+                                                    {
+                                                      "id": "084ca79d-4ab7-4421-a0fe-24655e82ecf6",
+                                                      "key": "provider",
+                                                      "value": "<string>",
+                                                      "description": "(Required) The name of the provider such as virtualbox or vmware_desktop."
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "Permanently deletes a provider from a version. This action cannot be undone."
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "26b8651a-828e-43be-a833-63ca1ff40bdc",
+                                                  "name": "Provider deleted successfully",
+                                                  "originalRequest": {
+                                                    "method": "DELETE",
+                                                    "header": [
+                                                      {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "vagrant",
+                                                        "2023-01-01",
+                                                        "registry",
+                                                        ":registry",
+                                                        "box",
+                                                        ":box",
+                                                        "version",
+                                                        ":version",
+                                                        "provider",
+                                                        ":provider"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "registry"
+                                                        },
+                                                        {
+                                                          "key": "box"
+                                                        },
+                                                        {
+                                                          "key": "version"
+                                                        },
+                                                        {
+                                                          "key": "provider"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "OK",
+                                                  "code": 200,
+                                                  "_postman_previewlanguage": "json",
+                                                  "header": [
+                                                    {
+                                                      "key": "Content-Type",
+                                                      "value": "application/json"
+                                                    }
+                                                  ],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": "{\n  \"operation\": {\n    \"id\": \"<string>\",\n    \"state\": \"RUNNING\",\n    \"error\": {\n      \"code\": \"<integer>\",\n      \"message\": \"<string>\"\n    }\n  }\n}",
+                                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                                  "uid": "35240-26b8651a-828e-43be-a833-63ca1ff40bdc"
+                                                },
+                                                {
+                                                  "id": "942753c5-feac-4999-84f6-2b7af0d1f906",
+                                                  "name": "Authentication required",
+                                                  "originalRequest": {
+                                                    "method": "DELETE",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "vagrant",
+                                                        "2023-01-01",
+                                                        "registry",
+                                                        ":registry",
+                                                        "box",
+                                                        ":box",
+                                                        "version",
+                                                        ":version",
+                                                        "provider",
+                                                        ":provider"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "registry"
+                                                        },
+                                                        {
+                                                          "key": "box"
+                                                        },
+                                                        {
+                                                          "key": "version"
+                                                        },
+                                                        {
+                                                          "key": "provider"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Unauthorized",
+                                                  "code": 401,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                                  "uid": "35240-942753c5-feac-4999-84f6-2b7af0d1f906"
+                                                },
+                                                {
+                                                  "id": "ef3d85bd-d84b-45bb-8b91-4891871467cd",
+                                                  "name": "Provider not found",
+                                                  "originalRequest": {
+                                                    "method": "DELETE",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "vagrant",
+                                                        "2023-01-01",
+                                                        "registry",
+                                                        ":registry",
+                                                        "box",
+                                                        ":box",
+                                                        "version",
+                                                        ":version",
+                                                        "provider",
+                                                        ":provider"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "registry"
+                                                        },
+                                                        {
+                                                          "key": "box"
+                                                        },
+                                                        {
+                                                          "key": "version"
+                                                        },
+                                                        {
+                                                          "key": "provider"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Not Found",
+                                                  "code": 404,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                                  "uid": "35240-ef3d85bd-d84b-45bb-8b91-4891871467cd"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T03:26:24.000Z",
+                                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                                              "uid": "35240-5519335d-6a1e-41b4-ab9a-f92618e99ab9"
+                                            }
+                                          ],
+                                          "id": "5ecb1cf7-05d7-4d49-95f8-b7f6620540a6",
+                                          "createdAt": "2026-07-28T03:26:24.000Z",
+                                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                                          "uid": "35240-5ecb1cf7-05d7-4d49-95f8-b7f6620540a6"
+                                        }
+                                      ],
+                                      "id": "400f4ce5-8292-4804-8c39-614ff2dcda7c",
+                                      "createdAt": "2026-07-28T03:26:24.000Z",
+                                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                                      "uid": "35240-400f4ce5-8292-4804-8c39-614ff2dcda7c"
+                                    }
+                                  ],
+                                  "id": "e94e51e7-5bf0-470f-86da-564df4c8ffa5",
+                                  "createdAt": "2026-07-28T03:26:24.000Z",
+                                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                                  "uid": "35240-e94e51e7-5bf0-470f-86da-564df4c8ffa5"
+                                }
+                              ],
+                              "id": "091be34e-3cef-424e-8c12-56836858dd98",
+                              "createdAt": "2026-07-28T03:26:24.000Z",
+                              "updatedAt": "2026-07-28T03:26:24.000Z",
+                              "uid": "35240-091be34e-3cef-424e-8c12-56836858dd98"
+                            }
+                          ],
+                          "id": "7ec1b902-84d6-434e-8aaa-d70e0a716a6c",
+                          "createdAt": "2026-07-28T03:26:24.000Z",
+                          "updatedAt": "2026-07-28T03:26:24.000Z",
+                          "uid": "35240-7ec1b902-84d6-434e-8aaa-d70e0a716a6c"
+                        }
+                      ],
+                      "id": "7d52edde-5f2a-48eb-acf4-3dd4bbde6eae",
+                      "createdAt": "2026-07-28T03:26:24.000Z",
+                      "updatedAt": "2026-07-28T03:26:24.000Z",
+                      "uid": "35240-7d52edde-5f2a-48eb-acf4-3dd4bbde6eae"
+                    }
+                  ],
+                  "id": "7efec2c1-a1a3-40c6-98b4-f3822476177f",
+                  "createdAt": "2026-07-28T03:26:24.000Z",
+                  "updatedAt": "2026-07-28T03:26:24.000Z",
+                  "uid": "35240-7efec2c1-a1a3-40c6-98b4-f3822476177f"
+                }
+              ],
+              "id": "7311e34c-fa2e-4a75-8832-932b6e96e94b",
+              "createdAt": "2026-07-28T03:26:24.000Z",
+              "updatedAt": "2026-07-28T03:26:24.000Z",
+              "uid": "35240-7311e34c-fa2e-4a75-8832-932b6e96e94b"
+            }
+          ],
+          "id": "5af1b1dd-cd5f-47e2-b2d8-cf6687f0182a",
+          "createdAt": "2026-07-28T03:26:24.000Z",
+          "updatedAt": "2026-07-28T03:26:24.000Z",
+          "uid": "35240-5af1b1dd-cd5f-47e2-b2d8-cf6687f0182a"
+        }
+      ],
+      "id": "dc4a1d91-e686-4f06-a479-9a950e649a58",
+      "createdAt": "2026-07-28T03:26:24.000Z",
+      "updatedAt": "2026-07-28T03:26:24.000Z",
+      "uid": "35240-dc4a1d91-e686-4f06-a479-9a950e649a58"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.vagrantup.com/api/v2"
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "info": {
+    "_postman_id": "f1221b6d-4826-4035-b174-7e323380a4af",
+    "name": "Vagrant Cloud Boxes Search API",
+    "description": "The Vagrant Cloud API v2 enables developers to programmatically interact with the Vagrant Cloud platform for managing Vagrant boxes, versions, and providers. It supports creating and updating boxes, publishing new versions, uploading provider binaries, and searching the public box catalog. The API uses token-based authentication and is designed for automating box lifecycle management and integrating Vagrant Cloud into CI/CD pipelines.\n\nContact Support:\n Name: HashiCorp Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:25.000Z",
+    "updatedAt": "2026-07-28T03:26:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f1221b6d-4826-4035-b174-7e323380a4af"
+  },
+  "item": [
+    {
+      "name": "search",
+      "item": [
+        {
+          "name": "Search boxes",
+          "id": "cdb6b686-3fb3-44a1-b533-01afb5164846",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/search?q=<string>&provider=<string>&sort=downloads&order=desc&limit=10&page=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search"
+              ],
+              "query": [
+                {
+                  "description": "Search query that matches against the username, name, or short_description fields.",
+                  "key": "q",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter results to boxes supporting a specific provider such as virtualbox or vmware_desktop.",
+                  "key": "provider",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The field to sort results on.",
+                  "key": "sort",
+                  "value": "downloads"
+                },
+                {
+                  "description": "The order to return the sorted field in.",
+                  "key": "order",
+                  "value": "desc"
+                },
+                {
+                  "description": "The number of results to return per page, with a maximum of 100.",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "The page number to return for paginated results.",
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Searches the public Vagrant box catalog. The search query matches against the username, name, or short_description fields. If the query is omitted, the top boxes based on sort and order are returned."
+          },
+          "response": [
+            {
+              "id": "2cb49f84-a7f8-451d-97ad-80f2090f1065",
+              "name": "Successful search results",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/search?q=<string>&provider=<string>&sort=downloads&order=desc&limit=10&page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "description": "Search query that matches against the username, name, or short_description fields.",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results to boxes supporting a specific provider such as virtualbox or vmware_desktop.",
+                      "key": "provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The field to sort results on.",
+                      "key": "sort",
+                      "value": "downloads"
+                    },
+                    {
+                      "description": "The order to return the sorted field in.",
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "description": "The number of results to return per page, with a maximum of 100.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "The page number to return for paginated results.",
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"boxes\": [\n    {\n      \"tag\": \"<string>\",\n      \"username\": \"<string>\",\n      \"name\": \"<string>\",\n      \"private\": \"<boolean>\",\n      \"downloads\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"short_description\": \"<string>\",\n      \"description_html\": \"<string>\",\n      \"description_markdown\": \"<string>\",\n      \"versions\": [\n        {\n          \"version\": \"<string>\",\n          \"status\": \"unreleased\",\n          \"description_html\": \"<string>\",\n          \"description_markdown\": \"<string>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"number\": \"<string>\",\n          \"downloads\": \"<integer>\",\n          \"providers\": [\n            {\n              \"name\": \"<string>\",\n              \"hosted\": \"<boolean>\",\n              \"hosted_token\": \"<string>\",\n              \"original_url\": \"<uri>\",\n              \"download_url\": \"<uri>\",\n              \"created_at\": \"<dateTime>\",\n              \"updated_at\": \"<dateTime>\",\n              \"checksum_type\": \"sha1\",\n              \"checksum\": \"<string>\",\n              \"architecture\": \"<string>\",\n              \"default_architecture\": \"<boolean>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"hosted\": \"<boolean>\",\n              \"hosted_token\": \"<string>\",\n              \"original_url\": \"<uri>\",\n              \"download_url\": \"<uri>\",\n              \"created_at\": \"<dateTime>\",\n              \"updated_at\": \"<dateTime>\",\n              \"checksum_type\": \"sha1\",\n              \"checksum\": \"<string>\",\n              \"architecture\": \"<string>\",\n              \"default_architecture\": \"<boolean>\"\n            }\n          ]\n        },\n        {\n          \"version\": \"<string>\",\n          \"status\": \"unreleased\",\n          \"description_html\": \"<string>\",\n          \"description_markdown\": \"<string>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"number\": \"<string>\",\n          \"downloads\": \"<integer>\",\n          \"providers\": [\n            {\n              \"name\": \"<string>\",\n              \"hosted\": \"<boolean>\",\n              \"hosted_token\": \"<string>\",\n              \"original_url\": \"<uri>\",\n              \"download_url\": \"<uri>\",\n              \"created_at\": \"<dateTime>\",\n              \"updated_at\": \"<dateTime>\",\n              \"checksum_type\": \"md5\",\n              \"checksum\": \"<string>\",\n              \"architecture\": \"<string>\",\n              \"default_architecture\": \"<boolean>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"hosted\": \"<boolean>\",\n              \"hosted_token\": \"<string>\",\n              \"original_url\": \"<uri>\",\n              \"download_url\": \"<uri>\",\n              \"created_at\": \"<dateTime>\",\n              \"updated_at\": \"<dateTime>\",\n              \"checksum_type\": \"md5\",\n              \"checksum\": \"<string>\",\n              \"architecture\": \"<string>\",\n              \"default_architecture\": \"<boolean>\"\n            }\n          ]\n        }\n      ],\n      \"current_version\": {\n        \"version\": \"<string>\",\n        \"status\": \"revoked\",\n        \"description_html\": \"<string>\",\n        \"description_markdown\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"number\": \"<string>\",\n        \"downloads\": \"<integer>\",\n        \"providers\": [\n          {\n            \"name\": \"<string>\",\n            \"hosted\": \"<boolean>\",\n            \"hosted_token\": \"<string>\",\n            \"original_url\": \"<uri>\",\n            \"download_url\": \"<uri>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"checksum_type\": \"sha256\",\n            \"checksum\": \"<string>\",\n            \"architecture\": \"<string>\",\n            \"default_architecture\": \"<boolean>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"hosted\": \"<boolean>\",\n            \"hosted_token\": \"<string>\",\n            \"original_url\": \"<uri>\",\n            \"download_url\": \"<uri>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"checksum_type\": \"sha256\",\n            \"checksum\": \"<string>\",\n            \"architecture\": \"<string>\",\n            \"default_architecture\": \"<boolean>\"\n          }\n        ]\n      }\n    },\n    {\n      \"tag\": \"<string>\",\n      \"username\": \"<string>\",\n      \"name\": \"<string>\",\n      \"private\": \"<boolean>\",\n      \"downloads\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"short_description\": \"<string>\",\n      \"description_html\": \"<string>\",\n      \"description_markdown\": \"<string>\",\n      \"versions\": [\n        {\n          \"version\": \"<string>\",\n          \"status\": \"unreleased\",\n          \"description_html\": \"<string>\",\n          \"description_markdown\": \"<string>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"number\": \"<string>\",\n          \"downloads\": \"<integer>\",\n          \"providers\": [\n            {\n              \"name\": \"<string>\",\n              \"hosted\": \"<boolean>\",\n              \"hosted_token\": \"<string>\",\n              \"original_url\": \"<uri>\",\n              \"download_url\": \"<uri>\",\n              \"created_at\": \"<dateTime>\",\n              \"updated_at\": \"<dateTime>\",\n              \"checksum_type\": \"sha384\",\n              \"checksum\": \"<string>\",\n              \"architecture\": \"<string>\",\n              \"default_architecture\": \"<boolean>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"hosted\": \"<boolean>\",\n              \"hosted_token\": \"<string>\",\n              \"original_url\": \"<uri>\",\n              \"download_url\": \"<uri>\",\n              \"created_at\": \"<dateTime>\",\n              \"updated_at\": \"<dateTime>\",\n              \"checksum_type\": \"md5\",\n              \"checksum\": \"<string>\",\n              \"architecture\": \"<string>\",\n              \"default_architecture\": \"<boolean>\"\n            }\n          ]\n        },\n        {\n          \"version\": \"<string>\",\n          \"status\": \"active\",\n          \"description_html\": \"<string>\",\n          \"description_markdown\": \"<string>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"number\": \"<string>\",\n          \"downloads\": \"<integer>\",\n          \"providers\": [\n            {\n              \"name\": \"<string>\",\n              \"hosted\": \"<boolean>\",\n              \"hosted_token\": \"<string>\",\n              \"original_url\": \"<uri>\",\n              \"download_url\": \"<uri>\",\n              \"created_at\": \"<dateTime>\",\n              \"updated_at\": \"<dateTime>\",\n              \"checksum_type\": \"md5\",\n              \"checksum\": \"<string>\",\n              \"architecture\": \"<string>\",\n              \"default_architecture\": \"<boolean>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"hosted\": \"<boolean>\",\n              \"hosted_token\": \"<string>\",\n              \"original_url\": \"<uri>\",\n              \"download_url\": \"<uri>\",\n              \"created_at\": \"<dateTime>\",\n              \"updated_at\": \"<dateTime>\",\n              \"checksum_type\": \"sha384\",\n              \"checksum\": \"<string>\",\n              \"architecture\": \"<string>\",\n              \"default_architecture\": \"<boolean>\"\n            }\n          ]\n        }\n      ],\n      \"current_version\": {\n        \"version\": \"<string>\",\n        \"status\": \"active\",\n        \"description_html\": \"<string>\",\n        \"description_markdown\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"number\": \"<string>\",\n        \"downloads\": \"<integer>\",\n        \"providers\": [\n          {\n            \"name\": \"<string>\",\n            \"hosted\": \"<boolean>\",\n            \"hosted_token\": \"<string>\",\n            \"original_url\": \"<uri>\",\n            \"download_url\": \"<uri>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"checksum_type\": \"md5\",\n            \"checksum\": \"<string>\",\n            \"architecture\": \"<string>\",\n            \"default_architecture\": \"<boolean>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"hosted\": \"<boolean>\",\n            \"hosted_token\": \"<string>\",\n            \"original_url\": \"<uri>\",\n            \"download_url\": \"<uri>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"checksum_type\": \"sha512\",\n            \"checksum\": \"<string>\",\n            \"architecture\": \"<string>\",\n            \"default_architecture\": \"<boolean>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:26:26.000Z",
+              "updatedAt": "2026-07-28T03:26:26.000Z",
+              "uid": "35240-2cb49f84-a7f8-451d-97ad-80f2090f1065"
+            }
+          ],
+          "createdAt": "2026-07-28T03:26:26.000Z",
+          "updatedAt": "2026-07-28T03:26:26.000Z",
+          "uid": "35240-cdb6b686-3fb3-44a1-b533-01afb5164846"
+        }
+      ],
+      "id": "0016b72f-e80b-4676-8c22-c0900faf261a",
+      "createdAt": "2026-07-28T03:26:26.000Z",
+      "updatedAt": "2026-07-28T03:26:26.000Z",
+      "uid": "35240-0016b72f-e80b-4676-8c22-c0900faf261a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.vagrantup.com/api/v2"
+    }
+  ]
+}

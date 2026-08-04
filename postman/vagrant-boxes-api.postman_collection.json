@@ -1,0 +1,1951 @@
+{
+  "info": {
+    "_postman_id": "ef36940e-ef81-4814-b2fd-8cfb848ec3db",
+    "name": "Vagrant Cloud Boxes API",
+    "description": "The Vagrant Cloud API v2 enables developers to programmatically interact with the Vagrant Cloud platform for managing Vagrant boxes, versions, and providers. It supports creating and updating boxes, publishing new versions, uploading provider binaries, and searching the public box catalog. The API uses token-based authentication and is designed for automating box lifecycle management and integrating Vagrant Cloud into CI/CD pipelines.\n\nContact Support:\n Name: HashiCorp Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:20.000Z",
+    "updatedAt": "2026-07-28T03:26:20.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ef36940e-ef81-4814-b2fd-8cfb848ec3db"
+  },
+  "item": [
+    {
+      "name": "boxes",
+      "item": [
+        {
+          "name": "Create a box",
+          "id": "a23c9c7f-38a6-4023-8fc1-61425c36d6a2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"box\": {\n    \"username\": \"<string>\",\n    \"name\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/boxes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "boxes"
+              ]
+            },
+            "description": "Creates a new Vagrant box under the authenticated user or specified organization. Requires authentication with a valid access token."
+          },
+          "response": [
+            {
+              "id": "22e942dd-e3c2-47d1-9994-83ab7a86790b",
+              "name": "Box created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"box\": {\n    \"username\": \"<string>\",\n    \"name\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/boxes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "boxes"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"tag\": \"<string>\",\n  \"username\": \"<string>\",\n  \"name\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"downloads\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"short_description\": \"<string>\",\n  \"description_html\": \"<string>\",\n  \"description_markdown\": \"<string>\",\n  \"versions\": [\n    {\n      \"version\": \"<string>\",\n      \"status\": \"revoked\",\n      \"description_html\": \"<string>\",\n      \"description_markdown\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"number\": \"<string>\",\n      \"downloads\": \"<integer>\",\n      \"providers\": [\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha256\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha256\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"version\": \"<string>\",\n      \"status\": \"unreleased\",\n      \"description_html\": \"<string>\",\n      \"description_markdown\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"number\": \"<string>\",\n      \"downloads\": \"<integer>\",\n      \"providers\": [\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha384\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha512\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"current_version\": {\n    \"version\": \"<string>\",\n    \"status\": \"active\",\n    \"description_html\": \"<string>\",\n    \"description_markdown\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"number\": \"<string>\",\n    \"downloads\": \"<integer>\",\n    \"providers\": [\n      {\n        \"name\": \"<string>\",\n        \"hosted\": \"<boolean>\",\n        \"hosted_token\": \"<string>\",\n        \"original_url\": \"<uri>\",\n        \"download_url\": \"<uri>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"checksum_type\": \"sha1\",\n        \"checksum\": \"<string>\",\n        \"architecture\": \"<string>\",\n        \"default_architecture\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"hosted\": \"<boolean>\",\n        \"hosted_token\": \"<string>\",\n        \"original_url\": \"<uri>\",\n        \"download_url\": \"<uri>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"checksum_type\": \"sha1\",\n        \"checksum\": \"<string>\",\n        \"architecture\": \"<string>\",\n        \"default_architecture\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T03:26:20.000Z",
+              "updatedAt": "2026-07-28T03:26:20.000Z",
+              "uid": "35240-22e942dd-e3c2-47d1-9994-83ab7a86790b"
+            },
+            {
+              "id": "0db088d0-3eee-4831-9139-9ed20f4f600f",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"box\": {\n    \"username\": \"<string>\",\n    \"name\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/boxes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "boxes"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:26:20.000Z",
+              "updatedAt": "2026-07-28T03:26:20.000Z",
+              "uid": "35240-0db088d0-3eee-4831-9139-9ed20f4f600f"
+            },
+            {
+              "id": "bd192e97-64d4-4310-bd65-4186215d7940",
+              "name": "Validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"box\": {\n    \"username\": \"<string>\",\n    \"name\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/boxes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "boxes"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:26:20.000Z",
+              "updatedAt": "2026-07-28T03:26:20.000Z",
+              "uid": "35240-bd192e97-64d4-4310-bd65-4186215d7940"
+            }
+          ],
+          "createdAt": "2026-07-28T03:26:20.000Z",
+          "updatedAt": "2026-07-28T03:26:20.000Z",
+          "uid": "35240-a23c9c7f-38a6-4023-8fc1-61425c36d6a2"
+        }
+      ],
+      "id": "e87aab57-7508-424c-b0da-8874f400da7a",
+      "createdAt": "2026-07-28T03:26:20.000Z",
+      "updatedAt": "2026-07-28T03:26:20.000Z",
+      "uid": "35240-e87aab57-7508-424c-b0da-8874f400da7a"
+    },
+    {
+      "name": "box",
+      "item": [
+        {
+          "name": "{username}",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "Read a box",
+                  "id": "9807f6a0-564a-4a3a-a836-0bf4c0b833fe",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/box/:username/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "box",
+                        ":username",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "243ddae5-442d-4236-a52a-61e1ab255bee",
+                          "key": "username",
+                          "value": "<string>",
+                          "description": "(Required) The username or organization name that owns the box."
+                        },
+                        {
+                          "id": "b93cdc8e-115d-49b1-bf82-b030af0cd853",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) The name of the Vagrant box."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves detailed information about a specific Vagrant box, including its versions, providers, and metadata. Public boxes do not require authentication."
+                  },
+                  "response": [
+                    {
+                      "id": "3fea5c3c-90be-4d12-bb01-5e1d24466df9",
+                      "name": "Box details returned successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/box/:username/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "box",
+                            ":username",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "username"
+                            },
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"tag\": \"<string>\",\n  \"username\": \"<string>\",\n  \"name\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"downloads\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"short_description\": \"<string>\",\n  \"description_html\": \"<string>\",\n  \"description_markdown\": \"<string>\",\n  \"versions\": [\n    {\n      \"version\": \"<string>\",\n      \"status\": \"revoked\",\n      \"description_html\": \"<string>\",\n      \"description_markdown\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"number\": \"<string>\",\n      \"downloads\": \"<integer>\",\n      \"providers\": [\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha256\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha256\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"version\": \"<string>\",\n      \"status\": \"unreleased\",\n      \"description_html\": \"<string>\",\n      \"description_markdown\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"number\": \"<string>\",\n      \"downloads\": \"<integer>\",\n      \"providers\": [\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha384\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha512\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"current_version\": {\n    \"version\": \"<string>\",\n    \"status\": \"active\",\n    \"description_html\": \"<string>\",\n    \"description_markdown\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"number\": \"<string>\",\n    \"downloads\": \"<integer>\",\n    \"providers\": [\n      {\n        \"name\": \"<string>\",\n        \"hosted\": \"<boolean>\",\n        \"hosted_token\": \"<string>\",\n        \"original_url\": \"<uri>\",\n        \"download_url\": \"<uri>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"checksum_type\": \"sha1\",\n        \"checksum\": \"<string>\",\n        \"architecture\": \"<string>\",\n        \"default_architecture\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"hosted\": \"<boolean>\",\n        \"hosted_token\": \"<string>\",\n        \"original_url\": \"<uri>\",\n        \"download_url\": \"<uri>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"checksum_type\": \"sha1\",\n        \"checksum\": \"<string>\",\n        \"architecture\": \"<string>\",\n        \"default_architecture\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-3fea5c3c-90be-4d12-bb01-5e1d24466df9"
+                    },
+                    {
+                      "id": "965a7833-3cec-400e-9422-d143e910df05",
+                      "name": "Box not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/box/:username/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "box",
+                            ":username",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "username"
+                            },
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-965a7833-3cec-400e-9422-d143e910df05"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:26:20.000Z",
+                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                  "uid": "35240-9807f6a0-564a-4a3a-a836-0bf4c0b833fe"
+                },
+                {
+                  "name": "Update a box",
+                  "id": "626024a7-b996-4dfa-ad3b-05cb4fb46a40",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"box\": {\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": \"<boolean>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/box/:username/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "box",
+                        ":username",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "85b848bc-7501-4d4a-be37-512d31b3bc1c",
+                          "key": "username",
+                          "value": "<string>",
+                          "description": "(Required) The username or organization name that owns the box."
+                        },
+                        {
+                          "id": "625c9331-203e-4aab-b726-8dfb7b5ac6df",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) The name of the Vagrant box."
+                        }
+                      ]
+                    },
+                    "description": "Updates the metadata of an existing Vagrant box, such as its description, short description, or privacy settings."
+                  },
+                  "response": [
+                    {
+                      "id": "2351a3b5-78a9-4b78-a49b-6578c31c16dd",
+                      "name": "Box updated successfully",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"box\": {\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": \"<boolean>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/box/:username/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "box",
+                            ":username",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "username"
+                            },
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"tag\": \"<string>\",\n  \"username\": \"<string>\",\n  \"name\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"downloads\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"short_description\": \"<string>\",\n  \"description_html\": \"<string>\",\n  \"description_markdown\": \"<string>\",\n  \"versions\": [\n    {\n      \"version\": \"<string>\",\n      \"status\": \"revoked\",\n      \"description_html\": \"<string>\",\n      \"description_markdown\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"number\": \"<string>\",\n      \"downloads\": \"<integer>\",\n      \"providers\": [\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha256\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha256\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"version\": \"<string>\",\n      \"status\": \"unreleased\",\n      \"description_html\": \"<string>\",\n      \"description_markdown\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"number\": \"<string>\",\n      \"downloads\": \"<integer>\",\n      \"providers\": [\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha384\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"hosted\": \"<boolean>\",\n          \"hosted_token\": \"<string>\",\n          \"original_url\": \"<uri>\",\n          \"download_url\": \"<uri>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\",\n          \"checksum_type\": \"sha512\",\n          \"checksum\": \"<string>\",\n          \"architecture\": \"<string>\",\n          \"default_architecture\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"current_version\": {\n    \"version\": \"<string>\",\n    \"status\": \"active\",\n    \"description_html\": \"<string>\",\n    \"description_markdown\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"number\": \"<string>\",\n    \"downloads\": \"<integer>\",\n    \"providers\": [\n      {\n        \"name\": \"<string>\",\n        \"hosted\": \"<boolean>\",\n        \"hosted_token\": \"<string>\",\n        \"original_url\": \"<uri>\",\n        \"download_url\": \"<uri>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"checksum_type\": \"sha1\",\n        \"checksum\": \"<string>\",\n        \"architecture\": \"<string>\",\n        \"default_architecture\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"hosted\": \"<boolean>\",\n        \"hosted_token\": \"<string>\",\n        \"original_url\": \"<uri>\",\n        \"download_url\": \"<uri>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"checksum_type\": \"sha1\",\n        \"checksum\": \"<string>\",\n        \"architecture\": \"<string>\",\n        \"default_architecture\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-2351a3b5-78a9-4b78-a49b-6578c31c16dd"
+                    },
+                    {
+                      "id": "7a06509c-6c7d-4bea-984a-01d693f33fdd",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"box\": {\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": \"<boolean>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/box/:username/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "box",
+                            ":username",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "username"
+                            },
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-7a06509c-6c7d-4bea-984a-01d693f33fdd"
+                    },
+                    {
+                      "id": "4748631b-9993-43d5-8242-94fb31864421",
+                      "name": "Box not found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"box\": {\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": \"<boolean>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/box/:username/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "box",
+                            ":username",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "username"
+                            },
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-4748631b-9993-43d5-8242-94fb31864421"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:26:20.000Z",
+                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                  "uid": "35240-626024a7-b996-4dfa-ad3b-05cb4fb46a40"
+                },
+                {
+                  "name": "Delete a box",
+                  "id": "50fc45df-db53-46ff-8190-7ba843b62c20",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/box/:username/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "box",
+                        ":username",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "75a0101b-8cf3-4644-9ae1-1a52a0d3ddac",
+                          "key": "username",
+                          "value": "<string>",
+                          "description": "(Required) The username or organization name that owns the box."
+                        },
+                        {
+                          "id": "d64f7100-f3aa-48d5-8b09-0862781b7bf0",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) The name of the Vagrant box."
+                        }
+                      ]
+                    },
+                    "description": "Permanently deletes a Vagrant box and all of its versions and providers. This action cannot be undone."
+                  },
+                  "response": [
+                    {
+                      "id": "3c5d5557-df1b-415e-8c41-ff189e82d70a",
+                      "name": "Box deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/box/:username/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "box",
+                            ":username",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "username"
+                            },
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-3c5d5557-df1b-415e-8c41-ff189e82d70a"
+                    },
+                    {
+                      "id": "0ce9f7a9-5d09-4e74-b1dd-0aedf6555160",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/box/:username/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "box",
+                            ":username",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "username"
+                            },
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-0ce9f7a9-5d09-4e74-b1dd-0aedf6555160"
+                    },
+                    {
+                      "id": "7282042e-563c-4912-abc0-0d7b989eb938",
+                      "name": "Box not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/box/:username/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "box",
+                            ":username",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "username"
+                            },
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-7282042e-563c-4912-abc0-0d7b989eb938"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:26:20.000Z",
+                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                  "uid": "35240-50fc45df-db53-46ff-8190-7ba843b62c20"
+                }
+              ],
+              "id": "a913034e-a2e2-4a73-87f6-8d5ab7b9cad0",
+              "createdAt": "2026-07-28T03:26:20.000Z",
+              "updatedAt": "2026-07-28T03:26:20.000Z",
+              "uid": "35240-a913034e-a2e2-4a73-87f6-8d5ab7b9cad0"
+            }
+          ],
+          "id": "98a5e447-7b73-412e-a0ab-2086b91c0a56",
+          "createdAt": "2026-07-28T03:26:20.000Z",
+          "updatedAt": "2026-07-28T03:26:20.000Z",
+          "uid": "35240-98a5e447-7b73-412e-a0ab-2086b91c0a56"
+        }
+      ],
+      "id": "edfa7623-0c16-44cc-bae4-4b3ec085f4de",
+      "createdAt": "2026-07-28T03:26:20.000Z",
+      "updatedAt": "2026-07-28T03:26:20.000Z",
+      "uid": "35240-edfa7623-0c16-44cc-bae4-4b3ec085f4de"
+    },
+    {
+      "name": "vagrant",
+      "item": [
+        {
+          "name": "2023-01-01",
+          "item": [
+            {
+              "name": "registry",
+              "item": [
+                {
+                  "name": "{registry}",
+                  "item": [
+                    {
+                      "name": "boxes",
+                      "item": [
+                        {
+                          "name": "List boxes",
+                          "id": "1abb603c-aa4b-4cca-be25-256621accfa7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/boxes?page_size=<integer>&page_token=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "vagrant",
+                                "2023-01-01",
+                                "registry",
+                                ":registry",
+                                "boxes"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The maximum number of results to return per page.",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The token for fetching the next page of results.",
+                                  "key": "page_token",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d292e12b-1a7b-411f-8aa1-34c7b36c29b8",
+                                  "key": "registry",
+                                  "value": "<string>",
+                                  "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                }
+                              ]
+                            },
+                            "description": "Lists all Vagrant boxes within a specific registry. Supports pagination for registries with many boxes."
+                          },
+                          "response": [
+                            {
+                              "id": "f97dc74e-cbed-4d51-b685-3440fffe4e66",
+                              "name": "List of boxes returned successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/boxes?page_size=<integer>&page_token=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "vagrant",
+                                    "2023-01-01",
+                                    "registry",
+                                    ":registry",
+                                    "boxes"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The maximum number of results to return per page.",
+                                      "key": "page_size",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The token for fetching the next page of results.",
+                                      "key": "page_token",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "registry"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"boxes\": [\n    {\n      \"name\": \"<string>\",\n      \"registry\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"description\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"downloads\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"registry\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"description\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"downloads\": \"<integer>\"\n    }\n  ],\n  \"pagination\": {\n    \"next_page_token\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:26:20.000Z",
+                              "updatedAt": "2026-07-28T03:26:20.000Z",
+                              "uid": "35240-f97dc74e-cbed-4d51-b685-3440fffe4e66"
+                            },
+                            {
+                              "id": "4a6c0791-d669-4f5d-8b73-e8ed1aba4703",
+                              "name": "Registry not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/boxes?page_size=<integer>&page_token=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "vagrant",
+                                    "2023-01-01",
+                                    "registry",
+                                    ":registry",
+                                    "boxes"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The maximum number of results to return per page.",
+                                      "key": "page_size",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "The token for fetching the next page of results.",
+                                      "key": "page_token",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "registry"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:20.000Z",
+                              "updatedAt": "2026-07-28T03:26:20.000Z",
+                              "uid": "35240-4a6c0791-d669-4f5d-8b73-e8ed1aba4703"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:26:20.000Z",
+                          "updatedAt": "2026-07-28T03:26:20.000Z",
+                          "uid": "35240-1abb603c-aa4b-4cca-be25-256621accfa7"
+                        },
+                        {
+                          "name": "Create a box",
+                          "id": "b6103d9c-05fd-4d69-a1ab-1eb9a10bf008",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/boxes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "vagrant",
+                                "2023-01-01",
+                                "registry",
+                                ":registry",
+                                "boxes"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2434e53e-bb5a-4323-b22c-2eccd49c8b22",
+                                  "key": "registry",
+                                  "value": "<string>",
+                                  "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                }
+                              ]
+                            },
+                            "description": "Creates a new Vagrant box within a registry. The box name must be unique within the registry and should only be set at creation time."
+                          },
+                          "response": [
+                            {
+                              "id": "f6134db8-7ccd-4ace-b931-2a71d381ad10",
+                              "name": "Box created successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/boxes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "vagrant",
+                                    "2023-01-01",
+                                    "registry",
+                                    ":registry",
+                                    "boxes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "registry"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"box\": {\n    \"name\": \"<string>\",\n    \"registry\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"downloads\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:26:20.000Z",
+                              "updatedAt": "2026-07-28T03:26:20.000Z",
+                              "uid": "35240-f6134db8-7ccd-4ace-b931-2a71d381ad10"
+                            },
+                            {
+                              "id": "d4411d09-d3c9-49c7-8279-e78ca46c281b",
+                              "name": "Authentication required",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/boxes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "vagrant",
+                                    "2023-01-01",
+                                    "registry",
+                                    ":registry",
+                                    "boxes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "registry"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:20.000Z",
+                              "updatedAt": "2026-07-28T03:26:20.000Z",
+                              "uid": "35240-d4411d09-d3c9-49c7-8279-e78ca46c281b"
+                            },
+                            {
+                              "id": "3d268742-ecc6-4201-a8f1-10c6d65e8730",
+                              "name": "Registry not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/boxes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "vagrant",
+                                    "2023-01-01",
+                                    "registry",
+                                    ":registry",
+                                    "boxes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "registry"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:20.000Z",
+                              "updatedAt": "2026-07-28T03:26:20.000Z",
+                              "uid": "35240-3d268742-ecc6-4201-a8f1-10c6d65e8730"
+                            },
+                            {
+                              "id": "7605e4a2-23f2-4324-9933-962bb0b170ca",
+                              "name": "Box name already exists in the registry",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/boxes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "vagrant",
+                                    "2023-01-01",
+                                    "registry",
+                                    ":registry",
+                                    "boxes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "registry"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:20.000Z",
+                              "updatedAt": "2026-07-28T03:26:20.000Z",
+                              "uid": "35240-7605e4a2-23f2-4324-9933-962bb0b170ca"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:26:20.000Z",
+                          "updatedAt": "2026-07-28T03:26:20.000Z",
+                          "uid": "35240-b6103d9c-05fd-4d69-a1ab-1eb9a10bf008"
+                        }
+                      ],
+                      "id": "6f1c23fc-903e-41b6-a0bf-1ab0b088c0fe",
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-6f1c23fc-903e-41b6-a0bf-1ab0b088c0fe"
+                    },
+                    {
+                      "name": "box",
+                      "item": [
+                        {
+                          "name": "{box}",
+                          "item": [
+                            {
+                              "name": "Read a box",
+                              "id": "ed4b4494-30ef-4cf2-8855-e9bfb6caddc8",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "vagrant",
+                                    "2023-01-01",
+                                    "registry",
+                                    ":registry",
+                                    "box",
+                                    ":box"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c3636992-dc0a-4b23-9b57-9ab002ae6524",
+                                      "key": "registry",
+                                      "value": "<string>",
+                                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                    },
+                                    {
+                                      "id": "54f9c109-1c11-494a-b3cc-10fc2da9912d",
+                                      "key": "box",
+                                      "value": "<string>",
+                                      "description": "(Required) The name segment of the box which is unique within the registry."
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves detailed information about a specific Vagrant box within a registry."
+                              },
+                              "response": [
+                                {
+                                  "id": "18382398-291a-4008-94ec-b0dbe340769a",
+                                  "name": "Box details returned successfully",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "registry"
+                                        },
+                                        {
+                                          "key": "box"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"box\": {\n    \"name\": \"<string>\",\n    \"registry\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"downloads\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:26:20.000Z",
+                                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                                  "uid": "35240-18382398-291a-4008-94ec-b0dbe340769a"
+                                },
+                                {
+                                  "id": "1b56d2a2-0142-470f-8f97-2dc8dc398b28",
+                                  "name": "Box not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "registry"
+                                        },
+                                        {
+                                          "key": "box"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:20.000Z",
+                                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                                  "uid": "35240-1b56d2a2-0142-470f-8f97-2dc8dc398b28"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:26:20.000Z",
+                              "updatedAt": "2026-07-28T03:26:20.000Z",
+                              "uid": "35240-ed4b4494-30ef-4cf2-8855-e9bfb6caddc8"
+                            },
+                            {
+                              "name": "Update a box",
+                              "id": "9dd83ab5-9a8c-4d4c-b1b0-5fc6d43da24a",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "vagrant",
+                                    "2023-01-01",
+                                    "registry",
+                                    ":registry",
+                                    "box",
+                                    ":box"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "ce6c36af-0983-4f61-8786-f18840213006",
+                                      "key": "registry",
+                                      "value": "<string>",
+                                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                    },
+                                    {
+                                      "id": "300e5325-0e1f-405b-8c08-bbc9bde29d07",
+                                      "key": "box",
+                                      "value": "<string>",
+                                      "description": "(Required) The name segment of the box which is unique within the registry."
+                                    }
+                                  ]
+                                },
+                                "description": "Updates the metadata of an existing Vagrant box within a registry, such as its descriptions."
+                              },
+                              "response": [
+                                {
+                                  "id": "75e1a1e1-307b-4400-b10e-ac5f4804d053",
+                                  "name": "Box updated successfully",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "registry"
+                                        },
+                                        {
+                                          "key": "box"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"box\": {\n    \"name\": \"<string>\",\n    \"registry\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"downloads\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:26:20.000Z",
+                                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                                  "uid": "35240-75e1a1e1-307b-4400-b10e-ac5f4804d053"
+                                },
+                                {
+                                  "id": "a1de7948-bcb9-4487-a20d-b4f364c25139",
+                                  "name": "Authentication required",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "registry"
+                                        },
+                                        {
+                                          "key": "box"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:20.000Z",
+                                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                                  "uid": "35240-a1de7948-bcb9-4487-a20d-b4f364c25139"
+                                },
+                                {
+                                  "id": "dac8df22-09f1-469d-a70d-4190cde06eb1",
+                                  "name": "Box not found",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "registry"
+                                        },
+                                        {
+                                          "key": "box"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:20.000Z",
+                                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                                  "uid": "35240-dac8df22-09f1-469d-a70d-4190cde06eb1"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:26:20.000Z",
+                              "updatedAt": "2026-07-28T03:26:20.000Z",
+                              "uid": "35240-9dd83ab5-9a8c-4d4c-b1b0-5fc6d43da24a"
+                            },
+                            {
+                              "name": "Delete a box",
+                              "id": "a4084b3f-8e45-4d85-812e-40210e491665",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "vagrant",
+                                    "2023-01-01",
+                                    "registry",
+                                    ":registry",
+                                    "box",
+                                    ":box"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "8a92bc3a-1878-4c61-ad12-f339545e3326",
+                                      "key": "registry",
+                                      "value": "<string>",
+                                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                    },
+                                    {
+                                      "id": "c15fd657-ea2c-4be9-9189-7084c5fb915f",
+                                      "key": "box",
+                                      "value": "<string>",
+                                      "description": "(Required) The name segment of the box which is unique within the registry."
+                                    }
+                                  ]
+                                },
+                                "description": "Permanently deletes a box and all of its versions and providers from the registry. This action cannot be undone."
+                              },
+                              "response": [
+                                {
+                                  "id": "8f876df4-dc30-4302-8cd8-105dda4006fa",
+                                  "name": "Box deleted successfully",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "registry"
+                                        },
+                                        {
+                                          "key": "box"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"operation\": {\n    \"id\": \"<string>\",\n    \"state\": \"DONE\",\n    \"error\": {\n      \"code\": \"<integer>\",\n      \"message\": \"<string>\"\n    }\n  }\n}",
+                                  "createdAt": "2026-07-28T03:26:20.000Z",
+                                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                                  "uid": "35240-8f876df4-dc30-4302-8cd8-105dda4006fa"
+                                },
+                                {
+                                  "id": "1bac1253-9dfc-4e55-92a1-a8620b0d3200",
+                                  "name": "Authentication required",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "registry"
+                                        },
+                                        {
+                                          "key": "box"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:20.000Z",
+                                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                                  "uid": "35240-1bac1253-9dfc-4e55-92a1-a8620b0d3200"
+                                },
+                                {
+                                  "id": "0db98f9e-11e7-44b2-8028-6067bd2310ae",
+                                  "name": "Box not found",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "registry"
+                                        },
+                                        {
+                                          "key": "box"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:20.000Z",
+                                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                                  "uid": "35240-0db98f9e-11e7-44b2-8028-6067bd2310ae"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:26:20.000Z",
+                              "updatedAt": "2026-07-28T03:26:20.000Z",
+                              "uid": "35240-a4084b3f-8e45-4d85-812e-40210e491665"
+                            }
+                          ],
+                          "id": "6554bbb4-3722-48e6-9b90-45ca6061df0d",
+                          "createdAt": "2026-07-28T03:26:20.000Z",
+                          "updatedAt": "2026-07-28T03:26:20.000Z",
+                          "uid": "35240-6554bbb4-3722-48e6-9b90-45ca6061df0d"
+                        }
+                      ],
+                      "id": "2ce6479d-c80c-438e-8204-7380bdb8d22a",
+                      "createdAt": "2026-07-28T03:26:20.000Z",
+                      "updatedAt": "2026-07-28T03:26:20.000Z",
+                      "uid": "35240-2ce6479d-c80c-438e-8204-7380bdb8d22a"
+                    }
+                  ],
+                  "id": "7ed543ee-1ccf-465a-8dcd-8f82c890b28d",
+                  "createdAt": "2026-07-28T03:26:20.000Z",
+                  "updatedAt": "2026-07-28T03:26:20.000Z",
+                  "uid": "35240-7ed543ee-1ccf-465a-8dcd-8f82c890b28d"
+                }
+              ],
+              "id": "a6caf8f6-0f5e-45f2-b489-8c1b21c1861c",
+              "createdAt": "2026-07-28T03:26:20.000Z",
+              "updatedAt": "2026-07-28T03:26:20.000Z",
+              "uid": "35240-a6caf8f6-0f5e-45f2-b489-8c1b21c1861c"
+            }
+          ],
+          "id": "ea2dc319-971d-4ffc-a81e-32a6cebcad9e",
+          "createdAt": "2026-07-28T03:26:20.000Z",
+          "updatedAt": "2026-07-28T03:26:20.000Z",
+          "uid": "35240-ea2dc319-971d-4ffc-a81e-32a6cebcad9e"
+        }
+      ],
+      "id": "7af1d41f-3401-43cb-be31-ded82521c7bf",
+      "createdAt": "2026-07-28T03:26:20.000Z",
+      "updatedAt": "2026-07-28T03:26:20.000Z",
+      "uid": "35240-7af1d41f-3401-43cb-be31-ded82521c7bf"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.vagrantup.com/api/v2"
+    }
+  ]
+}

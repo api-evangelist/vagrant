@@ -1,0 +1,22 @@
+{
+  "provider": "vagrant",
+  "sources": [
+    "vagrant-boxes-api-openapi.yml",
+    "vagrant-providers-api-openapi.yml",
+    "vagrant-registries-api-openapi.yml",
+    "vagrant-search-api-openapi.yml",
+    "vagrant-versions-api-openapi.yml"
+  ],
+  "outputs": [
+    "vagrant-boxes-api-openapi.yml",
+    "vagrant-providers-api-openapi.yml",
+    "vagrant-registries-api-openapi.yml",
+    "vagrant-search-api-openapi.yml",
+    "vagrant-versions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

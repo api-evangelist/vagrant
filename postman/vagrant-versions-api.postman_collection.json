@@ -1,0 +1,2474 @@
+{
+  "info": {
+    "_postman_id": "52ed9f6b-0c16-47c9-89a3-efe3fe976a15",
+    "name": "Vagrant Cloud Boxes Versions API",
+    "description": "The Vagrant Cloud API v2 enables developers to programmatically interact with the Vagrant Cloud platform for managing Vagrant boxes, versions, and providers. It supports creating and updating boxes, publishing new versions, uploading provider binaries, and searching the public box catalog. The API uses token-based authentication and is designed for automating box lifecycle management and integrating Vagrant Cloud into CI/CD pipelines.\n\nContact Support:\n Name: HashiCorp Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:26.000Z",
+    "updatedAt": "2026-07-28T03:26:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-52ed9f6b-0c16-47c9-89a3-efe3fe976a15"
+  },
+  "item": [
+    {
+      "name": "box",
+      "item": [
+        {
+          "name": "{username}",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "versions",
+                  "item": [
+                    {
+                      "name": "Create a version",
+                      "id": "79c279e2-03c3-4808-93af-9c5017a33df8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/box/:username/:name/versions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "box",
+                            ":username",
+                            ":name",
+                            "versions"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7d936ac4-80bd-4902-8e7c-4883e0703c75",
+                              "key": "username",
+                              "value": "<string>",
+                              "description": "(Required) The username or organization name that owns the box."
+                            },
+                            {
+                              "id": "2fedd9c5-5fd9-4049-a371-724ed3f14baf",
+                              "key": "name",
+                              "value": "<string>",
+                              "description": "(Required) The name of the Vagrant box."
+                            }
+                          ]
+                        },
+                        "description": "Creates a new version for an existing Vagrant box. The version string must follow semantic versioning. New versions are created in an unreleased state and must be explicitly released after uploading provider files."
+                      },
+                      "response": [
+                        {
+                          "id": "8d50500d-adc6-4c4a-b619-7e4114c21caa",
+                          "name": "Version created successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/box/:username/:name/versions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "box",
+                                ":username",
+                                ":name",
+                                "versions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"version\": \"<string>\",\n  \"status\": \"revoked\",\n  \"description_html\": \"<string>\",\n  \"description_markdown\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"number\": \"<string>\",\n  \"downloads\": \"<integer>\",\n  \"providers\": [\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"md5\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"sha512\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-8d50500d-adc6-4c4a-b619-7e4114c21caa"
+                        },
+                        {
+                          "id": "17b8ae1a-8f33-41d4-ba7f-12ba21fa29ca",
+                          "name": "Authentication required",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/box/:username/:name/versions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "box",
+                                ":username",
+                                ":name",
+                                "versions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-17b8ae1a-8f33-41d4-ba7f-12ba21fa29ca"
+                        },
+                        {
+                          "id": "5e25b6d8-c148-4452-b97c-6ac24ed49261",
+                          "name": "Box not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/box/:username/:name/versions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "box",
+                                ":username",
+                                ":name",
+                                "versions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-5e25b6d8-c148-4452-b97c-6ac24ed49261"
+                        },
+                        {
+                          "id": "2fd9035e-b865-4f16-84f1-97a782262868",
+                          "name": "Validation error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/box/:username/:name/versions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "box",
+                                ":username",
+                                ":name",
+                                "versions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-2fd9035e-b865-4f16-84f1-97a782262868"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:26:27.000Z",
+                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                      "uid": "35240-79c279e2-03c3-4808-93af-9c5017a33df8"
+                    }
+                  ],
+                  "id": "50d246e7-6a13-4f6e-b7bd-57f7811e6467",
+                  "createdAt": "2026-07-28T03:26:27.000Z",
+                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                  "uid": "35240-50d246e7-6a13-4f6e-b7bd-57f7811e6467"
+                },
+                {
+                  "name": "version",
+                  "item": [
+                    {
+                      "name": "{version}",
+                      "item": [
+                        {
+                          "name": "release",
+                          "item": [
+                            {
+                              "name": "Release a version",
+                              "id": "3a4cc095-6bdf-4cf3-913a-ba8d11a8eeb8",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version/release",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version",
+                                    "release"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "2d441389-d0a7-42d2-826c-5f3fdcd8842c",
+                                      "key": "username",
+                                      "value": "<string>",
+                                      "description": "(Required) The username or organization name that owns the box."
+                                    },
+                                    {
+                                      "id": "6fd0137b-852e-4868-9b3d-30921d78141b",
+                                      "key": "name",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the Vagrant box."
+                                    },
+                                    {
+                                      "id": "8b260225-97b4-47f4-87ca-5c65a60e7ef7",
+                                      "key": "version",
+                                      "value": "<string>",
+                                      "description": "(Required) The version number of the box following semantic versioning."
+                                    }
+                                  ]
+                                },
+                                "description": "Releases a version, making it available for consumption by Vagrant users. A version must have at least one provider with an uploaded box file before it can be released."
+                              },
+                              "response": [
+                                {
+                                  "id": "b311cadf-fe97-4dca-9dad-3025410c2267",
+                                  "name": "Version released successfully",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/release",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "release"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"version\": \"<string>\",\n  \"status\": \"revoked\",\n  \"description_html\": \"<string>\",\n  \"description_markdown\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"number\": \"<string>\",\n  \"downloads\": \"<integer>\",\n  \"providers\": [\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"md5\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"sha512\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-b311cadf-fe97-4dca-9dad-3025410c2267"
+                                },
+                                {
+                                  "id": "4355b600-9e74-46ad-ac5a-7fd938ba9fa9",
+                                  "name": "Authentication required",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/release",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "release"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-4355b600-9e74-46ad-ac5a-7fd938ba9fa9"
+                                },
+                                {
+                                  "id": "d6a2910e-95b1-40b6-8a56-dcee7fde92a8",
+                                  "name": "Version not found",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/release",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "release"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-d6a2910e-95b1-40b6-8a56-dcee7fde92a8"
+                                },
+                                {
+                                  "id": "4d110b02-ac5f-47c2-940c-2ea307785f94",
+                                  "name": "Version cannot be released",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/release",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "release"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-4d110b02-ac5f-47c2-940c-2ea307785f94"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-3a4cc095-6bdf-4cf3-913a-ba8d11a8eeb8"
+                            }
+                          ],
+                          "id": "f43c491f-596d-4d76-8e84-9238fb3f9a3e",
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-f43c491f-596d-4d76-8e84-9238fb3f9a3e"
+                        },
+                        {
+                          "name": "revoke",
+                          "item": [
+                            {
+                              "name": "Revoke a version",
+                              "id": "03443fb4-3c2f-4f66-b112-d7f9c0d6b163",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version/revoke",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version",
+                                    "revoke"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "268bfc64-b106-4622-a267-376940b1f484",
+                                      "key": "username",
+                                      "value": "<string>",
+                                      "description": "(Required) The username or organization name that owns the box."
+                                    },
+                                    {
+                                      "id": "df54f2a6-e80e-4200-8704-6c978ac65578",
+                                      "key": "name",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the Vagrant box."
+                                    },
+                                    {
+                                      "id": "6950f2b3-2725-434c-bce7-c21597685c52",
+                                      "key": "version",
+                                      "value": "<string>",
+                                      "description": "(Required) The version number of the box following semantic versioning."
+                                    }
+                                  ]
+                                },
+                                "description": "Revokes a previously released version, making it unavailable for download by Vagrant users."
+                              },
+                              "response": [
+                                {
+                                  "id": "a7a4ce3d-fc5d-4f05-b2ce-e3ac42be20ab",
+                                  "name": "Version revoked successfully",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/revoke",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "revoke"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"version\": \"<string>\",\n  \"status\": \"revoked\",\n  \"description_html\": \"<string>\",\n  \"description_markdown\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"number\": \"<string>\",\n  \"downloads\": \"<integer>\",\n  \"providers\": [\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"md5\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"sha512\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-a7a4ce3d-fc5d-4f05-b2ce-e3ac42be20ab"
+                                },
+                                {
+                                  "id": "7d87fb9d-ccc5-4e67-9c08-8c331b89d22b",
+                                  "name": "Authentication required",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/revoke",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "revoke"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-7d87fb9d-ccc5-4e67-9c08-8c331b89d22b"
+                                },
+                                {
+                                  "id": "920a1aae-8923-4beb-b934-cce1b10a6e51",
+                                  "name": "Version not found",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/box/:username/:name/version/:version/revoke",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "box",
+                                        ":username",
+                                        ":name",
+                                        "version",
+                                        ":version",
+                                        "revoke"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "username"
+                                        },
+                                        {
+                                          "key": "name"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-920a1aae-8923-4beb-b934-cce1b10a6e51"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-03443fb4-3c2f-4f66-b112-d7f9c0d6b163"
+                            }
+                          ],
+                          "id": "32671524-11db-4432-8398-120dc8f6157d",
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-32671524-11db-4432-8398-120dc8f6157d"
+                        },
+                        {
+                          "name": "Read a version",
+                          "id": "46d42cef-5910-4e49-be5f-b7dbb55de2ab",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "box",
+                                ":username",
+                                ":name",
+                                "version",
+                                ":version"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "c889dbfc-ba9c-4dce-8629-a7ca8092e177",
+                                  "key": "username",
+                                  "value": "<string>",
+                                  "description": "(Required) The username or organization name that owns the box."
+                                },
+                                {
+                                  "id": "6ee75c08-9b1e-4d95-ac36-d9cc04bcedea",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the Vagrant box."
+                                },
+                                {
+                                  "id": "760cd066-ba52-479a-b147-23ac5cce01b1",
+                                  "key": "version",
+                                  "value": "<string>",
+                                  "description": "(Required) The version number of the box following semantic versioning."
+                                }
+                              ]
+                            },
+                            "description": "Retrieves detailed information about a specific version of a Vagrant box, including its providers and release status."
+                          },
+                          "response": [
+                            {
+                              "id": "8b860632-d908-4e9d-a505-f409c4070a0c",
+                              "name": "Version details returned successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "username"
+                                    },
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "version"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"version\": \"<string>\",\n  \"status\": \"revoked\",\n  \"description_html\": \"<string>\",\n  \"description_markdown\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"number\": \"<string>\",\n  \"downloads\": \"<integer>\",\n  \"providers\": [\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"md5\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"sha512\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-8b860632-d908-4e9d-a505-f409c4070a0c"
+                            },
+                            {
+                              "id": "448d0e9e-510a-407a-83fc-be8f734d69fd",
+                              "name": "Version not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "username"
+                                    },
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "version"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-448d0e9e-510a-407a-83fc-be8f734d69fd"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-46d42cef-5910-4e49-be5f-b7dbb55de2ab"
+                        },
+                        {
+                          "name": "Update a version",
+                          "id": "164120af-aa18-4af6-8c9e-a0bbcae9f95e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "box",
+                                ":username",
+                                ":name",
+                                "version",
+                                ":version"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e0bddb94-2623-4c4b-bb49-411c529a671d",
+                                  "key": "username",
+                                  "value": "<string>",
+                                  "description": "(Required) The username or organization name that owns the box."
+                                },
+                                {
+                                  "id": "fb05b0f4-c05d-45ed-b5f1-3b3a64b5bdbe",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the Vagrant box."
+                                },
+                                {
+                                  "id": "d94e321a-99ad-4e81-b66c-7a20ec50a200",
+                                  "key": "version",
+                                  "value": "<string>",
+                                  "description": "(Required) The version number of the box following semantic versioning."
+                                }
+                              ]
+                            },
+                            "description": "Updates the metadata of an existing version, such as its description."
+                          },
+                          "response": [
+                            {
+                              "id": "cf6c0a59-9ff1-43bb-ae61-9db49c8d9321",
+                              "name": "Version updated successfully",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "username"
+                                    },
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "version"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"version\": \"<string>\",\n  \"status\": \"revoked\",\n  \"description_html\": \"<string>\",\n  \"description_markdown\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"number\": \"<string>\",\n  \"downloads\": \"<integer>\",\n  \"providers\": [\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"md5\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"hosted\": \"<boolean>\",\n      \"hosted_token\": \"<string>\",\n      \"original_url\": \"<uri>\",\n      \"download_url\": \"<uri>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"checksum_type\": \"sha512\",\n      \"checksum\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"default_architecture\": \"<boolean>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-cf6c0a59-9ff1-43bb-ae61-9db49c8d9321"
+                            },
+                            {
+                              "id": "37f8c9ce-876d-435a-aaad-0fa6f0aee05e",
+                              "name": "Authentication required",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "username"
+                                    },
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "version"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-37f8c9ce-876d-435a-aaad-0fa6f0aee05e"
+                            },
+                            {
+                              "id": "ea97a772-5a5b-44bf-9cbe-9ebfcce3f803",
+                              "name": "Version not found",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "username"
+                                    },
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "version"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-ea97a772-5a5b-44bf-9cbe-9ebfcce3f803"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-164120af-aa18-4af6-8c9e-a0bbcae9f95e"
+                        },
+                        {
+                          "name": "Delete a version",
+                          "id": "921d1522-5756-496b-a0a2-6545a2fabb61",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "box",
+                                ":username",
+                                ":name",
+                                "version",
+                                ":version"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "fb347329-eb4c-43f4-aaba-94d78cb0ed40",
+                                  "key": "username",
+                                  "value": "<string>",
+                                  "description": "(Required) The username or organization name that owns the box."
+                                },
+                                {
+                                  "id": "e4ab72f6-0fab-4d4d-bf91-d71c9e2a1195",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the Vagrant box."
+                                },
+                                {
+                                  "id": "0ce9f300-c712-4ae2-91fe-37aedc305dbf",
+                                  "key": "version",
+                                  "value": "<string>",
+                                  "description": "(Required) The version number of the box following semantic versioning."
+                                }
+                              ]
+                            },
+                            "description": "Permanently deletes a version and all of its providers. This action cannot be undone."
+                          },
+                          "response": [
+                            {
+                              "id": "7d348aa3-ec99-41a1-9287-72ac5d235e01",
+                              "name": "Version deleted successfully",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "username"
+                                    },
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "version"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-7d348aa3-ec99-41a1-9287-72ac5d235e01"
+                            },
+                            {
+                              "id": "2d2a54ee-b75f-4aad-8250-d28781702e24",
+                              "name": "Authentication required",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "username"
+                                    },
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "version"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-2d2a54ee-b75f-4aad-8250-d28781702e24"
+                            },
+                            {
+                              "id": "ebbaacf0-db05-4c72-b03b-798a6363b064",
+                              "name": "Version not found",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/box/:username/:name/version/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "box",
+                                    ":username",
+                                    ":name",
+                                    "version",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "username"
+                                    },
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "version"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-ebbaacf0-db05-4c72-b03b-798a6363b064"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-921d1522-5756-496b-a0a2-6545a2fabb61"
+                        }
+                      ],
+                      "id": "70715755-7689-42ed-aa81-2e04cf77da71",
+                      "createdAt": "2026-07-28T03:26:27.000Z",
+                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                      "uid": "35240-70715755-7689-42ed-aa81-2e04cf77da71"
+                    }
+                  ],
+                  "id": "169e7b0b-f40c-4a5d-a229-9081a1cb544a",
+                  "createdAt": "2026-07-28T03:26:27.000Z",
+                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                  "uid": "35240-169e7b0b-f40c-4a5d-a229-9081a1cb544a"
+                }
+              ],
+              "id": "9037063e-6dc7-43e6-84ce-099608eeb662",
+              "createdAt": "2026-07-28T03:26:27.000Z",
+              "updatedAt": "2026-07-28T03:26:27.000Z",
+              "uid": "35240-9037063e-6dc7-43e6-84ce-099608eeb662"
+            }
+          ],
+          "id": "fd4ee3ad-9201-49ca-a784-61799bada748",
+          "createdAt": "2026-07-28T03:26:27.000Z",
+          "updatedAt": "2026-07-28T03:26:27.000Z",
+          "uid": "35240-fd4ee3ad-9201-49ca-a784-61799bada748"
+        }
+      ],
+      "id": "1086a1c7-cd19-4dbe-8a6c-5d210062c58f",
+      "createdAt": "2026-07-28T03:26:27.000Z",
+      "updatedAt": "2026-07-28T03:26:27.000Z",
+      "uid": "35240-1086a1c7-cd19-4dbe-8a6c-5d210062c58f"
+    },
+    {
+      "name": "vagrant",
+      "item": [
+        {
+          "name": "2023-01-01",
+          "item": [
+            {
+              "name": "registry",
+              "item": [
+                {
+                  "name": "{registry}",
+                  "item": [
+                    {
+                      "name": "box",
+                      "item": [
+                        {
+                          "name": "{box}",
+                          "item": [
+                            {
+                              "name": "versions",
+                              "item": [
+                                {
+                                  "name": "List versions",
+                                  "id": "8913afa9-607c-435d-9ecc-baed975eae15",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/versions?page_size=<integer>&page_token=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box",
+                                        "versions"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "The maximum number of results to return per page.",
+                                          "key": "page_size",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "The token for fetching the next page of results.",
+                                          "key": "page_token",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "2b7a91ff-9f18-4bd0-bf0a-478108b2225c",
+                                          "key": "registry",
+                                          "value": "<string>",
+                                          "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                        },
+                                        {
+                                          "id": "c2b7630e-a919-4e20-b0bf-339b00bea73b",
+                                          "key": "box",
+                                          "value": "<string>",
+                                          "description": "(Required) The name segment of the box which is unique within the registry."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Lists all versions of a specific box within a registry. Supports pagination for boxes with many versions."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "15b921d2-ef36-45e8-95d6-28549e568539",
+                                      "name": "List of versions returned successfully",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/versions?page_size=<integer>&page_token=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "vagrant",
+                                            "2023-01-01",
+                                            "registry",
+                                            ":registry",
+                                            "box",
+                                            ":box",
+                                            "versions"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "The maximum number of results to return per page.",
+                                              "key": "page_size",
+                                              "value": "<integer>"
+                                            },
+                                            {
+                                              "description": "The token for fetching the next page of results.",
+                                              "key": "page_token",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "registry"
+                                            },
+                                            {
+                                              "key": "box"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"versions\": [\n    {\n      \"version\": \"<string>\",\n      \"description\": \"<string>\",\n      \"state\": \"ACTIVE\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"version\": \"<string>\",\n      \"description\": \"<string>\",\n      \"state\": \"UNRELEASED\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"pagination\": {\n    \"next_page_token\": \"<string>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:26:27.000Z",
+                                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                                      "uid": "35240-15b921d2-ef36-45e8-95d6-28549e568539"
+                                    },
+                                    {
+                                      "id": "b58f8765-86ae-46f7-a491-4b623f74b53a",
+                                      "name": "Box not found",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/versions?page_size=<integer>&page_token=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "vagrant",
+                                            "2023-01-01",
+                                            "registry",
+                                            ":registry",
+                                            "box",
+                                            ":box",
+                                            "versions"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "The maximum number of results to return per page.",
+                                              "key": "page_size",
+                                              "value": "<integer>"
+                                            },
+                                            {
+                                              "description": "The token for fetching the next page of results.",
+                                              "key": "page_token",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "registry"
+                                            },
+                                            {
+                                              "key": "box"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:27.000Z",
+                                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                                      "uid": "35240-b58f8765-86ae-46f7-a491-4b623f74b53a"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-8913afa9-607c-435d-9ecc-baed975eae15"
+                                },
+                                {
+                                  "name": "Create a version",
+                                  "id": "65e7d93a-1596-470f-8dbe-8c30fdfbf76a",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"version\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/versions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "vagrant",
+                                        "2023-01-01",
+                                        "registry",
+                                        ":registry",
+                                        "box",
+                                        ":box",
+                                        "versions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "9ad9d20f-20ad-4f25-9e80-c1af04aa0286",
+                                          "key": "registry",
+                                          "value": "<string>",
+                                          "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                        },
+                                        {
+                                          "id": "517389fb-dac1-47df-ac42-da3917e5ad19",
+                                          "key": "box",
+                                          "value": "<string>",
+                                          "description": "(Required) The name segment of the box which is unique within the registry."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Creates a new version for a box. The version string must be unique within the box and should follow semantic versioning."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "daa626da-e97a-4d41-a238-76764918aede",
+                                      "name": "Version created successfully",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"version\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/versions",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "vagrant",
+                                            "2023-01-01",
+                                            "registry",
+                                            ":registry",
+                                            "box",
+                                            ":box",
+                                            "versions"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "registry"
+                                            },
+                                            {
+                                              "key": "box"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\",\n    \"state\": \"REVOKED\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:26:27.000Z",
+                                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                                      "uid": "35240-daa626da-e97a-4d41-a238-76764918aede"
+                                    },
+                                    {
+                                      "id": "80ae54b2-26ce-469d-bd66-686a4249ba9f",
+                                      "name": "Authentication required",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"version\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/versions",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "vagrant",
+                                            "2023-01-01",
+                                            "registry",
+                                            ":registry",
+                                            "box",
+                                            ":box",
+                                            "versions"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "registry"
+                                            },
+                                            {
+                                              "key": "box"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:27.000Z",
+                                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                                      "uid": "35240-80ae54b2-26ce-469d-bd66-686a4249ba9f"
+                                    },
+                                    {
+                                      "id": "02160f36-6ece-407d-bb35-99d989811578",
+                                      "name": "Box not found",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"version\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/versions",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "vagrant",
+                                            "2023-01-01",
+                                            "registry",
+                                            ":registry",
+                                            "box",
+                                            ":box",
+                                            "versions"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "registry"
+                                            },
+                                            {
+                                              "key": "box"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:27.000Z",
+                                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                                      "uid": "35240-02160f36-6ece-407d-bb35-99d989811578"
+                                    },
+                                    {
+                                      "id": "aab49d50-848a-43ac-8daa-9473900788d6",
+                                      "name": "Version already exists",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"version\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/versions",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "vagrant",
+                                            "2023-01-01",
+                                            "registry",
+                                            ":registry",
+                                            "box",
+                                            ":box",
+                                            "versions"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "registry"
+                                            },
+                                            {
+                                              "key": "box"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Conflict",
+                                      "code": 409,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:26:27.000Z",
+                                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                                      "uid": "35240-aab49d50-848a-43ac-8daa-9473900788d6"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-65e7d93a-1596-470f-8dbe-8c30fdfbf76a"
+                                }
+                              ],
+                              "id": "b08223f0-f401-4e9b-8d5e-8715f6693a50",
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-b08223f0-f401-4e9b-8d5e-8715f6693a50"
+                            },
+                            {
+                              "name": "version",
+                              "item": [
+                                {
+                                  "name": "{version}",
+                                  "item": [
+                                    {
+                                      "name": "Read a version",
+                                      "id": "2ef3b2fb-f08e-4c40-ab1e-d083f55c7b18",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "vagrant",
+                                            "2023-01-01",
+                                            "registry",
+                                            ":registry",
+                                            "box",
+                                            ":box",
+                                            "version",
+                                            ":version"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "36cfa0c6-af73-458f-8121-c573268e84b7",
+                                              "key": "registry",
+                                              "value": "<string>",
+                                              "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                            },
+                                            {
+                                              "id": "90e52ec2-32c4-4ef7-a3bc-0798618deda4",
+                                              "key": "box",
+                                              "value": "<string>",
+                                              "description": "(Required) The name segment of the box which is unique within the registry."
+                                            },
+                                            {
+                                              "id": "aad274a8-1415-488d-8969-cd8f74fab059",
+                                              "key": "version",
+                                              "value": "<string>",
+                                              "description": "(Required) The version string which must be unique within the box."
+                                            }
+                                          ]
+                                        },
+                                        "description": "Retrieves detailed information about a specific version of a box within a registry."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "e96e5a10-bcee-4bc7-be5f-3424a8aa4361",
+                                          "name": "Version details returned successfully",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "vagrant",
+                                                "2023-01-01",
+                                                "registry",
+                                                ":registry",
+                                                "box",
+                                                ":box",
+                                                "version",
+                                                ":version"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "registry"
+                                                },
+                                                {
+                                                  "key": "box"
+                                                },
+                                                {
+                                                  "key": "version"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"version\": {\n    \"version\": \"<string>\",\n    \"description\": \"<string>\",\n    \"state\": \"REVOKED\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                                          "createdAt": "2026-07-28T03:26:27.000Z",
+                                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                                          "uid": "35240-e96e5a10-bcee-4bc7-be5f-3424a8aa4361"
+                                        },
+                                        {
+                                          "id": "5a928e86-cc7e-4455-865c-dc46239300c1",
+                                          "name": "Version not found",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "vagrant",
+                                                "2023-01-01",
+                                                "registry",
+                                                ":registry",
+                                                "box",
+                                                ":box",
+                                                "version",
+                                                ":version"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "registry"
+                                                },
+                                                {
+                                                  "key": "box"
+                                                },
+                                                {
+                                                  "key": "version"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:26:27.000Z",
+                                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                                          "uid": "35240-5a928e86-cc7e-4455-865c-dc46239300c1"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:26:27.000Z",
+                                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                                      "uid": "35240-2ef3b2fb-f08e-4c40-ab1e-d083f55c7b18"
+                                    },
+                                    {
+                                      "name": "Delete a version",
+                                      "id": "a3073918-18e7-40b9-9b48-f27be4fde2ab",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "vagrant",
+                                            "2023-01-01",
+                                            "registry",
+                                            ":registry",
+                                            "box",
+                                            ":box",
+                                            "version",
+                                            ":version"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "c4726515-36b6-444c-9dde-3dd29db84096",
+                                              "key": "registry",
+                                              "value": "<string>",
+                                              "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                                            },
+                                            {
+                                              "id": "3c039b47-9586-4343-8823-f8689bdafc09",
+                                              "key": "box",
+                                              "value": "<string>",
+                                              "description": "(Required) The name segment of the box which is unique within the registry."
+                                            },
+                                            {
+                                              "id": "6a1761f6-ff0a-46aa-a1fd-fba40ff8ba73",
+                                              "key": "version",
+                                              "value": "<string>",
+                                              "description": "(Required) The version string which must be unique within the box."
+                                            }
+                                          ]
+                                        },
+                                        "description": "Permanently deletes a version and all of its providers from the box. This action cannot be undone."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "0cbb244a-3e6c-45c7-ac89-f9f3b14e4c0a",
+                                          "name": "Version deleted successfully",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "vagrant",
+                                                "2023-01-01",
+                                                "registry",
+                                                ":registry",
+                                                "box",
+                                                ":box",
+                                                "version",
+                                                ":version"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "registry"
+                                                },
+                                                {
+                                                  "key": "box"
+                                                },
+                                                {
+                                                  "key": "version"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"operation\": {\n    \"id\": \"<string>\",\n    \"state\": \"PENDING\",\n    \"error\": {\n      \"code\": \"<integer>\",\n      \"message\": \"<string>\"\n    }\n  }\n}",
+                                          "createdAt": "2026-07-28T03:26:27.000Z",
+                                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                                          "uid": "35240-0cbb244a-3e6c-45c7-ac89-f9f3b14e4c0a"
+                                        },
+                                        {
+                                          "id": "9eda3389-6319-47ff-b9f2-e739b15e50a4",
+                                          "name": "Authentication required",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "vagrant",
+                                                "2023-01-01",
+                                                "registry",
+                                                ":registry",
+                                                "box",
+                                                ":box",
+                                                "version",
+                                                ":version"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "registry"
+                                                },
+                                                {
+                                                  "key": "box"
+                                                },
+                                                {
+                                                  "key": "version"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Unauthorized",
+                                          "code": 401,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:26:27.000Z",
+                                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                                          "uid": "35240-9eda3389-6319-47ff-b9f2-e739b15e50a4"
+                                        },
+                                        {
+                                          "id": "552840a2-73e1-4735-bbe8-28a684d2a015",
+                                          "name": "Version not found",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "vagrant",
+                                                "2023-01-01",
+                                                "registry",
+                                                ":registry",
+                                                "box",
+                                                ":box",
+                                                "version",
+                                                ":version"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "registry"
+                                                },
+                                                {
+                                                  "key": "box"
+                                                },
+                                                {
+                                                  "key": "version"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:26:27.000Z",
+                                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                                          "uid": "35240-552840a2-73e1-4735-bbe8-28a684d2a015"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:26:27.000Z",
+                                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                                      "uid": "35240-a3073918-18e7-40b9-9b48-f27be4fde2ab"
+                                    }
+                                  ],
+                                  "id": "63e11a54-65a7-4843-b989-c0f23026961c",
+                                  "createdAt": "2026-07-28T03:26:27.000Z",
+                                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                                  "uid": "35240-63e11a54-65a7-4843-b989-c0f23026961c"
+                                }
+                              ],
+                              "id": "d42cff2c-53e0-4dba-bb61-a2fa73662905",
+                              "createdAt": "2026-07-28T03:26:27.000Z",
+                              "updatedAt": "2026-07-28T03:26:27.000Z",
+                              "uid": "35240-d42cff2c-53e0-4dba-bb61-a2fa73662905"
+                            }
+                          ],
+                          "id": "926727a4-5904-4b27-9064-079bf9f0ff99",
+                          "createdAt": "2026-07-28T03:26:27.000Z",
+                          "updatedAt": "2026-07-28T03:26:27.000Z",
+                          "uid": "35240-926727a4-5904-4b27-9064-079bf9f0ff99"
+                        }
+                      ],
+                      "id": "8273091b-b313-42ef-a25e-5db5c8102a5d",
+                      "createdAt": "2026-07-28T03:26:27.000Z",
+                      "updatedAt": "2026-07-28T03:26:27.000Z",
+                      "uid": "35240-8273091b-b313-42ef-a25e-5db5c8102a5d"
+                    }
+                  ],
+                  "id": "617df873-0c8d-4784-8c47-ff03f49e1f7b",
+                  "createdAt": "2026-07-28T03:26:27.000Z",
+                  "updatedAt": "2026-07-28T03:26:27.000Z",
+                  "uid": "35240-617df873-0c8d-4784-8c47-ff03f49e1f7b"
+                }
+              ],
+              "id": "dce4f4d4-3967-472e-b8c1-9a0b8d10ca2a",
+              "createdAt": "2026-07-28T03:26:27.000Z",
+              "updatedAt": "2026-07-28T03:26:27.000Z",
+              "uid": "35240-dce4f4d4-3967-472e-b8c1-9a0b8d10ca2a"
+            }
+          ],
+          "id": "8d9296ed-738d-479a-a40d-26a262909a89",
+          "createdAt": "2026-07-28T03:26:27.000Z",
+          "updatedAt": "2026-07-28T03:26:27.000Z",
+          "uid": "35240-8d9296ed-738d-479a-a40d-26a262909a89"
+        }
+      ],
+      "id": "a45c6076-e608-43de-99dc-41d6e495246b",
+      "createdAt": "2026-07-28T03:26:27.000Z",
+      "updatedAt": "2026-07-28T03:26:27.000Z",
+      "uid": "35240-a45c6076-e608-43de-99dc-41d6e495246b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.vagrantup.com/api/v2"
+    }
+  ]
+}
