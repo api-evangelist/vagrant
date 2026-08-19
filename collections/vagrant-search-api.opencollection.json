@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vagrant Cloud Boxes Search API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search boxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query that matches against the username, name, or short_description fields."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to boxes supporting a specific provider such as virtualbox or vmware_desktop."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort results on."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The order to return the sorted field in."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return per page, with a maximum of 100."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return for paginated results."
+              }
+            ]
+          },
+          "docs": "Searches the public Vagrant box catalog. The search query matches against the username, name, or short_description fields. If the query is omitted, the top boxes based on sort and order are returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

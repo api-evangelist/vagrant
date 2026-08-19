@@ -1,0 +1,340 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vagrant Cloud Boxes Versions API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/versions",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new version for an existing Vagrant box. The version string must follow semantic versioning. New versions are created in an unreleased state and must be explicitly released after uploading provider files."
+        },
+        {
+          "info": {
+            "name": "Read a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific version of a Vagrant box, including its providers and release status."
+        },
+        {
+          "info": {
+            "name": "Update a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata of an existing version, such as its description."
+        },
+        {
+          "info": {
+            "name": "Delete a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a version and all of its providers. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Release a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/release",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ]
+          },
+          "docs": "Releases a version, making it available for consumption by Vagrant users. A version must have at least one provider with an uploaded box file before it can be released."
+        },
+        {
+          "info": {
+            "name": "Revoke a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/revoke",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ]
+          },
+          "docs": "Revokes a previously released version, making it unavailable for download by Vagrant users."
+        },
+        {
+          "info": {
+            "name": "List versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/vagrant/2023-01-01/registry/:registry/box/:box/versions",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return per page."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "The token for fetching the next page of results."
+              }
+            ]
+          },
+          "docs": "Lists all versions of a specific box within a registry. Supports pagination for boxes with many versions."
+        },
+        {
+          "info": {
+            "name": "Create a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.vagrantup.com/api/v2/vagrant/2023-01-01/registry/:registry/box/:box/versions",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new version for a box. The version string must be unique within the box and should follow semantic versioning."
+        },
+        {
+          "info": {
+            "name": "Read a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific version of a box within a registry."
+        },
+        {
+          "info": {
+            "name": "Delete a version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.vagrantup.com/api/v2/vagrant/2023-01-01/registry/:registry/box/:box/version/:version",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a version and all of its providers from the box. This action cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

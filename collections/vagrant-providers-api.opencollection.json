@@ -1,0 +1,388 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vagrant Cloud Boxes Providers API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/providers",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new provider for a specific version of a Vagrant box. A provider represents a specific virtualization platform (such as virtualbox, vmware_desktop, or docker) for which a box file is available."
+        },
+        {
+          "info": {
+            "name": "Read a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific provider within a version of a Vagrant box."
+        },
+        {
+          "info": {
+            "name": "Update a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata of an existing provider, such as its URL or checksum information."
+        },
+        {
+          "info": {
+            "name": "Delete a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a provider from a version. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get upload URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider/upload",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ]
+          },
+          "docs": "Returns a pre-signed upload URL for uploading a box file to the specified provider. The client should use the returned URL to upload the box file via an HTTP PUT request."
+        },
+        {
+          "info": {
+            "name": "Get direct upload URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/box/:username/:name/version/:version/provider/:provider/upload/direct",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username or organization name that owns the box."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Vagrant box."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the box following semantic versioning."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox, vmware_desktop, or docker."
+              }
+            ]
+          },
+          "docs": "Returns a pre-signed URL for directly uploading a box file to cloud storage, bypassing the Vagrant Cloud server. This is recommended for large box files to improve upload performance."
+        },
+        {
+          "info": {
+            "name": "List providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              }
+            ]
+          },
+          "docs": "Lists all providers for a specific version of a box within a registry."
+        },
+        {
+          "info": {
+            "name": "Create a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.vagrantup.com/api/v2/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/providers",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new provider for a specific version of a box. A provider represents a virtualization platform build of the box."
+        },
+        {
+          "info": {
+            "name": "Read a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.vagrantup.com/api/v2/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox or vmware_desktop."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific provider within a version of a box."
+        },
+        {
+          "info": {
+            "name": "Delete a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.vagrantup.com/api/v2/vagrant/2023-01-01/registry/:registry/box/:box/version/:version/provider/:provider",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+              },
+              {
+                "name": "box",
+                "value": "",
+                "type": "path",
+                "description": "The name segment of the box which is unique within the registry."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version string which must be unique within the box."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the provider such as virtualbox or vmware_desktop."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a provider from a version. This action cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

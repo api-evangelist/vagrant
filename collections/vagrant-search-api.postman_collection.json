@@ -1,0 +1,181 @@
+{
+  "item": [
+    {
+      "id": "b2f580d0-2f22-46fe-8052-372833dced56",
+      "name": "Search",
+      "description": {
+        "content": "Endpoints for searching the public Vagrant box catalog by query, provider, and other filters.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5cea03e0-2724-4b4b-ae55-31a6039f26a7",
+          "name": "Search boxes",
+          "request": {
+            "name": "Search boxes",
+            "description": {
+              "content": "Searches the public Vagrant box catalog. The search query matches against the username, name, or short_description fields. If the query is omitted, the top boxes based on sort and order are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search query that matches against the username, name, or short_description fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "<string>",
+                  "description": "Filter results to boxes supporting a specific provider such as virtualbox or vmware_desktop."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "downloads",
+                  "description": "The field to sort results on."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "The order to return the sorted field in."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "The number of results to return per page, with a maximum of 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number to return for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11088e82-19c7-4058-aacc-c3fea1d94fe0",
+              "name": "Successful search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "downloads"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"boxes\": [\n    {\n      \"tag\": \"string\",\n      \"username\": \"string\",\n      \"name\": \"string\",\n      \"private\": false,\n      \"downloads\": 9107,\n      \"created_at\": \"1978-06-20T13:50:57.060Z\",\n      \"updated_at\": \"1989-04-15T18:43:39.989Z\",\n      \"short_description\": \"string\",\n      \"description_html\": \"string\",\n      \"description_markdown\": \"string\",\n      \"versions\": [\n        {\n          \"version\": \"string\",\n          \"status\": \"active\",\n          \"description_html\": \"string\",\n          \"description_markdown\": \"string\",\n          \"created_at\": \"1994-04-03T01:38:34.356Z\",\n          \"updated_at\": \"1971-03-09T23:12:20.767Z\",\n          \"number\": \"string\",\n          \"downloads\": 315,\n          \"providers\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted_token\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"original_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"download_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"default_architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted_token\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"original_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"download_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"default_architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"version\": \"string\",\n          \"status\": \"active\",\n          \"description_html\": \"string\",\n          \"description_markdown\": \"string\",\n          \"created_at\": \"2014-09-25T02:31:18.260Z\",\n          \"updated_at\": \"1976-01-15T08:35:59.323Z\",\n          \"number\": \"string\",\n          \"downloads\": 8216,\n          \"providers\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted_token\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"original_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"download_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"default_architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted_token\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"original_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"download_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"default_architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"current_version\": {\n        \"version\": \"string\",\n        \"status\": \"active\",\n        \"description_html\": \"string\",\n        \"description_markdown\": \"string\",\n        \"created_at\": \"1969-08-10T19:35:30.794Z\",\n        \"updated_at\": \"2011-02-10T05:59:10.498Z\",\n        \"number\": \"string\",\n        \"downloads\": 9818,\n        \"providers\": [\n          {\n            \"name\": \"string\",\n            \"hosted\": true,\n            \"hosted_token\": \"string\",\n            \"original_url\": \"http://cvMhmPwioOYWqhUmeOSLFaTt.hfpsPXhNJZCb12E+6bjMVt5dljW0OG4WV72w.zFbfrlrdcfm1WI2JcNSkYA9xM\",\n            \"download_url\": \"https://GLZyaIPmlVukcHvpoCWHzuaWnUdWMXpp.yxFmh4SGdRMRW7gBK7B5jNWfR6Lob5rA\",\n            \"created_at\": \"2004-01-07T01:52:30.592Z\",\n            \"updated_at\": \"1966-01-31T05:48:29.239Z\",\n            \"checksum_type\": \"sha1\",\n            \"checksum\": \"string\",\n            \"architecture\": \"string\",\n            \"default_architecture\": true\n          },\n          {\n            \"name\": \"string\",\n            \"hosted\": false,\n            \"hosted_token\": \"string\",\n            \"original_url\": \"http://ocoLeBoVlBCYDhwVefEhsDoGafSFMxPTn.xqnioFdf7Cl3RJ8AtXyP3ALAFG-kzNCZzF8MLXKXuX0SbeIEpH+6foJQAAPH9\",\n            \"download_url\": \"http://CwQYNUHWVkcF.blP6gqBkN1\",\n            \"created_at\": \"2016-12-11T03:12:05.252Z\",\n            \"updated_at\": \"1979-07-11T07:04:33.633Z\",\n            \"checksum_type\": \"sha512\",\n            \"checksum\": \"string\",\n            \"architecture\": \"string\",\n            \"default_architecture\": false\n          }\n        ]\n      }\n    },\n    {\n      \"tag\": \"string\",\n      \"username\": \"string\",\n      \"name\": \"string\",\n      \"private\": true,\n      \"downloads\": 2139,\n      \"created_at\": \"1982-12-30T07:22:38.017Z\",\n      \"updated_at\": \"1998-01-30T20:22:38.148Z\",\n      \"short_description\": \"string\",\n      \"description_html\": \"string\",\n      \"description_markdown\": \"string\",\n      \"versions\": [\n        {\n          \"version\": \"string\",\n          \"status\": \"unreleased\",\n          \"description_html\": \"string\",\n          \"description_markdown\": \"string\",\n          \"created_at\": \"1963-11-19T22:57:15.904Z\",\n          \"updated_at\": \"1960-01-21T02:24:26.119Z\",\n          \"number\": \"string\",\n          \"downloads\": 2859,\n          \"providers\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted_token\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"original_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"download_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"default_architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted_token\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"original_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"download_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"default_architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"version\": \"string\",\n          \"status\": \"revoked\",\n          \"description_html\": \"string\",\n          \"description_markdown\": \"string\",\n          \"created_at\": \"2014-11-25T05:26:53.296Z\",\n          \"updated_at\": \"2003-11-28T05:14:10.724Z\",\n          \"number\": \"string\",\n          \"downloads\": 6333,\n          \"providers\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted_token\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"original_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"download_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"default_architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hosted_token\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"original_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"download_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checksum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"default_architecture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"current_version\": {\n        \"version\": \"string\",\n        \"status\": \"active\",\n        \"description_html\": \"string\",\n        \"description_markdown\": \"string\",\n        \"created_at\": \"1996-02-25T15:10:29.674Z\",\n        \"updated_at\": \"2013-01-26T02:35:21.755Z\",\n        \"number\": \"string\",\n        \"downloads\": 6661,\n        \"providers\": [\n          {\n            \"name\": \"string\",\n            \"hosted\": true,\n            \"hosted_token\": \"string\",\n            \"original_url\": \"https://WXTstwDcWXEQTfViZRk.nrzW5tGH6itMW8cf.CCgZ4VO5tl5O2plZgaM274n8Q,6uzvlrNixheIuNxu+VfFie5zS3n3\",\n            \"download_url\": \"https://eotMCEkljvLZigawCKgmerWjj.ulXdtEf\",\n            \"created_at\": \"1984-08-24T08:36:52.416Z\",\n            \"updated_at\": \"1971-11-06T05:52:25.331Z\",\n            \"checksum_type\": \"sha256\",\n            \"checksum\": \"string\",\n            \"architecture\": \"string\",\n            \"default_architecture\": true\n          },\n          {\n            \"name\": \"string\",\n            \"hosted\": false,\n            \"hosted_token\": \"string\",\n            \"original_url\": \"https://CGACMQsSnQXuDRPEoWDnAFzDxriDPY.lurVaKNCQhdKYRViXjqwKvDkxZpvIvJnLtqmY0tiWG4N\",\n            \"download_url\": \"https://nbtzSqfDDmTOtNUEmFtK.xgCqUvk9MKpEiazSMlLRaRZHnVRWQUgfimhLV\",\n            \"created_at\": \"1991-07-07T14:05:54.419Z\",\n            \"updated_at\": \"1960-07-26T14:37:25.454Z\",\n            \"checksum_type\": \"sha256\",\n            \"checksum\": \"string\",\n            \"architecture\": \"string\",\n            \"default_architecture\": true\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.vagrantup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fcf7b66a-8a4d-4331-86e2-3d982f89a1f1",
+    "name": "Vagrant Cloud Boxes Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vagrant Cloud API v2 enables developers to programmatically interact with the Vagrant Cloud platform for managing Vagrant boxes, versions, and providers. It supports creating and updating boxes, publishing new versions, uploading provider binaries, and searching the public box catalog. The API uses token-based authentication and is designed for automating box lifecycle management and integrating Vagrant Cloud into CI/CD pipelines.\n\nContact Support:\n Name: HashiCorp Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2055 @@
+{
+  "item": [
+    {
+      "id": "2c50395e-7f2d-4f0d-a90a-60495a96529e",
+      "name": "Boxes",
+      "description": {
+        "content": "Endpoints for creating, reading, updating, and deleting Vagrant boxes in the Vagrant Cloud registry.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "059c81dd-361a-4ce5-8eb6-3615aa5d19fd",
+          "name": "Create a box",
+          "request": {
+            "name": "Create a box",
+            "description": {
+              "content": "Creates a new Vagrant box under the authenticated user or specified organization. Requires authentication with a valid access token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"box\": {\n    \"username\": \"<string>\",\n    \"name\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "41dba046-3c4a-4743-b46e-c42d8d9a95c5",
+              "name": "Box created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"box\": {\n    \"username\": \"<string>\",\n    \"name\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tag\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"private\": false,\n  \"downloads\": 3399,\n  \"created_at\": \"1983-10-25T07:52:14.897Z\",\n  \"updated_at\": \"1958-12-25T22:48:45.020Z\",\n  \"short_description\": \"string\",\n  \"description_html\": \"string\",\n  \"description_markdown\": \"string\",\n  \"versions\": [\n    {\n      \"version\": \"string\",\n      \"status\": \"unreleased\",\n      \"description_html\": \"string\",\n      \"description_markdown\": \"string\",\n      \"created_at\": \"1949-10-29T09:41:54.677Z\",\n      \"updated_at\": \"2001-09-05T00:15:25.345Z\",\n      \"number\": \"string\",\n      \"downloads\": 1939,\n      \"providers\": [\n        {\n          \"name\": \"string\",\n          \"hosted\": true,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"http://SdIRVEOutOwUXBmrwEUdmrktLBQUptfDb.vqujzTN1SY+H,6ACLfuewp,hKua0mtiRxOMYmdwfBr9vKjhS6wfnZ+.yUQn+kFLZef,BTWIIFk+\",\n          \"download_url\": \"https://DrSenHNZEn.vlxwuHRjLm\",\n          \"created_at\": \"1971-08-15T19:20:55.892Z\",\n          \"updated_at\": \"1954-04-22T05:19:13.264Z\",\n          \"checksum_type\": \"sha384\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": false\n        },\n        {\n          \"name\": \"string\",\n          \"hosted\": true,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"http://UZs.tdpph0Bed9ARjYyYYxHmlEo.yBRsi\",\n          \"download_url\": \"https://jZZMCkoMzwofDzElKLUGxLLtnAhgtN.frubBSxeB1eqt.35sGb\",\n          \"created_at\": \"2000-05-01T07:14:47.792Z\",\n          \"updated_at\": \"2022-03-24T00:48:33.701Z\",\n          \"checksum_type\": \"sha1\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": false\n        }\n      ]\n    },\n    {\n      \"version\": \"string\",\n      \"status\": \"unreleased\",\n      \"description_html\": \"string\",\n      \"description_markdown\": \"string\",\n      \"created_at\": \"1952-06-26T22:48:34.884Z\",\n      \"updated_at\": \"1972-11-29T14:42:41.065Z\",\n      \"number\": \"string\",\n      \"downloads\": 243,\n      \"providers\": [\n        {\n          \"name\": \"string\",\n          \"hosted\": false,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"https://OMhINvyYBUGqheqa.euGyFyJZGJ5y3FmVk1OduoblCWhNMsk+demF6U,He5f2JyQ,L7ZvJ8K9dGGYqfPLav-aOCsD7aJGtlvqHQ1Id+JhotTW\",\n          \"download_url\": \"http://oE.jwjhEbJ2m1jg4DuOAV1rCmiztJmJfW2zMGHFj-4yCujhb\",\n          \"created_at\": \"1955-08-09T03:47:13.469Z\",\n          \"updated_at\": \"2008-12-21T18:01:23.715Z\",\n          \"checksum_type\": \"sha512\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": false\n        },\n        {\n          \"name\": \"string\",\n          \"hosted\": false,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"https://kSuuxEUtbdzvuGpIf.gbsfP3fJ8W5GXN0kMqv5f9M34.Tm-oTZ5IHauetKm9,UaWCO9JP9c4OWcKrPByJPPjDmaOKo\",\n          \"download_url\": \"https://DGM.zywYc7seMwDg\",\n          \"created_at\": \"2001-01-03T23:06:04.926Z\",\n          \"updated_at\": \"2019-08-23T07:56:55.358Z\",\n          \"checksum_type\": \"sha384\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": true\n        }\n      ]\n    }\n  ],\n  \"current_version\": {\n    \"version\": \"string\",\n    \"status\": \"active\",\n    \"description_html\": \"string\",\n    \"description_markdown\": \"string\",\n    \"created_at\": \"1973-05-17T23:00:28.710Z\",\n    \"updated_at\": \"1966-01-01T16:01:38.882Z\",\n    \"number\": \"string\",\n    \"downloads\": 8703,\n    \"providers\": [\n      {\n        \"name\": \"string\",\n        \"hosted\": true,\n        \"hosted_token\": \"string\",\n        \"original_url\": \"https://bZjVwxgmYJGVpeUjvpuPFC.qbktjRJfG,ml0yg65X1dLcY3.7XjVlNzDc+N3dG6u3Y0M6SC3CacBL+HedKHiqlbgWr\",\n        \"download_url\": \"http://SFeIbvkCNAKiLzIkRbMfoFo.lmdYLJmDZaOkc8PBq,CGD4Bs2JrQa,6l1\",\n        \"created_at\": \"1991-04-02T12:12:59.502Z\",\n        \"updated_at\": \"2006-06-19T20:25:10.550Z\",\n        \"checksum_type\": \"md5\",\n        \"checksum\": \"string\",\n        \"architecture\": \"string\",\n        \"default_architecture\": false\n      },\n      {\n        \"name\": \"string\",\n        \"hosted\": false,\n        \"hosted_token\": \"string\",\n        \"original_url\": \"http://YXTNuljpm.ypfngBvcucWGtOEy5BklqxjYA3ft7Gz6z2RYS3jhP3xj\",\n        \"download_url\": \"https://naqNPAovxVeVIIFjls.ungHkN21ZmnW6\",\n        \"created_at\": \"1960-11-30T08:56:26.009Z\",\n        \"updated_at\": \"1983-11-26T03:44:02.941Z\",\n        \"checksum_type\": \"sha256\",\n        \"checksum\": \"string\",\n        \"architecture\": \"string\",\n        \"default_architecture\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "132ac5f8-7b38-49b7-be31-cd0c49346792",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"box\": {\n    \"username\": \"<string>\",\n    \"name\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ecb1cad-f858-403c-8144-2d2adcfe89db",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"box\": {\n    \"username\": \"<string>\",\n    \"name\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ff5e681-596e-4af5-85d8-ac592936161d",
+          "name": "Read a box",
+          "request": {
+            "name": "Read a box",
+            "description": {
+              "content": "Retrieves detailed information about a specific Vagrant box, including its versions, providers, and metadata. Public boxes do not require authentication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "box",
+                ":username",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "username",
+                  "description": "(Required) The username or organization name that owns the box."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the Vagrant box."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "23da234e-4806-4de0-9033-66dbeefd67c6",
+              "name": "Box details returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "box",
+                    ":username",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username or organization name that owns the box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Vagrant box."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tag\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"private\": false,\n  \"downloads\": 3399,\n  \"created_at\": \"1983-10-25T07:52:14.897Z\",\n  \"updated_at\": \"1958-12-25T22:48:45.020Z\",\n  \"short_description\": \"string\",\n  \"description_html\": \"string\",\n  \"description_markdown\": \"string\",\n  \"versions\": [\n    {\n      \"version\": \"string\",\n      \"status\": \"unreleased\",\n      \"description_html\": \"string\",\n      \"description_markdown\": \"string\",\n      \"created_at\": \"1949-10-29T09:41:54.677Z\",\n      \"updated_at\": \"2001-09-05T00:15:25.345Z\",\n      \"number\": \"string\",\n      \"downloads\": 1939,\n      \"providers\": [\n        {\n          \"name\": \"string\",\n          \"hosted\": true,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"http://SdIRVEOutOwUXBmrwEUdmrktLBQUptfDb.vqujzTN1SY+H,6ACLfuewp,hKua0mtiRxOMYmdwfBr9vKjhS6wfnZ+.yUQn+kFLZef,BTWIIFk+\",\n          \"download_url\": \"https://DrSenHNZEn.vlxwuHRjLm\",\n          \"created_at\": \"1971-08-15T19:20:55.892Z\",\n          \"updated_at\": \"1954-04-22T05:19:13.264Z\",\n          \"checksum_type\": \"sha384\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": false\n        },\n        {\n          \"name\": \"string\",\n          \"hosted\": true,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"http://UZs.tdpph0Bed9ARjYyYYxHmlEo.yBRsi\",\n          \"download_url\": \"https://jZZMCkoMzwofDzElKLUGxLLtnAhgtN.frubBSxeB1eqt.35sGb\",\n          \"created_at\": \"2000-05-01T07:14:47.792Z\",\n          \"updated_at\": \"2022-03-24T00:48:33.701Z\",\n          \"checksum_type\": \"sha1\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": false\n        }\n      ]\n    },\n    {\n      \"version\": \"string\",\n      \"status\": \"unreleased\",\n      \"description_html\": \"string\",\n      \"description_markdown\": \"string\",\n      \"created_at\": \"1952-06-26T22:48:34.884Z\",\n      \"updated_at\": \"1972-11-29T14:42:41.065Z\",\n      \"number\": \"string\",\n      \"downloads\": 243,\n      \"providers\": [\n        {\n          \"name\": \"string\",\n          \"hosted\": false,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"https://OMhINvyYBUGqheqa.euGyFyJZGJ5y3FmVk1OduoblCWhNMsk+demF6U,He5f2JyQ,L7ZvJ8K9dGGYqfPLav-aOCsD7aJGtlvqHQ1Id+JhotTW\",\n          \"download_url\": \"http://oE.jwjhEbJ2m1jg4DuOAV1rCmiztJmJfW2zMGHFj-4yCujhb\",\n          \"created_at\": \"1955-08-09T03:47:13.469Z\",\n          \"updated_at\": \"2008-12-21T18:01:23.715Z\",\n          \"checksum_type\": \"sha512\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": false\n        },\n        {\n          \"name\": \"string\",\n          \"hosted\": false,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"https://kSuuxEUtbdzvuGpIf.gbsfP3fJ8W5GXN0kMqv5f9M34.Tm-oTZ5IHauetKm9,UaWCO9JP9c4OWcKrPByJPPjDmaOKo\",\n          \"download_url\": \"https://DGM.zywYc7seMwDg\",\n          \"created_at\": \"2001-01-03T23:06:04.926Z\",\n          \"updated_at\": \"2019-08-23T07:56:55.358Z\",\n          \"checksum_type\": \"sha384\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": true\n        }\n      ]\n    }\n  ],\n  \"current_version\": {\n    \"version\": \"string\",\n    \"status\": \"active\",\n    \"description_html\": \"string\",\n    \"description_markdown\": \"string\",\n    \"created_at\": \"1973-05-17T23:00:28.710Z\",\n    \"updated_at\": \"1966-01-01T16:01:38.882Z\",\n    \"number\": \"string\",\n    \"downloads\": 8703,\n    \"providers\": [\n      {\n        \"name\": \"string\",\n        \"hosted\": true,\n        \"hosted_token\": \"string\",\n        \"original_url\": \"https://bZjVwxgmYJGVpeUjvpuPFC.qbktjRJfG,ml0yg65X1dLcY3.7XjVlNzDc+N3dG6u3Y0M6SC3CacBL+HedKHiqlbgWr\",\n        \"download_url\": \"http://SFeIbvkCNAKiLzIkRbMfoFo.lmdYLJmDZaOkc8PBq,CGD4Bs2JrQa,6l1\",\n        \"created_at\": \"1991-04-02T12:12:59.502Z\",\n        \"updated_at\": \"2006-06-19T20:25:10.550Z\",\n        \"checksum_type\": \"md5\",\n        \"checksum\": \"string\",\n        \"architecture\": \"string\",\n        \"default_architecture\": false\n      },\n      {\n        \"name\": \"string\",\n        \"hosted\": false,\n        \"hosted_token\": \"string\",\n        \"original_url\": \"http://YXTNuljpm.ypfngBvcucWGtOEy5BklqxjYA3ft7Gz6z2RYS3jhP3xj\",\n        \"download_url\": \"https://naqNPAovxVeVIIFjls.ungHkN21ZmnW6\",\n        \"created_at\": \"1960-11-30T08:56:26.009Z\",\n        \"updated_at\": \"1983-11-26T03:44:02.941Z\",\n        \"checksum_type\": \"sha256\",\n        \"checksum\": \"string\",\n        \"architecture\": \"string\",\n        \"default_architecture\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c6054c6-9a0d-40c1-aa8a-a0d0e6812d2b",
+              "name": "Box not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "box",
+                    ":username",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username or organization name that owns the box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Vagrant box."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed81a597-6e72-4ac3-8785-7ca852571381",
+          "name": "Update a box",
+          "request": {
+            "name": "Update a box",
+            "description": {
+              "content": "Updates the metadata of an existing Vagrant box, such as its description, short description, or privacy settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "box",
+                ":username",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "username",
+                  "description": "(Required) The username or organization name that owns the box."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the Vagrant box."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"box\": {\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cc094e12-9daa-461a-a296-9ebe9bf895dd",
+              "name": "Box updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "box",
+                    ":username",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username or organization name that owns the box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Vagrant box."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"box\": {\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tag\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"private\": false,\n  \"downloads\": 3399,\n  \"created_at\": \"1983-10-25T07:52:14.897Z\",\n  \"updated_at\": \"1958-12-25T22:48:45.020Z\",\n  \"short_description\": \"string\",\n  \"description_html\": \"string\",\n  \"description_markdown\": \"string\",\n  \"versions\": [\n    {\n      \"version\": \"string\",\n      \"status\": \"unreleased\",\n      \"description_html\": \"string\",\n      \"description_markdown\": \"string\",\n      \"created_at\": \"1949-10-29T09:41:54.677Z\",\n      \"updated_at\": \"2001-09-05T00:15:25.345Z\",\n      \"number\": \"string\",\n      \"downloads\": 1939,\n      \"providers\": [\n        {\n          \"name\": \"string\",\n          \"hosted\": true,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"http://SdIRVEOutOwUXBmrwEUdmrktLBQUptfDb.vqujzTN1SY+H,6ACLfuewp,hKua0mtiRxOMYmdwfBr9vKjhS6wfnZ+.yUQn+kFLZef,BTWIIFk+\",\n          \"download_url\": \"https://DrSenHNZEn.vlxwuHRjLm\",\n          \"created_at\": \"1971-08-15T19:20:55.892Z\",\n          \"updated_at\": \"1954-04-22T05:19:13.264Z\",\n          \"checksum_type\": \"sha384\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": false\n        },\n        {\n          \"name\": \"string\",\n          \"hosted\": true,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"http://UZs.tdpph0Bed9ARjYyYYxHmlEo.yBRsi\",\n          \"download_url\": \"https://jZZMCkoMzwofDzElKLUGxLLtnAhgtN.frubBSxeB1eqt.35sGb\",\n          \"created_at\": \"2000-05-01T07:14:47.792Z\",\n          \"updated_at\": \"2022-03-24T00:48:33.701Z\",\n          \"checksum_type\": \"sha1\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": false\n        }\n      ]\n    },\n    {\n      \"version\": \"string\",\n      \"status\": \"unreleased\",\n      \"description_html\": \"string\",\n      \"description_markdown\": \"string\",\n      \"created_at\": \"1952-06-26T22:48:34.884Z\",\n      \"updated_at\": \"1972-11-29T14:42:41.065Z\",\n      \"number\": \"string\",\n      \"downloads\": 243,\n      \"providers\": [\n        {\n          \"name\": \"string\",\n          \"hosted\": false,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"https://OMhINvyYBUGqheqa.euGyFyJZGJ5y3FmVk1OduoblCWhNMsk+demF6U,He5f2JyQ,L7ZvJ8K9dGGYqfPLav-aOCsD7aJGtlvqHQ1Id+JhotTW\",\n          \"download_url\": \"http://oE.jwjhEbJ2m1jg4DuOAV1rCmiztJmJfW2zMGHFj-4yCujhb\",\n          \"created_at\": \"1955-08-09T03:47:13.469Z\",\n          \"updated_at\": \"2008-12-21T18:01:23.715Z\",\n          \"checksum_type\": \"sha512\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": false\n        },\n        {\n          \"name\": \"string\",\n          \"hosted\": false,\n          \"hosted_token\": \"string\",\n          \"original_url\": \"https://kSuuxEUtbdzvuGpIf.gbsfP3fJ8W5GXN0kMqv5f9M34.Tm-oTZ5IHauetKm9,UaWCO9JP9c4OWcKrPByJPPjDmaOKo\",\n          \"download_url\": \"https://DGM.zywYc7seMwDg\",\n          \"created_at\": \"2001-01-03T23:06:04.926Z\",\n          \"updated_at\": \"2019-08-23T07:56:55.358Z\",\n          \"checksum_type\": \"sha384\",\n          \"checksum\": \"string\",\n          \"architecture\": \"string\",\n          \"default_architecture\": true\n        }\n      ]\n    }\n  ],\n  \"current_version\": {\n    \"version\": \"string\",\n    \"status\": \"active\",\n    \"description_html\": \"string\",\n    \"description_markdown\": \"string\",\n    \"created_at\": \"1973-05-17T23:00:28.710Z\",\n    \"updated_at\": \"1966-01-01T16:01:38.882Z\",\n    \"number\": \"string\",\n    \"downloads\": 8703,\n    \"providers\": [\n      {\n        \"name\": \"string\",\n        \"hosted\": true,\n        \"hosted_token\": \"string\",\n        \"original_url\": \"https://bZjVwxgmYJGVpeUjvpuPFC.qbktjRJfG,ml0yg65X1dLcY3.7XjVlNzDc+N3dG6u3Y0M6SC3CacBL+HedKHiqlbgWr\",\n        \"download_url\": \"http://SFeIbvkCNAKiLzIkRbMfoFo.lmdYLJmDZaOkc8PBq,CGD4Bs2JrQa,6l1\",\n        \"created_at\": \"1991-04-02T12:12:59.502Z\",\n        \"updated_at\": \"2006-06-19T20:25:10.550Z\",\n        \"checksum_type\": \"md5\",\n        \"checksum\": \"string\",\n        \"architecture\": \"string\",\n        \"default_architecture\": false\n      },\n      {\n        \"name\": \"string\",\n        \"hosted\": false,\n        \"hosted_token\": \"string\",\n        \"original_url\": \"http://YXTNuljpm.ypfngBvcucWGtOEy5BklqxjYA3ft7Gz6z2RYS3jhP3xj\",\n        \"download_url\": \"https://naqNPAovxVeVIIFjls.ungHkN21ZmnW6\",\n        \"created_at\": \"1960-11-30T08:56:26.009Z\",\n        \"updated_at\": \"1983-11-26T03:44:02.941Z\",\n        \"checksum_type\": \"sha256\",\n        \"checksum\": \"string\",\n        \"architecture\": \"string\",\n        \"default_architecture\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "022bb08c-8624-4344-bb70-d38b91826376",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "box",
+                    ":username",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username or organization name that owns the box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Vagrant box."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"box\": {\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aad2bcb9-86d7-401d-a53b-ce4dc2e34b00",
+              "name": "Box not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "box",
+                    ":username",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username or organization name that owns the box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Vagrant box."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"box\": {\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_private\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ce62627-94e3-4827-a54d-1269a5a410d6",
+          "name": "Delete a box",
+          "request": {
+            "name": "Delete a box",
+            "description": {
+              "content": "Permanently deletes a Vagrant box and all of its versions and providers. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "box",
+                ":username",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "username",
+                  "description": "(Required) The username or organization name that owns the box."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the Vagrant box."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "598d699d-6428-4b27-9a70-5614ac8663e2",
+              "name": "Box deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "box",
+                    ":username",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username or organization name that owns the box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Vagrant box."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7ffb8d4-674d-4cec-8b33-a2fa4c614f06",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "box",
+                    ":username",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username or organization name that owns the box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Vagrant box."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb6c323e-4fa1-4025-aca2-f18e70cedc13",
+              "name": "Box not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "box",
+                    ":username",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username or organization name that owns the box."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Vagrant box."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f7b135c-2b84-4bac-aa17-545a6c12203a",
+          "name": "List boxes",
+          "request": {
+            "name": "List boxes",
+            "description": {
+              "content": "Lists all Vagrant boxes within a specific registry. Supports pagination for registries with many boxes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vagrant",
+                "2023-01-01",
+                "registry",
+                ":registry",
+                "boxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The maximum number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "The token for fetching the next page of results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registry",
+                  "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e72b4a9d-6686-4981-bb4a-1af7fa019dbe",
+              "name": "List of boxes returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "boxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"boxes\": [\n    {\n      \"name\": \"string\",\n      \"registry\": \"string\",\n      \"short_description\": \"string\",\n      \"description\": \"string\",\n      \"created_at\": \"1979-12-25T23:22:35.162Z\",\n      \"updated_at\": \"1967-04-17T01:54:04.334Z\",\n      \"downloads\": 2283\n    },\n    {\n      \"name\": \"string\",\n      \"registry\": \"string\",\n      \"short_description\": \"string\",\n      \"description\": \"string\",\n      \"created_at\": \"1981-07-27T12:18:12.932Z\",\n      \"updated_at\": \"2015-10-01T12:18:18.007Z\",\n      \"downloads\": 6249\n    }\n  ],\n  \"pagination\": {\n    \"next_page_token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0df1def-2b89-43a6-ba20-408d569ca417",
+              "name": "Registry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "boxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "889f9c2e-7b29-49a2-b92f-bca73b62139a",
+          "name": "Create a box",
+          "request": {
+            "name": "Create a box",
+            "description": {
+              "content": "Creates a new Vagrant box within a registry. The box name must be unique within the registry and should only be set at creation time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vagrant",
+                "2023-01-01",
+                "registry",
+                ":registry",
+                "boxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registry",
+                  "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dac6a16f-236e-49b3-9ad1-ba62c2d81064",
+              "name": "Box created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "boxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"box\": {\n    \"name\": \"string\",\n    \"registry\": \"string\",\n    \"short_description\": \"string\",\n    \"description\": \"string\",\n    \"created_at\": \"1998-07-01T12:19:36.886Z\",\n    \"updated_at\": \"1977-11-30T11:40:54.593Z\",\n    \"downloads\": 5664\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9e9e0d0-a802-4e01-a5c9-348e9f20db5a",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "boxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd9d443b-ea73-4478-9a69-79588403de75",
+              "name": "Registry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "boxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "268e5ad9-2758-445c-88eb-0d2027ed9983",
+              "name": "Box name already exists in the registry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "boxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b5a552e-3785-4e5d-82e9-93cbbdadac73",
+          "name": "Read a box",
+          "request": {
+            "name": "Read a box",
+            "description": {
+              "content": "Retrieves detailed information about a specific Vagrant box within a registry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vagrant",
+                "2023-01-01",
+                "registry",
+                ":registry",
+                "box",
+                ":box"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registry",
+                  "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "box",
+                  "description": "(Required) The name segment of the box which is unique within the registry."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c5bb5c1-f197-4435-b47a-4c8612be7f11",
+              "name": "Box details returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "box",
+                    ":box"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "box",
+                      "description": "(Required) The name segment of the box which is unique within the registry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"box\": {\n    \"name\": \"string\",\n    \"registry\": \"string\",\n    \"short_description\": \"string\",\n    \"description\": \"string\",\n    \"created_at\": \"1998-07-01T12:19:36.886Z\",\n    \"updated_at\": \"1977-11-30T11:40:54.593Z\",\n    \"downloads\": 5664\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39238149-cb80-4130-8d98-06bea8e09a1c",
+              "name": "Box not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "box",
+                    ":box"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "box",
+                      "description": "(Required) The name segment of the box which is unique within the registry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b773652f-3199-4074-9701-e5159d9a00b3",
+          "name": "Update a box",
+          "request": {
+            "name": "Update a box",
+            "description": {
+              "content": "Updates the metadata of an existing Vagrant box within a registry, such as its descriptions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vagrant",
+                "2023-01-01",
+                "registry",
+                ":registry",
+                "box",
+                ":box"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registry",
+                  "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "box",
+                  "description": "(Required) The name segment of the box which is unique within the registry."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e2fccac-c251-44b8-b2f8-9ce018126226",
+              "name": "Box updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "box",
+                    ":box"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "box",
+                      "description": "(Required) The name segment of the box which is unique within the registry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"box\": {\n    \"name\": \"string\",\n    \"registry\": \"string\",\n    \"short_description\": \"string\",\n    \"description\": \"string\",\n    \"created_at\": \"1998-07-01T12:19:36.886Z\",\n    \"updated_at\": \"1977-11-30T11:40:54.593Z\",\n    \"downloads\": 5664\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa2547de-9bee-4eac-a058-80262a467f80",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "box",
+                    ":box"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "box",
+                      "description": "(Required) The name segment of the box which is unique within the registry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "38f9e2ef-9e89-46ca-9b8d-5cc8cd4ec30c",
+              "name": "Box not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "box",
+                    ":box"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "box",
+                      "description": "(Required) The name segment of the box which is unique within the registry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "852140f2-2bc5-4665-9adf-0319568901a4",
+          "name": "Delete a box",
+          "request": {
+            "name": "Delete a box",
+            "description": {
+              "content": "Permanently deletes a box and all of its versions and providers from the registry. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vagrant",
+                "2023-01-01",
+                "registry",
+                ":registry",
+                "box",
+                ":box"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registry",
+                  "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "box",
+                  "description": "(Required) The name segment of the box which is unique within the registry."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "964e2ff4-6ba9-4489-982e-ea8c77d9a83b",
+              "name": "Box deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "box",
+                    ":box"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "box",
+                      "description": "(Required) The name segment of the box which is unique within the registry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"id\": \"string\",\n    \"state\": \"RUNNING\",\n    \"error\": {\n      \"code\": 5008,\n      \"message\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "250f7b13-f989-4be2-8ce7-912294e5fd68",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "box",
+                    ":box"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "box",
+                      "description": "(Required) The name segment of the box which is unique within the registry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a41c485-d8c3-4e4f-a340-8ccd283fcbe6",
+              "name": "Box not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vagrant",
+                    "2023-01-01",
+                    "registry",
+                    ":registry",
+                    "box",
+                    ":box"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "box",
+                      "description": "(Required) The name segment of the box which is unique within the registry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.vagrantup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0c89b4b6-a6e0-48f2-861d-f14e997647f3",
+    "name": "Vagrant Cloud Boxes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vagrant Cloud API v2 enables developers to programmatically interact with the Vagrant Cloud platform for managing Vagrant boxes, versions, and providers. It supports creating and updating boxes, publishing new versions, uploading provider binaries, and searching the public box catalog. The API uses token-based authentication and is designed for automating box lifecycle management and integrating Vagrant Cloud into CI/CD pipelines.\n\nContact Support:\n Name: HashiCorp Support",
+      "type": "text/plain"
+    }
+  }
+}
