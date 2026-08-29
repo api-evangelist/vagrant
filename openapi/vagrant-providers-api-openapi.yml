@@ -1,15 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vagrant Cloud Boxes Providers API
-  description: The Vagrant Cloud API v2 enables developers to programmatically interact with the Vagrant Cloud platform for managing Vagrant boxes, versions, and providers. It supports creating and updating boxes, publishing new versions, uploading provider binaries, and searching the public box catalog. The API uses token-based authentication and is designed for automating box lifecycle management and integrating Vagrant Cloud into CI/CD pipelines.
-  version: '2'
+  title: Vagrant Providers API
   contact:
     name: HashiCorp Support
     url: https://support.hashicorp.com
   termsOfService: https://www.hashicorp.com/terms-of-service
+  version: '1.0'
+  description: 'Operations tagged Providers across 2 of this provider''s published API definitions: vagrant-cloud-api-openapi.yml, vagrant-hcp-vagrant-box-registry-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.vagrantup.com/api/v2
   description: Vagrant Cloud Production Server
+- url: https://api.cloud.hashicorp.com
+  description: HCP Production Server
 security:
 - bearerAuth: []
 tags:
@@ -46,6 +48,9 @@ paths:
           description: Version not found
         '422':
           description: Validation error
+    servers:
+    - url: https://app.vagrantup.com/api/v2
+      description: Vagrant Cloud Production Server
   /box/{username}/{name}/version/{version}/provider/{provider}:
     get:
       operationId: readProvider
@@ -113,6 +118,9 @@ paths:
           description: Authentication required
         '404':
           description: Provider not found
+    servers:
+    - url: https://app.vagrantup.com/api/v2
+      description: Vagrant Cloud Production Server
   /box/{username}/{name}/version/{version}/provider/{provider}/upload:
     get:
       operationId: getUploadUrl
@@ -136,6 +144,9 @@ paths:
           description: Authentication required
         '404':
           description: Provider not found
+    servers:
+    - url: https://app.vagrantup.com/api/v2
+      description: Vagrant Cloud Production Server
   /box/{username}/{name}/version/{version}/provider/{provider}/upload/direct:
     get:
       operationId: getDirectUploadUrl
@@ -159,6 +170,9 @@ paths:
           description: Authentication required
         '404':
           description: Provider not found
+    servers:
+    - url: https://app.vagrantup.com/api/v2
+      description: Vagrant Cloud Production Server
   /vagrant/2023-01-01/registry/{registry}/box/{box}/version/{version}/providers:
     get:
       operationId: listProviders
@@ -208,6 +222,9 @@ paths:
           description: Version not found
         '409':
           description: Provider already exists for this version
+    servers:
+    - url: https://api.cloud.hashicorp.com
+      description: HCP Production Server
   /vagrant/2023-01-01/registry/{registry}/box/{box}/version/{version}/provider/{provider}:
     get:
       operationId: readProvider
@@ -251,65 +268,58 @@ paths:
           description: Authentication required
         '404':
           description: Provider not found
+    servers:
+    - url: https://api.cloud.hashicorp.com
+      description: HCP Production Server
 components:
-  parameters:
-    boxName:
-      name: name
-      in: path
-      required: true
-      description: The name of the Vagrant box.
-      schema:
-        type: string
-    providerName:
-      name: provider
-      in: path
-      required: true
-      description: The name of the provider such as virtualbox, vmware_desktop, or docker.
-      schema:
-        type: string
-    versionName:
-      name: version
-      in: path
-      required: true
-      description: The version string which must be unique within the box.
-      schema:
-        type: string
-    versionNumber:
-      name: version
-      in: path
-      required: true
-      description: The version number of the box following semantic versioning.
-      schema:
-        type: string
-    providerName_2:
-      name: provider
-      in: path
-      required: true
-      description: The name of the provider such as virtualbox or vmware_desktop.
-      schema:
-        type: string
-    username:
-      name: username
-      in: path
-      required: true
-      description: The username or organization name that owns the box.
-      schema:
-        type: string
-    registryName:
-      name: registry
-      in: path
-      required: true
-      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
-      schema:
-        type: string
-    boxName_2:
-      name: box
-      in: path
-      required: true
-      description: The name segment of the box which is unique within the registry.
-      schema:
-        type: string
   schemas:
+    Provider:
+      type: object
+      description: A provider represents a specific virtualization platform for which a box file is available within a version.
+      properties:
+        name:
+          type: string
+          description: The name of the provider such as virtualbox or vmware_desktop.
+        hosted:
+          type: boolean
+          description: Whether the box file is hosted on Vagrant Cloud.
+        hosted_token:
+          type: string
+          description: The token used for hosted box file downloads.
+        original_url:
+          type: string
+          format: uri
+          description: The original URL of the box file if externally hosted.
+        download_url:
+          type: string
+          format: uri
+          description: The URL to download the box file.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the provider was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the provider was last updated.
+        checksum_type:
+          type: string
+          description: The type of checksum used for the box file.
+          enum:
+          - md5
+          - sha1
+          - sha256
+          - sha384
+          - sha512
+        checksum:
+          type: string
+          description: The checksum value for the box file.
+        architecture:
+          type: string
+          description: The CPU architecture the box supports such as amd64 or arm64.
+        default_architecture:
+          type: boolean
+          description: Whether this is the default architecture for the provider.
     UpdateProviderRequest:
       type: object
       description: Request body for updating an existing provider.
@@ -333,6 +343,68 @@ components:
             architecture:
               type: string
               description: The updated CPU architecture.
+    CreateProviderRequest:
+      type: object
+      description: Request body for creating a new provider for a version.
+      required:
+      - provider
+      properties:
+        provider:
+          type: object
+          required:
+          - name
+          properties:
+            name:
+              type: string
+              description: The name of the provider such as virtualbox or vmware_desktop.
+            url:
+              type: string
+              format: uri
+              description: The URL of an externally hosted box file. If omitted, the box file must be uploaded to Vagrant Cloud.
+            checksum_type:
+              type: string
+              description: The type of checksum for the box file.
+              enum:
+              - md5
+              - sha1
+              - sha256
+              - sha384
+              - sha512
+            checksum:
+              type: string
+              description: The checksum value for the box file.
+            architecture:
+              type: string
+              description: The CPU architecture the box supports.
+            default_architecture:
+              type: boolean
+              description: Whether this is the default architecture for the provider.
+    UploadPath:
+      type: object
+      description: Contains the upload URL for uploading a box file to Vagrant Cloud.
+      properties:
+        upload_path:
+          type: string
+          format: uri
+          description: The pre-signed URL to upload the box file via HTTP PUT.
+        token:
+          type: string
+          description: The upload token for this upload session.
+    DirectUploadPath:
+      type: object
+      description: Contains the direct upload URL for uploading a box file directly to cloud storage.
+      properties:
+        upload_path:
+          type: string
+          format: uri
+          description: The pre-signed URL to upload the box file directly to cloud storage via HTTP PUT.
+        callback:
+          type: string
+          format: uri
+          description: The callback URL to notify Vagrant Cloud after the upload completes.
+        token:
+          type: string
+          description: The upload token for this upload session.
     Provider_2:
       type: object
       description: A provider describes a specific virtualization platform build of a box version, with its list of architectures and box data.
@@ -373,6 +445,15 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
+    ListProvidersResponse:
+      type: object
+      description: Response containing a list of providers.
+      properties:
+        providers:
+          type: array
+          description: List of providers for the version.
+          items:
+            $ref: '#/components/schemas/Provider_2'
     CreateProviderRequest_2:
       type: object
       description: Request body for creating a new provider for a version.
@@ -425,135 +506,74 @@ components:
             message:
               type: string
               description: The error message.
-    ListProvidersResponse:
-      type: object
-      description: Response containing a list of providers.
-      properties:
-        providers:
-          type: array
-          description: List of providers for the version.
-          items:
-            $ref: '#/components/schemas/Provider_2'
-    DirectUploadPath:
-      type: object
-      description: Contains the direct upload URL for uploading a box file directly to cloud storage.
-      properties:
-        upload_path:
-          type: string
-          format: uri
-          description: The pre-signed URL to upload the box file directly to cloud storage via HTTP PUT.
-        callback:
-          type: string
-          format: uri
-          description: The callback URL to notify Vagrant Cloud after the upload completes.
-        token:
-          type: string
-          description: The upload token for this upload session.
-    UploadPath:
-      type: object
-      description: Contains the upload URL for uploading a box file to Vagrant Cloud.
-      properties:
-        upload_path:
-          type: string
-          format: uri
-          description: The pre-signed URL to upload the box file via HTTP PUT.
-        token:
-          type: string
-          description: The upload token for this upload session.
-    Provider:
-      type: object
-      description: A provider represents a specific virtualization platform for which a box file is available within a version.
-      properties:
-        name:
-          type: string
-          description: The name of the provider such as virtualbox or vmware_desktop.
-        hosted:
-          type: boolean
-          description: Whether the box file is hosted on Vagrant Cloud.
-        hosted_token:
-          type: string
-          description: The token used for hosted box file downloads.
-        original_url:
-          type: string
-          format: uri
-          description: The original URL of the box file if externally hosted.
-        download_url:
-          type: string
-          format: uri
-          description: The URL to download the box file.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the provider was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the provider was last updated.
-        checksum_type:
-          type: string
-          description: The type of checksum used for the box file.
-          enum:
-          - md5
-          - sha1
-          - sha256
-          - sha384
-          - sha512
-        checksum:
-          type: string
-          description: The checksum value for the box file.
-        architecture:
-          type: string
-          description: The CPU architecture the box supports such as amd64 or arm64.
-        default_architecture:
-          type: boolean
-          description: Whether this is the default architecture for the provider.
     ProviderResponse:
       type: object
       description: Response containing a provider object.
       properties:
         provider:
           $ref: '#/components/schemas/Provider_2'
-    CreateProviderRequest:
-      type: object
-      description: Request body for creating a new provider for a version.
-      required:
-      - provider
-      properties:
-        provider:
-          type: object
-          required:
-          - name
-          properties:
-            name:
-              type: string
-              description: The name of the provider such as virtualbox or vmware_desktop.
-            url:
-              type: string
-              format: uri
-              description: The URL of an externally hosted box file. If omitted, the box file must be uploaded to Vagrant Cloud.
-            checksum_type:
-              type: string
-              description: The type of checksum for the box file.
-              enum:
-              - md5
-              - sha1
-              - sha256
-              - sha384
-              - sha512
-            checksum:
-              type: string
-              description: The checksum value for the box file.
-            architecture:
-              type: string
-              description: The CPU architecture the box supports.
-            default_architecture:
-              type: boolean
-              description: Whether this is the default architecture for the provider.
+  parameters:
+    username:
+      name: username
+      in: path
+      required: true
+      description: The username or organization name that owns the box.
+      schema:
+        type: string
+    versionNumber:
+      name: version
+      in: path
+      required: true
+      description: The version number of the box following semantic versioning.
+      schema:
+        type: string
+    boxName:
+      name: name
+      in: path
+      required: true
+      description: The name of the Vagrant box.
+      schema:
+        type: string
+    providerName:
+      name: provider
+      in: path
+      required: true
+      description: The name of the provider such as virtualbox, vmware_desktop, or docker.
+      schema:
+        type: string
+    boxName_2:
+      name: box
+      in: path
+      required: true
+      description: The name segment of the box which is unique within the registry.
+      schema:
+        type: string
+    registryName:
+      name: registry
+      in: path
+      required: true
+      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
+      schema:
+        type: string
+    providerName_2:
+      name: provider
+      in: path
+      required: true
+      description: The name of the provider such as virtualbox or vmware_desktop.
+      schema:
+        type: string
+    versionName:
+      name: version
+      in: path
+      required: true
+      description: The version string which must be unique within the box.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: Vagrant Cloud API token passed as a Bearer token in the Authorization header.
-externalDocs:
-  description: Vagrant Cloud API v2 Documentation
-  url: https://developer.hashicorp.com/vagrant/vagrant-cloud/api/v2
+x-refined-from:
+- vagrant-cloud-api-openapi.yml
+- vagrant-hcp-vagrant-box-registry-openapi.yml

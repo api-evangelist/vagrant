@@ -1,22 +1,32 @@
 {
   "provider": "vagrant",
   "sources": [
-    "vagrant-boxes-api-openapi.yml",
-    "vagrant-providers-api-openapi.yml",
-    "vagrant-registries-api-openapi.yml",
-    "vagrant-search-api-openapi.yml",
-    "vagrant-versions-api-openapi.yml"
+    "_original/vagrant-cloud-api-openapi.yml",
+    "_original/vagrant-hcp-vagrant-box-registry-openapi.yml"
   ],
   "outputs": [
     "vagrant-boxes-api-openapi.yml",
     "vagrant-providers-api-openapi.yml",
-    "vagrant-registries-api-openapi.yml",
     "vagrant-search-api-openapi.yml",
-    "vagrant-versions-api-openapi.yml"
+    "vagrant-versions-api-openapi.yml",
+    "vagrant-registries-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "vagrant-cloud-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vagrant-hcp-vagrant-box-registry-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Boxes' spans 2 source specs (vagrant-cloud-api-openapi.yml, vagrant-hcp-vagrant-box-registry-openapi.yml): per-path servers applied",
+    "tag 'Providers' spans 2 source specs (vagrant-cloud-api-openapi.yml, vagrant-hcp-vagrant-box-registry-openapi.yml): per-path servers applied",
+    "tag 'Versions' spans 2 source specs (vagrant-cloud-api-openapi.yml, vagrant-hcp-vagrant-box-registry-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "vagrant-boxes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vagrant-providers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vagrant-registries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vagrant-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vagrant-versions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

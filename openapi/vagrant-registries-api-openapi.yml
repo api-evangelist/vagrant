@@ -1,15 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vagrant Cloud Boxes Registries API
-  description: The Vagrant Cloud API v2 enables developers to programmatically interact with the Vagrant Cloud platform for managing Vagrant boxes, versions, and providers. It supports creating and updating boxes, publishing new versions, uploading provider binaries, and searching the public box catalog. The API uses token-based authentication and is designed for automating box lifecycle management and integrating Vagrant Cloud into CI/CD pipelines.
-  version: '2'
+  title: HCP Vagrant Box Registry Registries API
+  description: The HCP Vagrant Box Registry API provides REST endpoints for managing Vagrant box registries and boxes on the HashiCorp Cloud Platform. It supports creating and managing registries, listing and deleting boxes, and handling box versions and providers. The API uses HCP service principal credentials for authentication and is the successor to the legacy Vagrant Cloud service, offering tighter integration with the broader HashiCorp Cloud Platform ecosystem.
+  version: '2023-01-01'
   contact:
     name: HashiCorp Support
     url: https://support.hashicorp.com
   termsOfService: https://www.hashicorp.com/terms-of-service
 servers:
-- url: https://app.vagrantup.com/api/v2
-  description: Vagrant Cloud Production Server
+- url: https://api.cloud.hashicorp.com
+  description: HCP Production Server
 security:
 - bearerAuth: []
 tags:
@@ -80,21 +80,19 @@ paths:
         '404':
           description: Registry not found
 components:
-  parameters:
-    registryName:
-      name: registry
-      in: path
-      required: true
-      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
-      schema:
-        type: string
   schemas:
-    OperationResponse:
+    CreateRegistryRequest:
       type: object
-      description: Response containing an operation object for asynchronous actions.
+      description: Request body for creating a new Vagrant box registry.
+      required:
+      - name
       properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
+        name:
+          type: string
+          description: The globally unique name for the registry.
+        description:
+          type: string
+          description: A description of the registry.
     Registry:
       type: object
       description: A Vagrant box registry is a namespace on the HashiCorp Cloud Platform that holds boxes. The registry name forms the first segment of a box tag.
@@ -122,18 +120,6 @@ components:
       properties:
         registry:
           $ref: '#/components/schemas/Registry'
-    CreateRegistryRequest:
-      type: object
-      description: Request body for creating a new Vagrant box registry.
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: The globally unique name for the registry.
-        description:
-          type: string
-          description: A description of the registry.
     Operation:
       type: object
       description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
@@ -158,11 +144,25 @@ components:
             message:
               type: string
               description: The error message.
+    OperationResponse:
+      type: object
+      description: Response containing an operation object for asynchronous actions.
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+  parameters:
+    registryName:
+      name: registry
+      in: path
+      required: true
+      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: Vagrant Cloud API token passed as a Bearer token in the Authorization header.
+      description: HCP service principal access token passed as a Bearer token in the Authorization header.
 externalDocs:
-  description: Vagrant Cloud API v2 Documentation
-  url: https://developer.hashicorp.com/vagrant/vagrant-cloud/api/v2
+  description: HCP Vagrant Box Registry API Documentation
+  url: https://developer.hashicorp.com/hcp/api-docs/vagrant-box-registry
