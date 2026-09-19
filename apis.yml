@@ -37,6 +37,14 @@ tags:
   - DevOps
   - Virtualization
   - Development Environments
+  - Box
+  - Cloud
+  - HashiCorp
+  - Infrastructure
+tags_raw:
+  - DevOps
+  - Virtualization
+  - Development Environments
   - Boxes
   - Cloud
   - HashiCorp
@@ -53,6 +61,12 @@ apis:
     boxes, versions, and providers programmatically.
   humanURL: https://github.com/hashicorp/vagrant_cloud
   tags:
+  - DevOps
+  - Virtualization
+  - SDK
+  - Ruby
+  - Box
+  tags_raw:
   - DevOps
   - Virtualization
   - SDK
@@ -85,6 +99,8 @@ apis:
   humanURL: https://developer.hashicorp.com/vagrant/vagrant-cloud/api/v2
   baseURL: https://app.vagrantup.com/api/v2
   tags:
+  - Box
+  tags_raw:
   - Boxes
   properties:
   - type: OpenAPI
