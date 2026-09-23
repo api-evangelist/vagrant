@@ -81,18 +81,12 @@ paths:
           description: Registry not found
 components:
   schemas:
-    CreateRegistryRequest:
+    RegistryResponse:
       type: object
-      description: Request body for creating a new Vagrant box registry.
-      required:
-      - name
+      description: Response containing a registry object.
       properties:
-        name:
-          type: string
-          description: The globally unique name for the registry.
-        description:
-          type: string
-          description: A description of the registry.
+        registry:
+          $ref: '#/components/schemas/Registry'
     Registry:
       type: object
       description: A Vagrant box registry is a namespace on the HashiCorp Cloud Platform that holds boxes. The registry name forms the first segment of a box tag.
@@ -114,12 +108,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the registry was last updated.
-    RegistryResponse:
-      type: object
-      description: Response containing a registry object.
-      properties:
-        registry:
-          $ref: '#/components/schemas/Registry'
     Operation:
       type: object
       description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
@@ -144,6 +132,18 @@ components:
             message:
               type: string
               description: The error message.
+    CreateRegistryRequest:
+      type: object
+      description: Request body for creating a new Vagrant box registry.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The globally unique name for the registry.
+        description:
+          type: string
+          description: A description of the registry.
     OperationResponse:
       type: object
       description: Response containing an operation object for asynchronous actions.

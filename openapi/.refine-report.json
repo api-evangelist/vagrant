@@ -20,7 +20,8 @@
     "vagrant-hcp-vagrant-box-registry-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "tag 'Boxes' spans 2 source specs (vagrant-cloud-api-openapi.yml, vagrant-hcp-vagrant-box-registry-openapi.yml): per-path servers applied",
     "tag 'Providers' spans 2 source specs (vagrant-cloud-api-openapi.yml, vagrant-hcp-vagrant-box-registry-openapi.yml): per-path servers applied",
-    "tag 'Versions' spans 2 source specs (vagrant-cloud-api-openapi.yml, vagrant-hcp-vagrant-box-registry-openapi.yml): per-path servers applied"
+    "tag 'Versions' spans 2 source specs (vagrant-cloud-api-openapi.yml, vagrant-hcp-vagrant-box-registry-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "vagrant-boxes-api-openapi.yml: previously refined output, superseded by openapi/_original/",

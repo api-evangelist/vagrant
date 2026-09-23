@@ -272,7 +272,75 @@ paths:
     - url: https://api.cloud.hashicorp.com
       description: HCP Production Server
 components:
+  parameters:
+    versionNumber:
+      name: version
+      in: path
+      required: true
+      description: The version number of the box following semantic versioning.
+      schema:
+        type: string
+    username:
+      name: username
+      in: path
+      required: true
+      description: The username or organization name that owns the box.
+      schema:
+        type: string
+    boxName:
+      name: name
+      in: path
+      required: true
+      description: The name of the Vagrant box.
+      schema:
+        type: string
+    providerName:
+      name: provider
+      in: path
+      required: true
+      description: The name of the provider such as virtualbox, vmware_desktop, or docker.
+      schema:
+        type: string
+    boxName_2:
+      name: box
+      in: path
+      required: true
+      description: The name segment of the box which is unique within the registry.
+      schema:
+        type: string
+    registryName:
+      name: registry
+      in: path
+      required: true
+      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
+      schema:
+        type: string
+    providerName_2:
+      name: provider
+      in: path
+      required: true
+      description: The name of the provider such as virtualbox or vmware_desktop.
+      schema:
+        type: string
+    versionName:
+      name: version
+      in: path
+      required: true
+      description: The version string which must be unique within the box.
+      schema:
+        type: string
   schemas:
+    UploadPath:
+      type: object
+      description: Contains the upload URL for uploading a box file to Vagrant Cloud.
+      properties:
+        upload_path:
+          type: string
+          format: uri
+          description: The pre-signed URL to upload the box file via HTTP PUT.
+        token:
+          type: string
+          description: The upload token for this upload session.
     Provider:
       type: object
       description: A provider represents a specific virtualization platform for which a box file is available within a version.
@@ -379,17 +447,6 @@ components:
             default_architecture:
               type: boolean
               description: Whether this is the default architecture for the provider.
-    UploadPath:
-      type: object
-      description: Contains the upload URL for uploading a box file to Vagrant Cloud.
-      properties:
-        upload_path:
-          type: string
-          format: uri
-          description: The pre-signed URL to upload the box file via HTTP PUT.
-        token:
-          type: string
-          description: The upload token for this upload session.
     DirectUploadPath:
       type: object
       description: Contains the direct upload URL for uploading a box file directly to cloud storage.
@@ -405,6 +462,12 @@ components:
         token:
           type: string
           description: The upload token for this upload session.
+    ProviderResponse:
+      type: object
+      description: Response containing a provider object.
+      properties:
+        provider:
+          $ref: '#/components/schemas/Provider_2'
     Provider_2:
       type: object
       description: A provider describes a specific virtualization platform build of a box version, with its list of architectures and box data.
@@ -439,12 +502,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the provider was last updated.
-    OperationResponse:
-      type: object
-      description: Response containing an operation object for asynchronous actions.
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
     ListProvidersResponse:
       type: object
       description: Response containing a list of providers.
@@ -506,69 +563,12 @@ components:
             message:
               type: string
               description: The error message.
-    ProviderResponse:
+    OperationResponse:
       type: object
-      description: Response containing a provider object.
+      description: Response containing an operation object for asynchronous actions.
       properties:
-        provider:
-          $ref: '#/components/schemas/Provider_2'
-  parameters:
-    username:
-      name: username
-      in: path
-      required: true
-      description: The username or organization name that owns the box.
-      schema:
-        type: string
-    versionNumber:
-      name: version
-      in: path
-      required: true
-      description: The version number of the box following semantic versioning.
-      schema:
-        type: string
-    boxName:
-      name: name
-      in: path
-      required: true
-      description: The name of the Vagrant box.
-      schema:
-        type: string
-    providerName:
-      name: provider
-      in: path
-      required: true
-      description: The name of the provider such as virtualbox, vmware_desktop, or docker.
-      schema:
-        type: string
-    boxName_2:
-      name: box
-      in: path
-      required: true
-      description: The name segment of the box which is unique within the registry.
-      schema:
-        type: string
-    registryName:
-      name: registry
-      in: path
-      required: true
-      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
-      schema:
-        type: string
-    providerName_2:
-      name: provider
-      in: path
-      required: true
-      description: The name of the provider such as virtualbox or vmware_desktop.
-      schema:
-        type: string
-    versionName:
-      name: version
-      in: path
-      required: true
-      description: The version string which must be unique within the box.
-      schema:
-        type: string
+        operation:
+          $ref: '#/components/schemas/Operation'
   securitySchemes:
     bearerAuth:
       type: http

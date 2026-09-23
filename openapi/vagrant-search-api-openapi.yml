@@ -40,15 +40,51 @@ paths:
                 $ref: '#/components/schemas/SearchResults'
 components:
   schemas:
-    SearchResults:
+    Box:
       type: object
-      description: Container for search results returned from the box catalog.
+      description: A Vagrant box is a package format for Vagrant environments that includes the base image and metadata for one or more providers.
       properties:
-        boxes:
+        tag:
+          type: string
+          description: The full tag of the box in username/name format.
+        username:
+          type: string
+          description: The username or organization that owns the box.
+        name:
+          type: string
+          description: The name of the box.
+        private:
+          type: boolean
+          description: Whether the box is private and requires authentication to access.
+        downloads:
+          type: integer
+          description: The total number of downloads for this box across all versions.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the box was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the box was last updated.
+        short_description:
+          type: string
+          description: A brief description of the box, limited to 100 characters.
+          maxLength: 100
+        description_html:
+          type: string
+          description: The full description of the box rendered as HTML.
+        description_markdown:
+          type: string
+          description: The full description of the box in Markdown format.
+        versions:
           type: array
-          description: List of boxes matching the search criteria.
+          description: List of versions available for this box.
           items:
-            $ref: '#/components/schemas/Box'
+            $ref: '#/components/schemas/Version'
+        current_version:
+          description: The current released version of this box.
+          $ref: '#/components/schemas/Version'
     Provider:
       type: object
       description: A provider represents a specific virtualization platform for which a box file is available within a version.
@@ -135,52 +171,49 @@ components:
           description: List of providers available for this version.
           items:
             $ref: '#/components/schemas/Provider'
-    Box:
+    SearchResults:
       type: object
-      description: A Vagrant box is a package format for Vagrant environments that includes the base image and metadata for one or more providers.
+      description: Container for search results returned from the box catalog.
       properties:
-        tag:
-          type: string
-          description: The full tag of the box in username/name format.
-        username:
-          type: string
-          description: The username or organization that owns the box.
-        name:
-          type: string
-          description: The name of the box.
-        private:
-          type: boolean
-          description: Whether the box is private and requires authentication to access.
-        downloads:
-          type: integer
-          description: The total number of downloads for this box across all versions.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the box was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the box was last updated.
-        short_description:
-          type: string
-          description: A brief description of the box, limited to 100 characters.
-          maxLength: 100
-        description_html:
-          type: string
-          description: The full description of the box rendered as HTML.
-        description_markdown:
-          type: string
-          description: The full description of the box in Markdown format.
-        versions:
+        boxes:
           type: array
-          description: List of versions available for this box.
+          description: List of boxes matching the search criteria.
           items:
-            $ref: '#/components/schemas/Version'
-        current_version:
-          description: The current released version of this box.
-          $ref: '#/components/schemas/Version'
+            $ref: '#/components/schemas/Box'
   parameters:
+    searchOrder:
+      name: order
+      in: query
+      description: The order to return the sorted field in.
+      schema:
+        type: string
+        enum:
+        - desc
+        - asc
+        default: desc
+    searchQuery:
+      name: q
+      in: query
+      description: Search query that matches against the username, name, or short_description fields.
+      schema:
+        type: string
+    searchPage:
+      name: page
+      in: query
+      description: The page number to return for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    searchLimit:
+      name: limit
+      in: query
+      description: The number of results to return per page, with a maximum of 100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
     searchSort:
       name: sort
       in: query
@@ -192,39 +225,6 @@ components:
         - created
         - updated
         default: downloads
-    searchPage:
-      name: page
-      in: query
-      description: The page number to return for paginated results.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    searchQuery:
-      name: q
-      in: query
-      description: Search query that matches against the username, name, or short_description fields.
-      schema:
-        type: string
-    searchLimit:
-      name: limit
-      in: query
-      description: The number of results to return per page, with a maximum of 100.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-    searchOrder:
-      name: order
-      in: query
-      description: The order to return the sorted field in.
-      schema:
-        type: string
-        enum:
-        - desc
-        - asc
-        default: desc
     searchProvider:
       name: provider
       in: query

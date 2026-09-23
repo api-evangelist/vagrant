@@ -232,6 +232,80 @@ paths:
       description: HCP Production Server
 components:
   schemas:
+    Box:
+      type: object
+      description: A Vagrant box is a package format for Vagrant environments that includes the base image and metadata for one or more providers.
+      properties:
+        tag:
+          type: string
+          description: The full tag of the box in username/name format.
+        username:
+          type: string
+          description: The username or organization that owns the box.
+        name:
+          type: string
+          description: The name of the box.
+        private:
+          type: boolean
+          description: Whether the box is private and requires authentication to access.
+        downloads:
+          type: integer
+          description: The total number of downloads for this box across all versions.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the box was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the box was last updated.
+        short_description:
+          type: string
+          description: A brief description of the box, limited to 100 characters.
+          maxLength: 100
+        description_html:
+          type: string
+          description: The full description of the box rendered as HTML.
+        description_markdown:
+          type: string
+          description: The full description of the box in Markdown format.
+        versions:
+          type: array
+          description: List of versions available for this box.
+          items:
+            $ref: '#/components/schemas/Version'
+        current_version:
+          description: The current released version of this box.
+          $ref: '#/components/schemas/Version'
+    CreateBoxRequest:
+      type: object
+      description: Request body for creating a new Vagrant box.
+      required:
+      - box
+      properties:
+        box:
+          type: object
+          required:
+          - username
+          - name
+          properties:
+            username:
+              type: string
+              description: The username or organization to create the box under.
+            name:
+              type: string
+              description: The name of the box.
+            short_description:
+              type: string
+              description: A brief description of the box, limited to 100 characters.
+              maxLength: 100
+            description:
+              type: string
+              description: The full description of the box in Markdown format.
+            is_private:
+              type: boolean
+              description: Whether the box should be private.
+              default: false
     Provider:
       type: object
       description: A provider represents a specific virtualization platform for which a box file is available within a version.
@@ -296,35 +370,6 @@ components:
             is_private:
               type: boolean
               description: Whether the box should be private.
-    CreateBoxRequest:
-      type: object
-      description: Request body for creating a new Vagrant box.
-      required:
-      - box
-      properties:
-        box:
-          type: object
-          required:
-          - username
-          - name
-          properties:
-            username:
-              type: string
-              description: The username or organization to create the box under.
-            name:
-              type: string
-              description: The name of the box.
-            short_description:
-              type: string
-              description: A brief description of the box, limited to 100 characters.
-              maxLength: 100
-            description:
-              type: string
-              description: The full description of the box in Markdown format.
-            is_private:
-              type: boolean
-              description: Whether the box should be private.
-              default: false
     Version:
       type: object
       description: A version of a Vagrant box following semantic versioning. Versions must be released before they are available for download.
@@ -364,92 +409,6 @@ components:
           description: List of providers available for this version.
           items:
             $ref: '#/components/schemas/Provider'
-    Box:
-      type: object
-      description: A Vagrant box is a package format for Vagrant environments that includes the base image and metadata for one or more providers.
-      properties:
-        tag:
-          type: string
-          description: The full tag of the box in username/name format.
-        username:
-          type: string
-          description: The username or organization that owns the box.
-        name:
-          type: string
-          description: The name of the box.
-        private:
-          type: boolean
-          description: Whether the box is private and requires authentication to access.
-        downloads:
-          type: integer
-          description: The total number of downloads for this box across all versions.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the box was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the box was last updated.
-        short_description:
-          type: string
-          description: A brief description of the box, limited to 100 characters.
-          maxLength: 100
-        description_html:
-          type: string
-          description: The full description of the box rendered as HTML.
-        description_markdown:
-          type: string
-          description: The full description of the box in Markdown format.
-        versions:
-          type: array
-          description: List of versions available for this box.
-          items:
-            $ref: '#/components/schemas/Version'
-        current_version:
-          description: The current released version of this box.
-          $ref: '#/components/schemas/Version'
-    UpdateBoxRequest_2:
-      type: object
-      description: Request body for updating a box in a registry.
-      properties:
-        short_description:
-          type: string
-          description: An updated brief description limited to 100 characters.
-          maxLength: 100
-        description:
-          type: string
-          description: An updated full description.
-    BoxResponse:
-      type: object
-      description: Response containing a box object.
-      properties:
-        box:
-          $ref: '#/components/schemas/Box_2'
-    Operation:
-      type: object
-      description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the operation within the region.
-        state:
-          type: string
-          description: The current state of the operation.
-          enum:
-          - PENDING
-          - RUNNING
-          - DONE
-        error:
-          type: object
-          description: Error details if the operation failed.
-          properties:
-            code:
-              type: integer
-              description: The error code.
-            message:
-              type: string
-              description: The error message.
     Box_2:
       type: object
       description: A Vagrant box within an HCP registry. The box name combined with the registry name forms the full box tag.
@@ -478,30 +437,6 @@ components:
         downloads:
           type: integer
           description: The total number of downloads for this box.
-    Pagination:
-      type: object
-      description: Pagination information for list responses.
-      properties:
-        next_page_token:
-          type: string
-          description: The token to use for fetching the next page of results. Empty when there are no more results.
-    ListBoxesResponse:
-      type: object
-      description: Response containing a list of boxes and pagination information.
-      properties:
-        boxes:
-          type: array
-          description: List of boxes in the registry.
-          items:
-            $ref: '#/components/schemas/Box_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    OperationResponse:
-      type: object
-      description: Response containing an operation object for asynchronous actions.
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
     CreateBoxRequest_2:
       type: object
       description: Request body for creating a new box in a registry.
@@ -518,6 +453,71 @@ components:
         description:
           type: string
           description: The full description of the box.
+    Pagination:
+      type: object
+      description: Pagination information for list responses.
+      properties:
+        next_page_token:
+          type: string
+          description: The token to use for fetching the next page of results. Empty when there are no more results.
+    UpdateBoxRequest_2:
+      type: object
+      description: Request body for updating a box in a registry.
+      properties:
+        short_description:
+          type: string
+          description: An updated brief description limited to 100 characters.
+          maxLength: 100
+        description:
+          type: string
+          description: An updated full description.
+    ListBoxesResponse:
+      type: object
+      description: Response containing a list of boxes and pagination information.
+      properties:
+        boxes:
+          type: array
+          description: List of boxes in the registry.
+          items:
+            $ref: '#/components/schemas/Box_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Operation:
+      type: object
+      description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the operation within the region.
+        state:
+          type: string
+          description: The current state of the operation.
+          enum:
+          - PENDING
+          - RUNNING
+          - DONE
+        error:
+          type: object
+          description: Error details if the operation failed.
+          properties:
+            code:
+              type: integer
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+    BoxResponse:
+      type: object
+      description: Response containing a box object.
+      properties:
+        box:
+          $ref: '#/components/schemas/Box_2'
+    OperationResponse:
+      type: object
+      description: Response containing an operation object for asynchronous actions.
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
   parameters:
     username:
       name: username
@@ -533,6 +533,13 @@ components:
       description: The name of the Vagrant box.
       schema:
         type: string
+    pageSize:
+      name: page_size
+      in: query
+      description: The maximum number of results to return per page.
+      schema:
+        type: integer
+        minimum: 1
     pageToken:
       name: page_token
       in: query
@@ -553,13 +560,6 @@ components:
       description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
       schema:
         type: string
-    pageSize:
-      name: page_size
-      in: query
-      description: The maximum number of results to return per page.
-      schema:
-        type: integer
-        minimum: 1
   securitySchemes:
     bearerAuth:
       type: http
