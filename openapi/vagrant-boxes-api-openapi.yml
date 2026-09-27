@@ -133,7 +133,7 @@ paths:
         '404':
           description: Registry not found
     post:
-      operationId: createBox
+      operationId: postVagrant20230101RegistryByRegistryBoxes
       summary: Create a box
       description: Creates a new Vagrant box within a registry. The box name must be unique within the registry and should only be set at creation time.
       tags:
@@ -159,12 +159,14 @@ paths:
           description: Registry not found
         '409':
           description: Box name already exists in the registry
+      x-operation-id-source: normalized
+      x-operation-id-original: createBox
     servers:
     - url: https://api.cloud.hashicorp.com
       description: HCP Production Server
   /vagrant/2023-01-01/registry/{registry}/box/{box}:
     get:
-      operationId: readBox
+      operationId: getVagrant20230101RegistryByRegistryBoxByBox
       summary: Read a box
       description: Retrieves detailed information about a specific Vagrant box within a registry.
       tags:
@@ -181,8 +183,10 @@ paths:
                 $ref: '#/components/schemas/BoxResponse'
         '404':
           description: Box not found
+      x-operation-id-source: normalized
+      x-operation-id-original: readBox
     put:
-      operationId: updateBox
+      operationId: putVagrant20230101RegistryByRegistryBoxByBox
       summary: Update a box
       description: Updates the metadata of an existing Vagrant box within a registry, such as its descriptions.
       tags:
@@ -207,8 +211,10 @@ paths:
           description: Authentication required
         '404':
           description: Box not found
+      x-operation-id-source: normalized
+      x-operation-id-original: updateBox
     delete:
-      operationId: deleteBox
+      operationId: deleteVagrant20230101RegistryByRegistryBoxByBox
       summary: Delete a box
       description: Permanently deletes a box and all of its versions and providers from the registry. This action cannot be undone.
       tags:
@@ -227,6 +233,8 @@ paths:
           description: Authentication required
         '404':
           description: Box not found
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteBox
     servers:
     - url: https://api.cloud.hashicorp.com
       description: HCP Production Server
@@ -277,82 +285,6 @@ components:
         current_version:
           description: The current released version of this box.
           $ref: '#/components/schemas/Version'
-    CreateBoxRequest:
-      type: object
-      description: Request body for creating a new Vagrant box.
-      required:
-      - box
-      properties:
-        box:
-          type: object
-          required:
-          - username
-          - name
-          properties:
-            username:
-              type: string
-              description: The username or organization to create the box under.
-            name:
-              type: string
-              description: The name of the box.
-            short_description:
-              type: string
-              description: A brief description of the box, limited to 100 characters.
-              maxLength: 100
-            description:
-              type: string
-              description: The full description of the box in Markdown format.
-            is_private:
-              type: boolean
-              description: Whether the box should be private.
-              default: false
-    Provider:
-      type: object
-      description: A provider represents a specific virtualization platform for which a box file is available within a version.
-      properties:
-        name:
-          type: string
-          description: The name of the provider such as virtualbox or vmware_desktop.
-        hosted:
-          type: boolean
-          description: Whether the box file is hosted on Vagrant Cloud.
-        hosted_token:
-          type: string
-          description: The token used for hosted box file downloads.
-        original_url:
-          type: string
-          format: uri
-          description: The original URL of the box file if externally hosted.
-        download_url:
-          type: string
-          format: uri
-          description: The URL to download the box file.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the provider was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the provider was last updated.
-        checksum_type:
-          type: string
-          description: The type of checksum used for the box file.
-          enum:
-          - md5
-          - sha1
-          - sha256
-          - sha384
-          - sha512
-        checksum:
-          type: string
-          description: The checksum value for the box file.
-        architecture:
-          type: string
-          description: The CPU architecture the box supports such as amd64 or arm64.
-        default_architecture:
-          type: boolean
-          description: Whether this is the default architecture for the provider.
     UpdateBoxRequest:
       type: object
       description: Request body for updating an existing Vagrant box.
@@ -409,6 +341,136 @@ components:
           description: List of providers available for this version.
           items:
             $ref: '#/components/schemas/Provider'
+    Provider:
+      type: object
+      description: A provider represents a specific virtualization platform for which a box file is available within a version.
+      properties:
+        name:
+          type: string
+          description: The name of the provider such as virtualbox or vmware_desktop.
+        hosted:
+          type: boolean
+          description: Whether the box file is hosted on Vagrant Cloud.
+        hosted_token:
+          type: string
+          description: The token used for hosted box file downloads.
+        original_url:
+          type: string
+          format: uri
+          description: The original URL of the box file if externally hosted.
+        download_url:
+          type: string
+          format: uri
+          description: The URL to download the box file.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the provider was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the provider was last updated.
+        checksum_type:
+          type: string
+          description: The type of checksum used for the box file.
+          enum:
+          - md5
+          - sha1
+          - sha256
+          - sha384
+          - sha512
+        checksum:
+          type: string
+          description: The checksum value for the box file.
+        architecture:
+          type: string
+          description: The CPU architecture the box supports such as amd64 or arm64.
+        default_architecture:
+          type: boolean
+          description: Whether this is the default architecture for the provider.
+    CreateBoxRequest:
+      type: object
+      description: Request body for creating a new Vagrant box.
+      required:
+      - box
+      properties:
+        box:
+          type: object
+          required:
+          - username
+          - name
+          properties:
+            username:
+              type: string
+              description: The username or organization to create the box under.
+            name:
+              type: string
+              description: The name of the box.
+            short_description:
+              type: string
+              description: A brief description of the box, limited to 100 characters.
+              maxLength: 100
+            description:
+              type: string
+              description: The full description of the box in Markdown format.
+            is_private:
+              type: boolean
+              description: Whether the box should be private.
+              default: false
+    BoxResponse:
+      type: object
+      description: Response containing a box object.
+      properties:
+        box:
+          $ref: '#/components/schemas/Box_2'
+    Pagination:
+      type: object
+      description: Pagination information for list responses.
+      properties:
+        next_page_token:
+          type: string
+          description: The token to use for fetching the next page of results. Empty when there are no more results.
+    Operation:
+      type: object
+      description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the operation within the region.
+        state:
+          type: string
+          description: The current state of the operation.
+          enum:
+          - PENDING
+          - RUNNING
+          - DONE
+        error:
+          type: object
+          description: Error details if the operation failed.
+          properties:
+            code:
+              type: integer
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+    ListBoxesResponse:
+      type: object
+      description: Response containing a list of boxes and pagination information.
+      properties:
+        boxes:
+          type: array
+          description: List of boxes in the registry.
+          items:
+            $ref: '#/components/schemas/Box_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    OperationResponse:
+      type: object
+      description: Response containing an operation object for asynchronous actions.
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
     Box_2:
       type: object
       description: A Vagrant box within an HCP registry. The box name combined with the registry name forms the full box tag.
@@ -437,6 +499,17 @@ components:
         downloads:
           type: integer
           description: The total number of downloads for this box.
+    UpdateBoxRequest_2:
+      type: object
+      description: Request body for updating a box in a registry.
+      properties:
+        short_description:
+          type: string
+          description: An updated brief description limited to 100 characters.
+          maxLength: 100
+        description:
+          type: string
+          description: An updated full description.
     CreateBoxRequest_2:
       type: object
       description: Request body for creating a new box in a registry.
@@ -453,71 +526,6 @@ components:
         description:
           type: string
           description: The full description of the box.
-    Pagination:
-      type: object
-      description: Pagination information for list responses.
-      properties:
-        next_page_token:
-          type: string
-          description: The token to use for fetching the next page of results. Empty when there are no more results.
-    UpdateBoxRequest_2:
-      type: object
-      description: Request body for updating a box in a registry.
-      properties:
-        short_description:
-          type: string
-          description: An updated brief description limited to 100 characters.
-          maxLength: 100
-        description:
-          type: string
-          description: An updated full description.
-    ListBoxesResponse:
-      type: object
-      description: Response containing a list of boxes and pagination information.
-      properties:
-        boxes:
-          type: array
-          description: List of boxes in the registry.
-          items:
-            $ref: '#/components/schemas/Box_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    Operation:
-      type: object
-      description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the operation within the region.
-        state:
-          type: string
-          description: The current state of the operation.
-          enum:
-          - PENDING
-          - RUNNING
-          - DONE
-        error:
-          type: object
-          description: Error details if the operation failed.
-          properties:
-            code:
-              type: integer
-              description: The error code.
-            message:
-              type: string
-              description: The error message.
-    BoxResponse:
-      type: object
-      description: Response containing a box object.
-      properties:
-        box:
-          $ref: '#/components/schemas/Box_2'
-    OperationResponse:
-      type: object
-      description: Response containing an operation object for asynchronous actions.
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
   parameters:
     username:
       name: username
@@ -533,6 +541,12 @@ components:
       description: The name of the Vagrant box.
       schema:
         type: string
+    pageToken:
+      name: page_token
+      in: query
+      description: The token for fetching the next page of results.
+      schema:
+        type: string
     pageSize:
       name: page_size
       in: query
@@ -540,10 +554,11 @@ components:
       schema:
         type: integer
         minimum: 1
-    pageToken:
-      name: page_token
-      in: query
-      description: The token for fetching the next page of results.
+    registryName:
+      name: registry
+      in: path
+      required: true
+      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
       schema:
         type: string
     boxName_2:
@@ -551,13 +566,6 @@ components:
       in: path
       required: true
       description: The name segment of the box which is unique within the registry.
-      schema:
-        type: string
-    registryName:
-      name: registry
-      in: path
-      required: true
-      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
       schema:
         type: string
   securitySchemes:

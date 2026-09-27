@@ -81,6 +81,48 @@ paths:
           description: Registry not found
 components:
   schemas:
+    Operation:
+      type: object
+      description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the operation within the region.
+        state:
+          type: string
+          description: The current state of the operation.
+          enum:
+          - PENDING
+          - RUNNING
+          - DONE
+        error:
+          type: object
+          description: Error details if the operation failed.
+          properties:
+            code:
+              type: integer
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+    OperationResponse:
+      type: object
+      description: Response containing an operation object for asynchronous actions.
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    CreateRegistryRequest:
+      type: object
+      description: Request body for creating a new Vagrant box registry.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The globally unique name for the registry.
+        description:
+          type: string
+          description: A description of the registry.
     RegistryResponse:
       type: object
       description: Response containing a registry object.
@@ -108,48 +150,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the registry was last updated.
-    Operation:
-      type: object
-      description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the operation within the region.
-        state:
-          type: string
-          description: The current state of the operation.
-          enum:
-          - PENDING
-          - RUNNING
-          - DONE
-        error:
-          type: object
-          description: Error details if the operation failed.
-          properties:
-            code:
-              type: integer
-              description: The error code.
-            message:
-              type: string
-              description: The error message.
-    CreateRegistryRequest:
-      type: object
-      description: Request body for creating a new Vagrant box registry.
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: The globally unique name for the registry.
-        description:
-          type: string
-          description: A description of the registry.
-    OperationResponse:
-      type: object
-      description: Response containing an operation object for asynchronous actions.
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
   parameters:
     registryName:
       name: registry
