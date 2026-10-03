@@ -273,13 +273,6 @@ paths:
       description: HCP Production Server
 components:
   parameters:
-    versionNumber:
-      name: version
-      in: path
-      required: true
-      description: The version number of the box following semantic versioning.
-      schema:
-        type: string
     username:
       name: username
       in: path
@@ -294,24 +287,17 @@ components:
       description: The name of the Vagrant box.
       schema:
         type: string
+    versionNumber:
+      name: version
+      in: path
+      required: true
+      description: The version number of the box following semantic versioning.
+      schema:
+        type: string
     pageToken:
       name: page_token
       in: query
       description: The token for fetching the next page of results.
-      schema:
-        type: string
-    pageSize:
-      name: page_size
-      in: query
-      description: The maximum number of results to return per page.
-      schema:
-        type: integer
-        minimum: 1
-    registryName:
-      name: registry
-      in: path
-      required: true
-      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
       schema:
         type: string
     versionName:
@@ -328,46 +314,34 @@ components:
       description: The name segment of the box which is unique within the registry.
       schema:
         type: string
+    registryName:
+      name: registry
+      in: path
+      required: true
+      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      description: The maximum number of results to return per page.
+      schema:
+        type: integer
+        minimum: 1
   schemas:
-    Version:
+    UpdateVersionRequest:
       type: object
-      description: A version of a Vagrant box following semantic versioning. Versions must be released before they are available for download.
+      description: Request body for updating an existing version.
       properties:
         version:
-          type: string
-          description: The version number following semantic versioning.
-        status:
-          type: string
-          description: The release status of the version.
-          enum:
-          - unreleased
-          - active
-          - revoked
-        description_html:
-          type: string
-          description: The version description rendered as HTML.
-        description_markdown:
-          type: string
-          description: The version description in Markdown format.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the version was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the version was last updated.
-        number:
-          type: string
-          description: The version number string.
-        downloads:
-          type: integer
-          description: The total number of downloads for this version.
-        providers:
-          type: array
-          description: List of providers available for this version.
-          items:
-            $ref: '#/components/schemas/Provider'
+          type: object
+          properties:
+            version:
+              type: string
+              description: The updated version number.
+            description:
+              type: string
+              description: The updated description in Markdown format.
     Provider:
       type: object
       description: A provider represents a specific virtualization platform for which a box file is available within a version.
@@ -432,26 +406,62 @@ components:
             description:
               type: string
               description: The description of this version in Markdown format.
-    UpdateVersionRequest:
+    Version:
       type: object
-      description: Request body for updating an existing version.
+      description: A version of a Vagrant box following semantic versioning. Versions must be released before they are available for download.
       properties:
         version:
-          type: object
-          properties:
-            version:
-              type: string
-              description: The updated version number.
-            description:
-              type: string
-              description: The updated description in Markdown format.
-    Pagination:
-      type: object
-      description: Pagination information for list responses.
-      properties:
-        next_page_token:
           type: string
-          description: The token to use for fetching the next page of results. Empty when there are no more results.
+          description: The version number following semantic versioning.
+        status:
+          type: string
+          description: The release status of the version.
+          enum:
+          - unreleased
+          - active
+          - revoked
+        description_html:
+          type: string
+          description: The version description rendered as HTML.
+        description_markdown:
+          type: string
+          description: The version description in Markdown format.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the version was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the version was last updated.
+        number:
+          type: string
+          description: The version number string.
+        downloads:
+          type: integer
+          description: The total number of downloads for this version.
+        providers:
+          type: array
+          description: List of providers available for this version.
+          items:
+            $ref: '#/components/schemas/Provider'
+    ListVersionsResponse:
+      type: object
+      description: Response containing a list of versions and pagination information.
+      properties:
+        versions:
+          type: array
+          description: List of versions for the box.
+          items:
+            $ref: '#/components/schemas/Version_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    OperationResponse:
+      type: object
+      description: Response containing an operation object for asynchronous actions.
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
     Operation:
       type: object
       description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
@@ -476,23 +486,31 @@ components:
             message:
               type: string
               description: The error message.
-    OperationResponse:
+    Pagination:
       type: object
-      description: Response containing an operation object for asynchronous actions.
+      description: Pagination information for list responses.
       properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-    ListVersionsResponse:
+        next_page_token:
+          type: string
+          description: The token to use for fetching the next page of results. Empty when there are no more results.
+    CreateVersionRequest_2:
       type: object
-      description: Response containing a list of versions and pagination information.
+      description: Request body for creating a new version of a box.
+      required:
+      - version
       properties:
-        versions:
-          type: array
-          description: List of versions for the box.
-          items:
-            $ref: '#/components/schemas/Version_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+        version:
+          type: string
+          description: The version string following semantic versioning.
+        description:
+          type: string
+          description: A description of this version.
+    VersionResponse:
+      type: object
+      description: Response containing a version object.
+      properties:
+        version:
+          $ref: '#/components/schemas/Version_2'
     Version_2:
       type: object
       description: A version of a Vagrant box. Versions support long-form descriptions and must have unique version strings within the box.
@@ -518,24 +536,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the version was last updated.
-    CreateVersionRequest_2:
-      type: object
-      description: Request body for creating a new version of a box.
-      required:
-      - version
-      properties:
-        version:
-          type: string
-          description: The version string following semantic versioning.
-        description:
-          type: string
-          description: A description of this version.
-    VersionResponse:
-      type: object
-      description: Response containing a version object.
-      properties:
-        version:
-          $ref: '#/components/schemas/Version_2'
   securitySchemes:
     bearerAuth:
       type: http
