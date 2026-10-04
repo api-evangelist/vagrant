@@ -80,13 +80,15 @@ paths:
         '404':
           description: Registry not found
 components:
+  parameters:
+    registryName:
+      name: registry
+      in: path
+      required: true
+      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
+      schema:
+        type: string
   schemas:
-    RegistryResponse:
-      type: object
-      description: Response containing a registry object.
-      properties:
-        registry:
-          $ref: '#/components/schemas/Registry'
     CreateRegistryRequest:
       type: object
       description: Request body for creating a new Vagrant box registry.
@@ -99,6 +101,33 @@ components:
         description:
           type: string
           description: A description of the registry.
+    Registry:
+      type: object
+      description: A Vagrant box registry is a namespace on the HashiCorp Cloud Platform that holds boxes. The registry name forms the first segment of a box tag.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the registry.
+        name:
+          type: string
+          description: The globally unique name of the registry.
+        description:
+          type: string
+          description: The description of the registry.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the registry was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the registry was last updated.
+    RegistryResponse:
+      type: object
+      description: Response containing a registry object.
+      properties:
+        registry:
+          $ref: '#/components/schemas/Registry'
     OperationResponse:
       type: object
       description: Response containing an operation object for asynchronous actions.
@@ -129,35 +158,6 @@ components:
             message:
               type: string
               description: The error message.
-    Registry:
-      type: object
-      description: A Vagrant box registry is a namespace on the HashiCorp Cloud Platform that holds boxes. The registry name forms the first segment of a box tag.
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the registry.
-        name:
-          type: string
-          description: The globally unique name of the registry.
-        description:
-          type: string
-          description: The description of the registry.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the registry was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the registry was last updated.
-  parameters:
-    registryName:
-      name: registry
-      in: path
-      required: true
-      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
