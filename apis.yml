@@ -193,6 +193,12 @@ apis:
   - type: Documentation
     url: https://developer.hashicorp.com/hcp/api-docs/vagrant-box-registry
 common:
+  - type: Plans
+    url: plans/vagrant-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/vagrant-rate-limits.yml
+  - type: FinOps
+    url: finops/vagrant-finops.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/vagrant/overview
   - type: AgenticAccess
