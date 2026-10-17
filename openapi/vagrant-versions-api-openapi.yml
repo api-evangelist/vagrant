@@ -272,119 +272,7 @@ paths:
     - url: https://api.cloud.hashicorp.com
       description: HCP Production Server
 components:
-  parameters:
-    username:
-      name: username
-      in: path
-      required: true
-      description: The username or organization name that owns the box.
-      schema:
-        type: string
-    boxName:
-      name: name
-      in: path
-      required: true
-      description: The name of the Vagrant box.
-      schema:
-        type: string
-    versionNumber:
-      name: version
-      in: path
-      required: true
-      description: The version number of the box following semantic versioning.
-      schema:
-        type: string
-    registryName:
-      name: registry
-      in: path
-      required: true
-      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
-      schema:
-        type: string
-    versionName:
-      name: version
-      in: path
-      required: true
-      description: The version string which must be unique within the box.
-      schema:
-        type: string
-    pageToken:
-      name: page_token
-      in: query
-      description: The token for fetching the next page of results.
-      schema:
-        type: string
-    boxName_2:
-      name: box
-      in: path
-      required: true
-      description: The name segment of the box which is unique within the registry.
-      schema:
-        type: string
-    pageSize:
-      name: page_size
-      in: query
-      description: The maximum number of results to return per page.
-      schema:
-        type: integer
-        minimum: 1
   schemas:
-    Version:
-      type: object
-      description: A version of a Vagrant box following semantic versioning. Versions must be released before they are available for download.
-      properties:
-        version:
-          type: string
-          description: The version number following semantic versioning.
-        status:
-          type: string
-          description: The release status of the version.
-          enum:
-          - unreleased
-          - active
-          - revoked
-        description_html:
-          type: string
-          description: The version description rendered as HTML.
-        description_markdown:
-          type: string
-          description: The version description in Markdown format.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the version was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the version was last updated.
-        number:
-          type: string
-          description: The version number string.
-        downloads:
-          type: integer
-          description: The total number of downloads for this version.
-        providers:
-          type: array
-          description: List of providers available for this version.
-          items:
-            $ref: '#/components/schemas/Provider'
-    CreateVersionRequest:
-      type: object
-      description: Request body for creating a new version of a Vagrant box.
-      required:
-      - version
-      properties:
-        version:
-          type: object
-          required:
-          - version
-          properties:
-            version:
-              type: string
-              description: The version number following semantic versioning.
-            description:
-              type: string
-              description: The description of this version in Markdown format.
     Provider:
       type: object
       description: A provider represents a specific virtualization platform for which a box file is available within a version.
@@ -432,6 +320,62 @@ components:
         default_architecture:
           type: boolean
           description: Whether this is the default architecture for the provider.
+    CreateVersionRequest:
+      type: object
+      description: Request body for creating a new version of a Vagrant box.
+      required:
+      - version
+      properties:
+        version:
+          type: object
+          required:
+          - version
+          properties:
+            version:
+              type: string
+              description: The version number following semantic versioning.
+            description:
+              type: string
+              description: The description of this version in Markdown format.
+    Version:
+      type: object
+      description: A version of a Vagrant box following semantic versioning. Versions must be released before they are available for download.
+      properties:
+        version:
+          type: string
+          description: The version number following semantic versioning.
+        status:
+          type: string
+          description: The release status of the version.
+          enum:
+          - unreleased
+          - active
+          - revoked
+        description_html:
+          type: string
+          description: The version description rendered as HTML.
+        description_markdown:
+          type: string
+          description: The version description in Markdown format.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the version was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the version was last updated.
+        number:
+          type: string
+          description: The version number string.
+        downloads:
+          type: integer
+          description: The total number of downloads for this version.
+        providers:
+          type: array
+          description: List of providers available for this version.
+          items:
+            $ref: '#/components/schemas/Provider'
     UpdateVersionRequest:
       type: object
       description: Request body for updating an existing version.
@@ -445,6 +389,31 @@ components:
             description:
               type: string
               description: The updated description in Markdown format.
+    VersionResponse:
+      type: object
+      description: Response containing a version object.
+      properties:
+        version:
+          $ref: '#/components/schemas/Version_2'
+    Pagination:
+      type: object
+      description: Pagination information for list responses.
+      properties:
+        next_page_token:
+          type: string
+          description: The token to use for fetching the next page of results. Empty when there are no more results.
+    CreateVersionRequest_2:
+      type: object
+      description: Request body for creating a new version of a box.
+      required:
+      - version
+      properties:
+        version:
+          type: string
+          description: The version string following semantic versioning.
+        description:
+          type: string
+          description: A description of this version.
     Version_2:
       type: object
       description: A version of a Vagrant box. Versions support long-form descriptions and must have unique version strings within the box.
@@ -470,37 +439,23 @@ components:
           type: string
           format: date-time
           description: The timestamp when the version was last updated.
-    CreateVersionRequest_2:
-      type: object
-      description: Request body for creating a new version of a box.
-      required:
-      - version
-      properties:
-        version:
-          type: string
-          description: The version string following semantic versioning.
-        description:
-          type: string
-          description: A description of this version.
-    Pagination:
-      type: object
-      description: Pagination information for list responses.
-      properties:
-        next_page_token:
-          type: string
-          description: The token to use for fetching the next page of results. Empty when there are no more results.
     OperationResponse:
       type: object
       description: Response containing an operation object for asynchronous actions.
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-    VersionResponse:
+    ListVersionsResponse:
       type: object
-      description: Response containing a version object.
+      description: Response containing a list of versions and pagination information.
       properties:
-        version:
-          $ref: '#/components/schemas/Version_2'
+        versions:
+          type: array
+          description: List of versions for the box.
+          items:
+            $ref: '#/components/schemas/Version_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Operation:
       type: object
       description: An operation returned by asynchronous API calls. The operation ID is unique within the region the operation is running in.
@@ -525,17 +480,62 @@ components:
             message:
               type: string
               description: The error message.
-    ListVersionsResponse:
-      type: object
-      description: Response containing a list of versions and pagination information.
-      properties:
-        versions:
-          type: array
-          description: List of versions for the box.
-          items:
-            $ref: '#/components/schemas/Version_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+  parameters:
+    boxName:
+      name: name
+      in: path
+      required: true
+      description: The name of the Vagrant box.
+      schema:
+        type: string
+    versionNumber:
+      name: version
+      in: path
+      required: true
+      description: The version number of the box following semantic versioning.
+      schema:
+        type: string
+    username:
+      name: username
+      in: path
+      required: true
+      description: The username or organization name that owns the box.
+      schema:
+        type: string
+    pageToken:
+      name: page_token
+      in: query
+      description: The token for fetching the next page of results.
+      schema:
+        type: string
+    boxName_2:
+      name: box
+      in: path
+      required: true
+      description: The name segment of the box which is unique within the registry.
+      schema:
+        type: string
+    registryName:
+      name: registry
+      in: path
+      required: true
+      description: The globally unique name of the Vagrant box registry such as hashicorp in hashicorp/vagrant.
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      description: The maximum number of results to return per page.
+      schema:
+        type: integer
+        minimum: 1
+    versionName:
+      name: version
+      in: path
+      required: true
+      description: The version string which must be unique within the box.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -411,43 +411,6 @@ components:
             architecture:
               type: string
               description: The updated CPU architecture.
-    CreateProviderRequest_2:
-      type: object
-      description: Request body for creating a new provider for a version.
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: The name of the provider such as virtualbox or vmware_desktop.
-        url:
-          type: string
-          format: uri
-          description: The URL of an externally hosted box file.
-        checksum:
-          type: string
-          description: The checksum value for the box file.
-        checksum_type:
-          type: string
-          description: The type of checksum.
-          enum:
-          - MD5
-          - SHA1
-          - SHA256
-          - SHA384
-          - SHA512
-        architecture:
-          type: string
-          description: The CPU architecture such as amd64 or arm64.
-    ListProvidersResponse:
-      type: object
-      description: Response containing a list of providers.
-      properties:
-        providers:
-          type: array
-          description: List of providers for the version.
-          items:
-            $ref: '#/components/schemas/Provider_2'
     Provider_2:
       type: object
       description: A provider describes a specific virtualization platform build of a box version, with its list of architectures and box data.
@@ -482,12 +445,49 @@ components:
           type: string
           format: date-time
           description: The timestamp when the provider was last updated.
+    CreateProviderRequest_2:
+      type: object
+      description: Request body for creating a new provider for a version.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the provider such as virtualbox or vmware_desktop.
+        url:
+          type: string
+          format: uri
+          description: The URL of an externally hosted box file.
+        checksum:
+          type: string
+          description: The checksum value for the box file.
+        checksum_type:
+          type: string
+          description: The type of checksum.
+          enum:
+          - MD5
+          - SHA1
+          - SHA256
+          - SHA384
+          - SHA512
+        architecture:
+          type: string
+          description: The CPU architecture such as amd64 or arm64.
     ProviderResponse:
       type: object
       description: Response containing a provider object.
       properties:
         provider:
           $ref: '#/components/schemas/Provider_2'
+    ListProvidersResponse:
+      type: object
+      description: Response containing a list of providers.
+      properties:
+        providers:
+          type: array
+          description: List of providers for the version.
+          items:
+            $ref: '#/components/schemas/Provider_2'
     OperationResponse:
       type: object
       description: Response containing an operation object for asynchronous actions.
@@ -519,18 +519,25 @@ components:
               type: string
               description: The error message.
   parameters:
-    username:
-      name: username
-      in: path
-      required: true
-      description: The username or organization name that owns the box.
-      schema:
-        type: string
     boxName:
       name: name
       in: path
       required: true
       description: The name of the Vagrant box.
+      schema:
+        type: string
+    versionNumber:
+      name: version
+      in: path
+      required: true
+      description: The version number of the box following semantic versioning.
+      schema:
+        type: string
+    username:
+      name: username
+      in: path
+      required: true
+      description: The username or organization name that owns the box.
       schema:
         type: string
     providerName:
@@ -540,11 +547,18 @@ components:
       description: The name of the provider such as virtualbox, vmware_desktop, or docker.
       schema:
         type: string
-    versionNumber:
-      name: version
+    providerName_2:
+      name: provider
       in: path
       required: true
-      description: The version number of the box following semantic versioning.
+      description: The name of the provider such as virtualbox or vmware_desktop.
+      schema:
+        type: string
+    boxName_2:
+      name: box
+      in: path
+      required: true
+      description: The name segment of the box which is unique within the registry.
       schema:
         type: string
     registryName:
@@ -559,20 +573,6 @@ components:
       in: path
       required: true
       description: The version string which must be unique within the box.
-      schema:
-        type: string
-    boxName_2:
-      name: box
-      in: path
-      required: true
-      description: The name segment of the box which is unique within the registry.
-      schema:
-        type: string
-    providerName_2:
-      name: provider
-      in: path
-      required: true
-      description: The name of the provider such as virtualbox or vmware_desktop.
       schema:
         type: string
   securitySchemes:

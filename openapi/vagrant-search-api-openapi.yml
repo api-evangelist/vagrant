@@ -39,58 +39,54 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchResults'
 components:
-  parameters:
-    searchOrder:
-      name: order
-      in: query
-      description: The order to return the sorted field in.
-      schema:
-        type: string
-        enum:
-        - desc
-        - asc
-        default: desc
-    searchProvider:
-      name: provider
-      in: query
-      description: Filter results to boxes supporting a specific provider such as virtualbox or vmware_desktop.
-      schema:
-        type: string
-    searchQuery:
-      name: q
-      in: query
-      description: Search query that matches against the username, name, or short_description fields.
-      schema:
-        type: string
-    searchLimit:
-      name: limit
-      in: query
-      description: The number of results to return per page, with a maximum of 100.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-    searchPage:
-      name: page
-      in: query
-      description: The page number to return for paginated results.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    searchSort:
-      name: sort
-      in: query
-      description: The field to sort results on.
-      schema:
-        type: string
-        enum:
-        - downloads
-        - created
-        - updated
-        default: downloads
   schemas:
+    Provider:
+      type: object
+      description: A provider represents a specific virtualization platform for which a box file is available within a version.
+      properties:
+        name:
+          type: string
+          description: The name of the provider such as virtualbox or vmware_desktop.
+        hosted:
+          type: boolean
+          description: Whether the box file is hosted on Vagrant Cloud.
+        hosted_token:
+          type: string
+          description: The token used for hosted box file downloads.
+        original_url:
+          type: string
+          format: uri
+          description: The original URL of the box file if externally hosted.
+        download_url:
+          type: string
+          format: uri
+          description: The URL to download the box file.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the provider was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the provider was last updated.
+        checksum_type:
+          type: string
+          description: The type of checksum used for the box file.
+          enum:
+          - md5
+          - sha1
+          - sha256
+          - sha384
+          - sha512
+        checksum:
+          type: string
+          description: The checksum value for the box file.
+        architecture:
+          type: string
+          description: The CPU architecture the box supports such as amd64 or arm64.
+        default_architecture:
+          type: boolean
+          description: Whether this is the default architecture for the provider.
     Box:
       type: object
       description: A Vagrant box is a package format for Vagrant environments that includes the base image and metadata for one or more providers.
@@ -184,53 +180,57 @@ components:
           description: List of boxes matching the search criteria.
           items:
             $ref: '#/components/schemas/Box'
-    Provider:
-      type: object
-      description: A provider represents a specific virtualization platform for which a box file is available within a version.
-      properties:
-        name:
-          type: string
-          description: The name of the provider such as virtualbox or vmware_desktop.
-        hosted:
-          type: boolean
-          description: Whether the box file is hosted on Vagrant Cloud.
-        hosted_token:
-          type: string
-          description: The token used for hosted box file downloads.
-        original_url:
-          type: string
-          format: uri
-          description: The original URL of the box file if externally hosted.
-        download_url:
-          type: string
-          format: uri
-          description: The URL to download the box file.
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the provider was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the provider was last updated.
-        checksum_type:
-          type: string
-          description: The type of checksum used for the box file.
-          enum:
-          - md5
-          - sha1
-          - sha256
-          - sha384
-          - sha512
-        checksum:
-          type: string
-          description: The checksum value for the box file.
-        architecture:
-          type: string
-          description: The CPU architecture the box supports such as amd64 or arm64.
-        default_architecture:
-          type: boolean
-          description: Whether this is the default architecture for the provider.
+  parameters:
+    searchOrder:
+      name: order
+      in: query
+      description: The order to return the sorted field in.
+      schema:
+        type: string
+        enum:
+        - desc
+        - asc
+        default: desc
+    searchSort:
+      name: sort
+      in: query
+      description: The field to sort results on.
+      schema:
+        type: string
+        enum:
+        - downloads
+        - created
+        - updated
+        default: downloads
+    searchQuery:
+      name: q
+      in: query
+      description: Search query that matches against the username, name, or short_description fields.
+      schema:
+        type: string
+    searchProvider:
+      name: provider
+      in: query
+      description: Filter results to boxes supporting a specific provider such as virtualbox or vmware_desktop.
+      schema:
+        type: string
+    searchLimit:
+      name: limit
+      in: query
+      description: The number of results to return per page, with a maximum of 100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    searchPage:
+      name: page
+      in: query
+      description: The page number to return for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   securitySchemes:
     bearerAuth:
       type: http
